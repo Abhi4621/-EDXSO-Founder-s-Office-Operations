@@ -5,7 +5,7 @@
 **Submission Target:** [hr@edxso.com](mailto:hr@edxso.com)  
 **Subject Line:** `Assignment 2 – Abhi Pandey`  
 **Execution Context Date:** Friday, 23 October 2026 (Meeting: Thursday, 22 October 2026)  
-**Public Repository:** [https://github.com/TANISHQDAS/EDXSo](https://github.com/TANISHQDAS/EDXSo)  
+**Public Repository:** [https://github.com/Abhi4621/Edxso-Platform](https://github.com/Abhi4621/Edxso-Platform)  
 
 ---
 
@@ -48,7 +48,7 @@ Additionally, this package includes **all extra credit deliverables**:
 * **Tools Actually Used:**
   * **Claude:** Used for unstructured text extraction and initial drafting of communication drafts.
   * **Python 3.14:** Used for local script execution (`edxso_engine.py`), programmatic generation of the Excel tracker (`openpyxl`), Word document formatting (`docx`), and ZIP packaging (`zipfile`).
-  * **Git & GitHub:** Used for publishing the public repository to [`https://github.com/TANISHQDAS/EDXSo`](https://github.com/TANISHQDAS/EDXSo).
+  * **Git & GitHub:** Used for publishing the public repository to [`https://github.com/Abhi4621/Edxso-Platform`](https://github.com/Abhi4621/Edxso-Platform).
   * **Standard Browser:** Used for running and verifying the local interactive dashboard at `http://localhost:8000/interactive_app.html`.
 
 * **Manual Checks Actually Performed:**

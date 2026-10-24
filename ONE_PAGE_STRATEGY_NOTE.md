@@ -60,7 +60,7 @@ In accordance with assignment honesty standards, below is the transparent disclo
 * **Tools Actually Used:**
   * **Claude:** Used for unstructured text extraction, initial drafting of communication drafts, and synthesizing meeting notes into standardized sections.
   * **Python 3.14:** Used for local script execution (`edxso_engine.py`), programmatic generation of the Excel tracker (`openpyxl`), Word document formatting (`docx`), and ZIP packaging (`zipfile`).
-  * **Git & GitHub:** Used for version control and publishing the clean static web dashboard to [`https://github.com/TANISHQDAS/EDXSo`](https://github.com/TANISHQDAS/EDXSo).
+  * **Git & GitHub:** Used for version control and publishing the clean static web dashboard to [`https://github.com/Abhi4621/Edxso-Platform`](https://github.com/Abhi4621/Edxso-Platform).
   * **Standard Web Browser (Edge / Chrome):** Used for running and verifying the local interactive dashboard at `http://localhost:8000/interactive_app.html`.
 
 * **Manual Checks Actually Performed by Hand:**

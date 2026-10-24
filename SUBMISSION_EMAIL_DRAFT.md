@@ -4,7 +4,7 @@
 **To:** hr@edxso.com  
 **Subject:** Assignment 2 – Abhi Pandey  
 **Attachments:** `Assignment_2_Abhi_Pandey_EDXSO.zip`  
-**Public Repository Link:** https://github.com/TANISHQDAS/EDXSo  
+**Public Repository Link:** https://github.com/Abhi4621/Edxso-Platform  
 
 ---
 
@@ -22,7 +22,7 @@ The submission is based on the notes from the Founders Sync of Thursday, 22 Octo
 5. **One-Page Weekly Operating Note (`EDXSO_Operations_Weekly_Note.docx`):** A practical guide explaining how this workflow would run every week at EDXSO, common AI failure modes, manual verification steps, and consequential areas that must remain human-owned (financial disbursements, DPDP legal compliance, student data privacy).
 6. **Reusable Master Prompt (`PROMPT_SYSTEM_INSTRUCTIONS.md`):** A copy-ready prompt that any team member can use to process future meeting notes with the same consistency and accuracy guardrails.
 7. **Second-Scenario Test (`EXTRA_CREDIT_SECOND_RUN.md`):** A test run on a fictional post-Diwali meeting to demonstrate that the workflow reliably flags missing information and unconfirmed proposals across different weeks.
-8. **Live Web App & Public Repository:** The complete codebase is published on GitHub at [https://github.com/TANISHQDAS/EDXSo](https://github.com/TANISHQDAS/EDXSo) and configured for zero-config static deployment on Vercel (`index.html` + `vercel.json`).
+8. **Live Web App & Public Repository:** The complete codebase is published on GitHub at [https://github.com/Abhi4621/Edxso-Platform](https://github.com/Abhi4621/Edxso-Platform) and configured for zero-config static deployment on Vercel (`index.html` + `vercel.json`).
 
 ### Disclosed Tools & Manual Checks:
 * **Tools Used:** Claude for text structuring and drafts; Python 3.14 (with openpyxl, docx, zipfile) for document and tracker generation; Git for version control; standard web browser for testing.
@@ -40,5 +40,5 @@ Warm regards,
 
 **Abhi Pandey**  
 Applicant — Founder’s Office: Business Operations Intern  
-New Delhi, India | abhipandey.work@gmail.com | +91 98XXX XXXXX  
-GitHub: [https://github.com/TANISHQDAS/EDXSo](https://github.com/TANISHQDAS/EDXSo)
+New Delhi, India | abhipandey4631@gmail.com | +91 98XXX XXXXX  
+GitHub: [https://github.com/Abhi4621/Edxso-Platform](https://github.com/Abhi4621/Edxso-Platform)
