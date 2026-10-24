@@ -9,7 +9,7 @@ To demonstrate that the prompt architecture and operations workflow is generic, 
 
 ```text
 FOUNDERS SYNC — Thursday, 12 November 2026
-Attendees: Both founders, Operations Intern, Tech Lead
+Attendees: Both founders, Founder's Office Intern, Tech Lead
 
 • Maple Heights update: Class 8 maths demo was completed. Principal wants a proposal for 180 students across Classes 8 and 9. Coordinator Ms. Kapoor asked if our app works offline because Gurugram schools might close next week due to high AQI / air pollution.
 • PrintWorks delivered 300 teacher guides on Tuesday. Invoice received for ₹38,500. However, 25 copies in box 3 have defective binding. Nobody has spoken to PrintWorks yet.
@@ -17,13 +17,13 @@ Attendees: Both founders, Operations Intern, Tech Lead
 • Delhi World Public School (Noida) reached out asking for a pilot for Class 10 science. Exploratory call requested for next Tuesday afternoon.
 • Legal intern prepared draft parent consent form for DPDP compliance. Needs founder review before sending to Maple Heights Class 9 parents. No date set.
 • Matrix Edge (seed investor) asked for updated burn forecast by 20 Nov. Founder 2 will handle.
-• Operations Intern to keep tracker updated.
+• Founder's Office Intern to keep tracker updated.
 ```
 
 **Context Parameters:**
 * **Reference Date (Today):** Friday, 13 November 2026
 * **Meeting Date:** Thursday, 12 November 2026
-* **Attendees:** Both founders, Operations Intern, Tech Lead
+* **Attendees:** Both founders, Founder's Office Intern, Tech Lead
 
 ---
 
@@ -37,12 +37,12 @@ Attendees: Both founders, Operations Intern, Tech Lead
 |---|---|---|---|---|---|---|---|
 | **ACT-201** | Prepare formal commercial proposal for Maple Heights School (180 students, Classes 8 & 9) | Unassigned *(Suggested: Founder 1 with Ops support)* | TBD | **High** | School | Not started | `[FLAGGED: Missing Pricing Tier & Due Date]`. Need approved per-student rate from founders. |
 | **ACT-202** | Confirm offline/hybrid capability and respond to Ms. Kapoor regarding AQI school closures | Unassigned *(Suggested: Tech Lead for tech check, Ops for email)* | TBD *(Urgent due to expected pollution closures)* | **High** | School | In progress | `[FLAGGED: Pending Tech Lead Verification]`. Tech Lead must confirm offline capability before any promise is made to the school. |
-| **ACT-203** | Notify PrintWorks of 25 defective copies and resolve invoice payment (billed ₹38,500) | Unassigned *(Suggested: Operations Intern)* | TBD | **High** | Vendor | Not started | `[FLAGGED: Payment Terms & Retention Unapproved]`. 25 copies damaged. Holding ₹5,000 is an ops recommendation requiring founder approval before communicating. |
+| **ACT-203** | Notify PrintWorks of 25 defective copies and resolve invoice payment (billed ₹38,500) | Unassigned *(Suggested: Founder's Office Intern)* | TBD | **High** | Vendor | Not started | `[FLAGGED: Payment Terms & Retention Unapproved]`. 25 copies damaged. Holding ₹5,000 is an ops recommendation requiring founder approval before communicating. |
 | **ACT-204** | Investigate ₹35,000 cloud server bill spike and implement cost controls | Tech Lead | Monday, 16-Nov-2026 | **High** | Internal | In progress | Confirmed owner is Tech Lead. Investigation due Monday. |
 | **ACT-205** | Schedule exploratory pitch call with Delhi World Public School (Noida) for Class 10 science | Unassigned *(Suggested: Founder 1 or 2 to lead; Ops to coordinate)* | Tuesday, 17-Nov-2026 | **High** | School | Not started | `[FLAGGED: Missing Caller Assignment]`. Call slot requested for Tuesday afternoon. Caller unconfirmed. |
 | **ACT-206** | Review legal intern's draft parent consent form for DPDP compliance before Class 9 rollout | Unassigned *(Suggested: Founders)* | TBD *(Must precede Class 9 onboarding)* | **High** | Compliance | Blocked | `[FLAGGED: Legal Form Unapproved]`. Draft prepared by legal intern, but founder review date not set. Blocks Class 9 rollout. |
 | **ACT-207** | Prepare and send updated burn forecast to Matrix Edge (investor) | Founder 2 | 20-Nov-2026 | **Medium** | Investor | Not started | Confirmed owner is Founder 2. Hard investor deadline 20 Nov. |
-| **ACT-208** | Maintain central operations tracker across all workstreams | Operations Intern | Ongoing | **High** | Internal | In progress | Confirmed owner is Operations Intern. Central tracker updated weekly. |
+| **ACT-208** | Maintain central operations tracker across all workstreams | Founder's Office Intern | Ongoing | **High** | Internal | In progress | Confirmed owner is Founder's Office Intern. Central tracker updated weekly. |
 
 ---
 
@@ -70,7 +70,7 @@ Please let us know if there are specific timetable or curriculum requirements we
 
 Warm regards,  
 
-**Operations Intern**  
+**Founder's Office Intern**  
 Founder’s Office, EDXSO  
 `[Contact Phone / Email]`  
 
@@ -97,7 +97,7 @@ Please confirm receipt and let us know your collection schedule.
 
 Best regards,  
 
-**Operations Intern**  
+**Founder's Office Intern**  
 Founder’s Office, EDXSO  
 `[Contact Phone / Email]`  
 

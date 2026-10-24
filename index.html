@@ -218,7 +218,7 @@ Thank you for your guidance and support throughout the pilot.
 
 Warm regards,  
 
-Operations Intern  
+Founder's Office Intern  
 Founder’s Office, EDXSO  
 [Contact Phone / Email]
         </div>
@@ -262,7 +262,7 @@ Looking forward to your response.
 
 Best regards,  
 
-Operations Intern  
+Founder's Office Intern  
 Founder’s Office, EDXSO  
 [Contact Phone / Email]
         </div>
@@ -401,7 +401,7 @@ Please share your thoughts when free so I can update the tracker and send out th
             <h4 class="font-bold text-slate-900">1. Weekly Operating Cadence</h4>
             <p>• <strong>Thu 5:00 PM (Sync):</strong> Raw notes captured in real time.</p>
             <p>• <strong>Thu 5:30 PM (AI Extraction):</strong> Raw notes run through master prompt in Claude.</p>
-            <p>• <strong>Thu 6:00 PM (Manual Audit):</strong> Ops Intern verifies unassigned owners, dates, and amounts.</p>
+            <p>• <strong>Thu 6:00 PM (Manual Audit):</strong> Founder's Office Intern verifies unassigned owners, dates, and amounts.</p>
             <p>• <strong>Fri 9:00 AM (Dispatch):</strong> Founders review 2-min brief; approved drafts are sent.</p>
 
             <h4 class="font-bold text-slate-900 pt-2">2. What Could Go Wrong (AI Failure Modes)</h4>
@@ -454,7 +454,7 @@ INPUT PARAMETERS:
 CORE OPERATING RULES:
 1. STRICT ACCURACY: Use only facts stated in the notes. Never invent owners, dates, budget figures, completed tasks, or business outcomes.
 2. MISSING INFORMATION: If an owner is missing or ambiguous, label it "Unassigned". If a date is missing, label it "TBD". If a budget or amount is unstated, label it "Amount unstated".
-3. SUGGESTIONS VS FACTS: You may suggest a practical owner or target date in parentheses, but clearly label it as a suggestion (e.g., "Unassigned (Suggested: Operations Intern)").
+3. SUGGESTIONS VS FACTS: You may suggest a practical owner or target date in parentheses, but clearly label it as a suggestion (e.g., "Unassigned (Suggested: Founder's Office Intern)").
 4. RELATIVE DATES: Calculate relative dates strictly relative to the Meeting Date and Reference Date. Factor in Indian business/school contexts (e.g., Diwali break, term exams) when mentioned.
 5. NO FABRICATED COMPLETION: Never mark a task as "Done" based only on generated text.
 6. SENSITIVE MATTERS: Flag all payment approvals, legal compliance (including DPDP Act 2023 parent consent), and external commercial commitments for human founder review.
@@ -487,17 +487,17 @@ REQUIRED OUTPUTS:
         date: "2026-10-23",
         meetingDate: "Thursday, 22 October 2026",
         executionDate: "Friday, 23 October 2026",
-        notes: `FOUNDERS SYNC — Thursday, 22 October 2026\nAttendees: Both founders and the Operations Intern.\n\n• Maple Heights School in Gurugram wants a demo for its Class 8 maths teachers before the Diwali break, which starts around 8 November.\n• Ms. Kapoor, the school coordinator, also asked for a usage report covering the first month.\n• A print quotation is needed from PrintWorks for 300 teacher guides. The budget cap is ₹40,000. Nobody has followed up yet.\n• A content vendor invoice is due on 30 October. The amount was not discussed, and the person responsible for payment is unclear.\n• Founder 1 wants a quick review of three AI tutoring tools for K–12 India by next Friday.\n• Parent consent forms must be checked for DPDP compliance before expanding the pilot to more classes. No date has been set.\n• Leads collected at the school fair two weeks ago are still on paper and have not been entered into the CRM.\n• The investor update will be sent on 5 November. Founder 2 will draft it.\n• The Operations Intern must maintain one tracker so that no action is missed.`,
+        notes: `FOUNDERS SYNC — Thursday, 22 October 2026\nAttendees: Both founders and the Founder's Office Intern.\n\n• Maple Heights School in Gurugram wants a demo for its Class 8 maths teachers before the Diwali break, which starts around 8 November.\n• Ms. Kapoor, the school coordinator, also asked for a usage report covering the first month.\n• A print quotation is needed from PrintWorks for 300 teacher guides. The budget cap is ₹40,000. Nobody has followed up yet.\n• A content vendor invoice is due on 30 October. The amount was not discussed, and the person responsible for payment is unclear.\n• Founder 1 wants a quick review of three AI tutoring tools for K–12 India by next Friday.\n• Parent consent forms must be checked for DPDP compliance before expanding the pilot to more classes. No date has been set.\n• Leads collected at the school fair two weeks ago are still on paper and have not been entered into the CRM.\n• The investor update will be sent on 5 November. Founder 2 will draft it.\n• The Founder's Office Intern must maintain one tracker so that no action is missed.`,
         tracker: [
           { id: "ACT-001", task: "Schedule and deliver Class 8 maths teacher demo at Maple Heights School (Gurugram)", owner: "Unassigned (Suggested: Founder 1 or Academic Lead)", due: "Before 08-Nov-2026", priority: "High", cat: "School", status: "Not started", notes: "Demo date and presenter unconfirmed. Need dates before Diwali break (~8 Nov)." },
           { id: "ACT-002", task: "Prepare first-month usage report for Maple Heights School (requested by Ms. Kapoor)", owner: "Unassigned", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Due date not set. Metrics to include not defined. Need to check if Ms. Kapoor wants specific data." },
-          { id: "ACT-003", task: "Request print quotation from PrintWorks for 300 teacher guides (budget cap ₹40,000)", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "Nobody has followed up yet. Need print specifications, page count, and quotation approver." },
+          { id: "ACT-003", task: "Request print quotation from PrintWorks for 300 teacher guides (budget cap ₹40,000)", owner: "Unassigned (Suggested: Founder's Office Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "Nobody has followed up yet. Need print specifications, page count, and quotation approver." },
           { id: "ACT-004", task: "Clarify invoice amount, verify deliverables, and process payment for content vendor", owner: "Unassigned", due: "30-Oct-2026", priority: "High", cat: "Vendor", status: "Blocked", notes: "Invoice amount not discussed in meeting. Invoice copy missing. Payment authorizer unconfirmed." },
           { id: "ACT-005", task: "Conduct quick review of 3 AI tutoring tools for K-12 India (requested by Founder 1)", owner: "Unassigned (Requested by Founder 1)", due: "30-Oct-2026", priority: "Medium", cat: "Internal", status: "Not started", notes: "Founder 1 requested this by next Friday (30 Oct 2026). Assignee not confirmed in notes." },
           { id: "ACT-006", task: "Review parent consent forms for DPDP compliance before expanding pilot to more classes", owner: "Unassigned", due: "TBD (Precedes expansion)", priority: "High", cat: "Compliance", status: "Blocked", notes: "No date set. Reviewer unassigned. Strictly blocks expanding the school pilot." },
           { id: "ACT-007", task: "Enter paper leads from school fair (collected two weeks ago) into central CRM", owner: "Unassigned", due: "TBD", priority: "Medium", cat: "Internal", status: "Not started", notes: "Leads sitting on paper for ~14 days. Owner and data-entry deadline not confirmed." },
           { id: "ACT-008", task: "Draft and send investor update", owner: "Founder 2", due: "05-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Internal draft review date not specified." },
-          { id: "ACT-009", task: "Maintain single central tracker across all workstreams so no action slips", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker active and maintained weekly." }
+          { id: "ACT-009", task: "Maintain single central tracker across all workstreams so no action slips", owner: "Founder's Office Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Founder's Office Intern. Central tracker active and maintained weekly." }
         ],
         brief: {
           heading: "Founder Brief — 23 October 2026",
@@ -554,7 +554,7 @@ Thank you for your guidance and support throughout the pilot.
 
 Warm regards,  
 
-Operations Intern  
+Founder's Office Intern  
 Founder’s Office, EDXSO  
 abhipandey4631@gmail.com`
           },
@@ -585,7 +585,7 @@ Looking forward to your response.
 
 Best regards,  
 
-Operations Intern  
+Founder's Office Intern  
 Founder’s Office, EDXSO  
 abhipandey4631@gmail.com`
           },
@@ -604,11 +604,11 @@ Please share your thoughts when free so I can update the tracker and send out th
           }
         },
         gaps: [
-          { gap: "Actions without named owners", why: "PrintWorks chase, demo, and DPDP review had no owner; shared ownership causes tasks to slip.", fix: "DRI Rule: Every action must have exactly one named owner before ending the sync.", owner: "Ops Intern" },
+          { gap: "Actions without named owners", why: "PrintWorks chase, demo, and DPDP review had no owner; shared ownership causes tasks to slip.", fix: "DRI Rule: Every action must have exactly one named owner before ending the sync.", owner: "Founder's Office Intern" },
           { gap: "Deadlines missing or approximate", why: "Vague dates like 'before Diwali' or 'no date set' make weekly planning difficult.", fix: "Explicit Dates: Require specific calendar dates or interim follow-up target dates.", owner: "Founders & Ops" },
           { gap: "Invoice logged without amount or payer", why: "Invoice due in 7 days without cost or authorizer; risks late fees or vendor friction.", fix: "Invoice SLA: Incoming bills must be forwarded to a central folder with amount and approver.", owner: "Ops & Founders" },
           { gap: "School demo date unconfirmed", why: "Teachers go on leave around 8 Nov; delay risks losing school pilot engagement.", fix: "48-Hour Scheduling SLA: Send 2-3 specific time windows within 48 hours of request.", owner: "Demo Lead & Ops" },
-          { gap: "Leads on paper for two weeks", why: "School fair leads go cold if not followed up quickly.", fix: "48-Hour Event Ingestion SLA: Digitize lead slips into CRM within 48 hours of event.", owner: "Ops Intern" },
+          { gap: "Leads on paper for two weeks", why: "School fair leads go cold if not followed up quickly.", fix: "48-Hour Event Ingestion SLA: Digitize lead slips into CRM within 48 hours of event.", owner: "Founder's Office Intern" },
           { gap: "Compliance blocker with no deadline", why: "DPDP consent review left unowned; risks delaying pilot expansion.", fix: "Compliance Gating: Regulatory tasks must have a named reviewer and milestone deadline.", owner: "Founders" }
         ]
       },
@@ -618,16 +618,16 @@ Please share your thoughts when free so I can update the tracker and send out th
         date: "2026-11-13",
         meetingDate: "Thursday, 12 November 2026",
         executionDate: "Friday, 13 November 2026",
-        notes: `FOUNDERS SYNC — Thursday, 12 November 2026\nAttendees: Both founders, Operations Intern, Tech Lead\n\n• Maple Heights update: Class 8 maths demo was completed. Principal wants a proposal for 180 students across Classes 8 and 9. Coordinator Ms. Kapoor asked if our app works offline because Gurugram schools might close next week due to high AQI / air pollution.\n• PrintWorks delivered 300 teacher guides on Tuesday. Invoice received for ₹38,500. However, 25 copies in box 3 have defective binding. Nobody has spoken to PrintWorks yet.\n• Cloud server bill spiked by ₹35,000 this month. Tech Lead to investigate root cause by Monday.\n• Delhi World Public School (Noida) reached out asking for a pilot for Class 10 science. Exploratory call requested for next Tuesday afternoon.\n• Legal intern prepared draft parent consent form for DPDP compliance. Needs founder review before sending to Maple Heights Class 9 parents. No date set.\n• Matrix Edge (seed investor) asked for updated burn forecast by 20 Nov. Founder 2 will handle.\n• Operations Intern to keep tracker updated.`,
+        notes: `FOUNDERS SYNC — Thursday, 12 November 2026\nAttendees: Both founders, Founder's Office Intern, Tech Lead\n\n• Maple Heights update: Class 8 maths demo was completed. Principal wants a proposal for 180 students across Classes 8 and 9. Coordinator Ms. Kapoor asked if our app works offline because Gurugram schools might close next week due to high AQI / air pollution.\n• PrintWorks delivered 300 teacher guides on Tuesday. Invoice received for ₹38,500. However, 25 copies in box 3 have defective binding. Nobody has spoken to PrintWorks yet.\n• Cloud server bill spiked by ₹35,000 this month. Tech Lead to investigate root cause by Monday.\n• Delhi World Public School (Noida) reached out asking for a pilot for Class 10 science. Exploratory call requested for next Tuesday afternoon.\n• Legal intern prepared draft parent consent form for DPDP compliance. Needs founder review before sending to Maple Heights Class 9 parents. No date set.\n• Matrix Edge (seed investor) asked for updated burn forecast by 20 Nov. Founder 2 will handle.\n• Founder's Office Intern to keep tracker updated.`,
         tracker: [
           { id: "ACT-201", task: "Prepare formal commercial proposal for Maple Heights School (180 students, Classes 8 & 9)", owner: "Unassigned (Suggested: Founder 1 with Ops support)", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Pricing tier and delivery date unconfirmed. Need approved rates from founders." },
           { id: "ACT-202", task: "Confirm offline capability and respond to Ms. Kapoor regarding AQI school closures", owner: "Unassigned (Suggested: Tech Lead for tech check, Ops for email)", due: "TBD", priority: "High", cat: "School", status: "In progress", notes: "Tech Lead must confirm offline capability before any promise is made to the school." },
-          { id: "ACT-203", task: "Notify PrintWorks of 25 defective copies and resolve invoice payment (billed ₹38,500)", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "25 copies damaged. Holding partial payment requires founder approval before communicating." },
+          { id: "ACT-203", task: "Notify PrintWorks of 25 defective copies and resolve invoice payment (billed ₹38,500)", owner: "Unassigned (Suggested: Founder's Office Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "25 copies damaged. Holding partial payment requires founder approval before communicating." },
           { id: "ACT-204", task: "Investigate ₹35,000 cloud server bill spike and implement cost controls", owner: "Tech Lead", due: "16-Nov-2026", priority: "High", cat: "Internal", status: "In progress", notes: "Tech Lead named as owner. Root cause analysis due Monday." },
           { id: "ACT-205", task: "Schedule exploratory pitch call with Delhi World Public School (Noida) for Class 10 science", owner: "Unassigned (Suggested: Founder 1 or 2 lead; Ops coordinate)", due: "17-Nov-2026", priority: "High", cat: "School", status: "Not started", notes: "Call requested for Tuesday afternoon. Caller unconfirmed." },
           { id: "ACT-206", task: "Review legal intern draft parent consent form for DPDP compliance before Class 9 rollout", owner: "Unassigned (Suggested: Founders)", due: "TBD", priority: "High", cat: "Compliance", status: "Blocked", notes: "Draft ready, but founder review date not set. Blocks Class 9 rollout." },
           { id: "ACT-207", task: "Prepare and send updated burn forecast to Matrix Edge (investor)", owner: "Founder 2", due: "20-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Hard investor deadline 20 Nov." },
-          { id: "ACT-208", task: "Maintain central operations tracker across all workstreams", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker updated weekly." }
+          { id: "ACT-208", task: "Maintain central operations tracker across all workstreams", owner: "Founder's Office Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Founder's Office Intern. Central tracker updated weekly." }
         ],
         brief: {
           heading: "Founder Brief — 13 November 2026",
@@ -684,7 +684,7 @@ Please let us know if there are specific timetable or curriculum requirements we
 
 Warm regards,  
 
-Operations Intern  
+Founder's Office Intern  
 Founder’s Office, EDXSO  
 abhipandey4631@gmail.com`
           },
@@ -708,7 +708,7 @@ Please confirm receipt and let us know your collection schedule.
 
 Best regards,  
 
-Operations Intern  
+Founder's Office Intern  
 Founder’s Office, EDXSO  
 abhipandey4631@gmail.com`
           },
@@ -728,7 +728,7 @@ Please share your guidance when free.`
         },
         gaps: [
           { gap: "Untagged cloud infrastructure spike (₹35,000)", why: "Untagged staging servers left running over holidays cause unexpected burn rate spikes.", fix: "Cloud Governance: Enforce mandatory resource tagging and automated budget kill-switches.", owner: "Tech Lead" },
-          { gap: "Quality defect discovered after delivery", why: "25 defective guides found inside box 3 after vendor left; delays teacher onboarding.", fix: "Delivery QA Checklist: Inspect sample copies from every box before signing delivery challan.", owner: "Ops Intern" },
+          { gap: "Quality defect discovered after delivery", why: "25 defective guides found inside box 3 after vendor left; delays teacher onboarding.", fix: "Delivery QA Checklist: Inspect sample copies from every box before signing delivery challan.", owner: "Founder's Office Intern" },
           { gap: "Undefined pricing tiers for 180-student expansion", why: "School requested commercial proposal without pre-agreed multi-class discount tiers.", fix: "Standardized Rate Card: Pre-approve Class 8-10 pricing brackets for schools.", owner: "Founders" },
           { gap: "Legal intern DPDP consent form unreviewed", why: "Consent form draft sits in folder without sign-off deadline; blocks Class 9 rollout.", fix: "48-Hour Legal Review SLA: Founders must review compliance drafts within 48 hours.", owner: "Founders" },
           { gap: "Exploratory school pitch call unassigned", why: "Inbound opportunity from Noida school requested for Tuesday without a confirmed caller.", fix: "Inbound Routing SLA: Automatically assign school pitch leads to a designated founder.", owner: "Ops & Founders" }
@@ -885,7 +885,7 @@ Your job is to convert messy, unstructured meeting notes into an accurate, opera
 INPUT PARAMETERS:
 - Meeting Date: ${meetingDateStr}
 - Reference Execution Date (Today): ${executionDateStr}
-- Attendees: Both founders and the Operations Intern
+- Attendees: Both founders and the Founder's Office Intern
 - Previous Tracker Open Items (if available): None (Baseline setup)
 - Raw Meeting Notes:
 """
@@ -895,7 +895,7 @@ ${rawNotes}
 CORE OPERATING RULES:
 1. STRICT ACCURACY: Use only facts stated in the notes. Never invent owners, dates, budget figures, completed tasks, or business outcomes.
 2. MISSING INFORMATION: If an owner is missing or ambiguous, label it "Unassigned". If a date is missing, label it "TBD". If a budget or amount is unstated, label it "Amount unstated".
-3. SUGGESTIONS VS FACTS: You may suggest a practical owner or target date in parentheses, but clearly label it as a suggestion (e.g., "Unassigned (Suggested: Operations Intern)").
+3. SUGGESTIONS VS FACTS: You may suggest a practical owner or target date in parentheses, but clearly label it as a suggestion (e.g., "Unassigned (Suggested: Founder's Office Intern)").
 4. RELATIVE DATES: Calculate relative dates strictly relative to the Meeting Date and Reference Date. Factor in Indian business/school contexts (e.g., Diwali break, term exams) when mentioned.
 5. NO FABRICATED COMPLETION: Never mark a task as "Done" based only on generated text.
 6. SENSITIVE MATTERS: Flag all payment approvals, legal compliance (including DPDP Act 2023 parent consent), and external commercial commitments for human founder review.
@@ -1085,9 +1085,9 @@ REQUIRED OUTPUTS:
 
         let owner = "Unassigned";
         if (/founder 2 will draft|founder 2 will handle|founder 2/i.test(clean)) owner = "Founder 2";
-        else if (/ops intern to|ops intern/i.test(clean)) owner = "Operations Intern";
+        else if (/Founder's Office Intern to|Founder's Office Intern/i.test(clean)) owner = "Founder's Office Intern";
         else if (/founder 1 wants/i.test(clean)) owner = "Unassigned (Requested by Founder 1)";
-        else if (/printworks|print quotation|teacher guides/i.test(clean)) owner = "Unassigned (Suggested: Operations Intern)";
+        else if (/printworks|print quotation|teacher guides/i.test(clean)) owner = "Unassigned (Suggested: Founder's Office Intern)";
         else if (/tech lead/i.test(clean)) owner = "Tech Lead";
 
         let due = "TBD";
@@ -1277,12 +1277,12 @@ REQUIRED OUTPUTS:
             <label class="block font-semibold text-slate-700 mb-1">Assignee / Owner <span class="text-red-500">*</span></label>
             <select id="modalTaskOwner" onchange="toggleCustomOwner(this.value)" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
               <option value="Unassigned">Unassigned (Missing Owner)</option>
-              <option value="Operations Intern">Operations Intern (Abhi Pandey)</option>
+              <option value="Founder's Office Intern">Founder's Office Intern (Abhi Pandey)</option>
               <option value="Founder 1">Founder 1</option>
               <option value="Founder 2">Founder 2</option>
               <option value="Tech Lead">Tech Lead</option>
               <option value="Legal Reviewer">Legal Reviewer</option>
-              <option value="Unassigned (Suggested: Operations Intern)">Unassigned (Suggested: Operations Intern)</option>
+              <option value="Unassigned (Suggested: Founder's Office Intern)">Unassigned (Suggested: Founder's Office Intern)</option>
               <option value="CUSTOM">Custom Assignee...</option>
             </select>
             <input type="text" id="modalCustomOwner" placeholder="Enter custom assignee" class="hidden mt-1.5 w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">

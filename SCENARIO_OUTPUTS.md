@@ -2,7 +2,7 @@
 ## EDXSO Founders' Sync Operations Deliverables
 **Meeting Date:** Thursday, 22 October 2026  
 **Reference / Execution Date:** Friday, 23 October 2026  
-**Attendees:** Both founders, Operations Intern  
+**Attendees:** Both founders, Founder's Office Intern  
 
 ---
 
@@ -14,13 +14,13 @@
 |---|---|---|---|---|---|---|---|
 | **ACT-001** | Schedule and deliver Class 8 maths teacher demo at Maple Heights School (Gurugram) | Unassigned *(Suggested: Founder 1 or Academic Lead; Ops to coordinate)* | Before 08-Nov-2026 *(Diwali break starts ~8 Nov)* | **High** | School | Not started | `[FLAGGED: Missing Owner & Confirmed Date]`. Demo date and presenter unconfirmed. Need available slots before Diwali break (~8 Nov). |
 | **ACT-002** | Prepare first-month usage report for Maple Heights School (requested by Ms. Kapoor) | Unassigned | TBD | **High** | School | Not started | `[FLAGGED: Missing Due Date & Metrics]`. Due date not set. Metrics to include not defined. Need to check if Ms. Kapoor wants specific information included. |
-| **ACT-003** | Request print quotation from PrintWorks for 300 teacher guides (budget cap ₹40,000) | Unassigned *(Suggested: Operations Intern)* | TBD | **High** | Vendor | Not started | `[FLAGGED: Missing Owner in notes ("Nobody has chased them yet")]`. Need print specifications, page count, and quotation approver. |
+| **ACT-003** | Request print quotation from PrintWorks for 300 teacher guides (budget cap ₹40,000) | Unassigned *(Suggested: Founder's Office Intern)* | TBD | **High** | Vendor | Not started | `[FLAGGED: Missing Owner in notes ("Nobody has chased them yet")]`. Need print specifications, page count, and quotation approver. |
 | **ACT-004** | Clarify content vendor invoice amount, verify deliverables, and process payment | Unassigned | 30-Oct-2026 *(Invoice due date)* | **High** | Vendor | Blocked | `[FLAGGED: Missing Amount, Missing Invoice Copy, Missing Payment Owner]`. Amount was not discussed in meeting; payer unclear. Must clarify before 30 Oct. |
 | **ACT-005** | Conduct quick review of 3 AI tutoring tools for K-12 India (requested by Founder 1) | Unassigned *(Requested by Founder 1)* | Friday, 30-Oct-2026 *("by next Friday")* | **Medium** | Internal | Not started | `[FLAGGED: Missing Owner]`. Requested by Founder 1 by next Friday (30 Oct 2026). Assignee not confirmed in notes. |
 | **ACT-006** | Review parent consent forms for DPDP compliance before expanding pilot to more classes | Unassigned | TBD *(Must precede class expansion)* | **High** | Compliance | Blocked | `[FLAGGED: "No date set" & Missing Reviewer]`. Regulatory requirement under DPDP Act 2023. Strictly blocks expanding pilot to additional classes. |
 | **ACT-007** | Enter paper leads from school fair (collected two weeks ago) into central CRM | Unassigned | TBD | **Medium** | Internal | Not started | `[FLAGGED: Missing Owner & Target Date]`. Leads collected ~14 days ago are still on paper. Risk of lead decay. |
 | **ACT-008** | Draft and send investor update | Founder 2 | Thursday, 05-Nov-2026 | **Medium** | Investor | Not started | Owner explicitly assigned to Founder 2 in notes. No draft deadline invented; due 5 Nov. |
-| **ACT-009** | Maintain single central tracker across all workstreams so no action slips | Operations Intern | Ongoing | **High** | Internal | In progress | Confirmed owner is Operations Intern as assigned in meeting notes. Tracker active and maintained weekly. |
+| **ACT-009** | Maintain single central tracker across all workstreams so no action slips | Founder's Office Intern | Ongoing | **High** | Internal | In progress | Confirmed owner is Founder's Office Intern as assigned in meeting notes. Tracker active and maintained weekly. |
 
 ---
 
@@ -48,7 +48,7 @@ Thank you for your guidance and support throughout the pilot.
 
 Warm regards,  
 
-**Operations Intern**  
+**Founder's Office Intern**  
 Founder’s Office, EDXSO  
 `[Contact Phone / Email]`  
 
@@ -83,7 +83,7 @@ Looking forward to your response.
 
 Best regards,  
 
-**Operations Intern**  
+**Founder's Office Intern**  
 Founder’s Office, EDXSO  
 `[Contact Phone / Email]`  
 
@@ -92,7 +92,7 @@ Founder’s Office, EDXSO
 #### Draft 2.3: Internal Note to Founders
 * **Channel:** Slack `#founders-internal` / Team Chat  
 * **To:** Founder 1, Founder 2  
-* **From:** Operations Intern  
+* **From:** Founder's Office Intern  
 * **Subject:** 5 quick decisions needed from Thu 22 Oct sync  
 
 ---
@@ -108,7 +108,7 @@ Hi team, quick update following yesterday’s sync. I have set up our central tr
 Please share your thoughts when free so I can update the tracker and send out the school and vendor emails.
 
 Best,  
-**Operations Intern**
+**Founder's Office Intern**
 
 ---
 
@@ -162,10 +162,10 @@ Our central operational tracker is now active. We are running one active pilot a
 
 | Process Gap | Why It Matters | Practical Fix | Suggested Owner or Role |
 |---|---|---|---|
-| **Actions discussed without named owners** | Tasks like PrintWorks follow-up, school demo, and DPDP review had no confirmed owner. When ownership is shared or vague, tasks slip. | **Direct Responsible Individual (DRI) rule:** Every action must have exactly one named owner recorded in the meeting notes before closing the sync. | Operations Intern (to enforce during syncs) |
-| **Deadlines missing or approximate** | Tasks had vague timings (e.g. "before Diwali", "no date set", "due date TBD"). Makes weekly workload planning difficult. | **Explicit date rule:** Every task must have a target date. If dependent on an external party, record an interim follow-up date (e.g., "confirm demo slot by 28 Oct"). | Founders & Operations Intern |
-| **Invoice logged without amount or payment owner** | Content invoice is due in 7 days, but the cost is unknown and nobody is assigned to pay it. Risks late fees or vendor friction. | **Invoice intake protocol:** Incoming invoices must be emailed to a central folder with the PDF, amount, due date, and approving founder recorded immediately. | Operations Intern & Founders |
-| **School demo date unconfirmed** | Maple Heights principal wants a demo before Diwali break (~8 Nov). Without quick outreach, teacher calendars fill up. | **48-hour client scheduling SLA:** Whenever a school requests a meeting or demo, send available time options within 48 hours. | Operations Intern (drafting) & Demo Lead |
-| **Sales leads remaining on paper for two weeks** | School fair leads collected 14 days ago are still on paper. Leads lose value quickly when follow-up is delayed. | **Event ingestion SLA:** Physical event leads must be photographed on the event day and entered into the CRM within 48 hours. | Operations Intern |
+| **Actions discussed without named owners** | Tasks like PrintWorks follow-up, school demo, and DPDP review had no confirmed owner. When ownership is shared or vague, tasks slip. | **Direct Responsible Individual (DRI) rule:** Every action must have exactly one named owner recorded in the meeting notes before closing the sync. | Founder's Office Intern (to enforce during syncs) |
+| **Deadlines missing or approximate** | Tasks had vague timings (e.g. "before Diwali", "no date set", "due date TBD"). Makes weekly workload planning difficult. | **Explicit date rule:** Every task must have a target date. If dependent on an external party, record an interim follow-up date (e.g., "confirm demo slot by 28 Oct"). | Founders & Founder's Office Intern |
+| **Invoice logged without amount or payment owner** | Content invoice is due in 7 days, but the cost is unknown and nobody is assigned to pay it. Risks late fees or vendor friction. | **Invoice intake protocol:** Incoming invoices must be emailed to a central folder with the PDF, amount, due date, and approving founder recorded immediately. | Founder's Office Intern & Founders |
+| **School demo date unconfirmed** | Maple Heights principal wants a demo before Diwali break (~8 Nov). Without quick outreach, teacher calendars fill up. | **48-hour client scheduling SLA:** Whenever a school requests a meeting or demo, send available time options within 48 hours. | Founder's Office Intern (drafting) & Demo Lead |
+| **Sales leads remaining on paper for two weeks** | School fair leads collected 14 days ago are still on paper. Leads lose value quickly when follow-up is delayed. | **Event ingestion SLA:** Physical event leads must be photographed on the event day and entered into the CRM within 48 hours. | Founder's Office Intern |
 | **Compliance requirement without deadline or reviewer** | DPDP consent review is a legal blocker for pilot expansion, but was left with "no date set" and no owner. Growth could stall. | **Compliance gating log:** Any regulatory requirement must be tagged as a blocker with an assigned reviewer and a deadline tied to the pilot rollout date. | Founders |
-| **No structured review of previous action items** | Meeting notes show loose ends lingering from past weeks without a formal status check. | **10-minute tracker review:** Start each weekly sync by reviewing open items from the central spreadsheet before taking up new topics. | Operations Intern |
+| **No structured review of previous action items** | Meeting notes show loose ends lingering from past weeks without a formal status check. | **10-minute tracker review:** Start each weekly sync by reviewing open items from the central spreadsheet before taking up new topics. | Founder's Office Intern |

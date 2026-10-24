@@ -1,11 +1,11 @@
 # EDXSO Assignment 2: Build a Claude Automation
-## Founder’s Office – Business Operations Intern Submission Package
+## Founder’s Office Intern Submission Package
 **Candidate:** Abhi Pandey  
-**Role:** Founder’s Office – Business Operations Intern  
+**Role:** Founder’s Office Intern  
 **Submission Target:** [hr@edxso.com](mailto:hr@edxso.com)  
 **Subject Line:** `Assignment 2 – Abhi Pandey`  
 **Execution Context Date:** Friday, 23 October 2026 (Meeting: Thursday, 22 October 2026)  
-**Public Repository:** [https://github.com/Abhi4621/Edxso-Platform](https://github.com/Abhi4621/Edxso-Platform)  
+**Public Repository:** [https://github.com/abhipandey/EDXSo](https://github.com/abhipandey/EDXSo)  
 
 ---
 
@@ -48,7 +48,7 @@ Additionally, this package includes **all extra credit deliverables**:
 * **Tools Actually Used:**
   * **Claude:** Used for unstructured text extraction and initial drafting of communication drafts.
   * **Python 3.14:** Used for local script execution (`edxso_engine.py`), programmatic generation of the Excel tracker (`openpyxl`), Word document formatting (`docx`), and ZIP packaging (`zipfile`).
-  * **Git & GitHub:** Used for publishing the public repository to [`https://github.com/Abhi4621/Edxso-Platform`](https://github.com/Abhi4621/Edxso-Platform).
+  * **Git & GitHub:** Used for publishing the public repository to [`https://github.com/abhipandey/EDXSo`](https://github.com/abhipandey/EDXSo).
   * **Standard Browser:** Used for running and verifying the local interactive dashboard at `http://localhost:8000/interactive_app.html`.
 
 * **Manual Checks Actually Performed:**
