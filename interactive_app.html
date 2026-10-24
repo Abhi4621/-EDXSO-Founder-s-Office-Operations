@@ -125,6 +125,38 @@
         </div>
       </div>
 
+            <!-- Real-Time Metrics Overview -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-xs">
+          <div>
+            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Total Tasks</div>
+            <div id="statTotal" class="text-lg font-bold text-slate-800 mt-0.5">9</div>
+          </div>
+          <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">#</span>
+        </div>
+        <div class="bg-white border border-red-100 rounded-xl p-3 flex items-center justify-between shadow-xs">
+          <div>
+            <div class="text-[11px] font-semibold text-red-600 uppercase tracking-wider">High Priority</div>
+            <div id="statHigh" class="text-lg font-bold text-red-700 mt-0.5">6</div>
+          </div>
+          <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600 font-bold text-xs">!</span>
+        </div>
+        <div class="bg-white border border-amber-100 rounded-xl p-3 flex items-center justify-between shadow-xs">
+          <div>
+            <div class="text-[11px] font-semibold text-amber-600 uppercase tracking-wider">Blocked / Gating</div>
+            <div id="statBlocked" class="text-lg font-bold text-amber-700 mt-0.5">2</div>
+          </div>
+          <span class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600 font-bold text-xs">✕</span>
+        </div>
+        <div class="bg-white border border-blue-100 rounded-xl p-3 flex items-center justify-between shadow-xs">
+          <div>
+            <div class="text-[11px] font-semibold text-blue-600 uppercase tracking-wider">Unassigned Owners</div>
+            <div id="statUnassigned" class="text-lg font-bold text-blue-700 mt-0.5">7</div>
+          </div>
+          <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xs">?</span>
+        </div>
+      </div>
+
       <div class="overflow-x-auto bg-white rounded-xl border border-slate-200">
         <table class="w-full text-left border-collapse text-xs">
           <thead>
@@ -159,17 +191,17 @@
       <div id="draft-school" class="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
-            <h3 class="text-sm font-bold text-slate-900">Email to Ms. Kapoor (Maple Heights School, Gurugram)</h3>
-            <p class="text-xs text-slate-500">Demo scheduling and month 1 usage report</p>
+            <h3 id="schoolDraftTitle" class="text-sm font-bold text-slate-900">Email to Ms. Kapoor (Maple Heights School, Gurugram)</h3>
+            <p id="schoolDraftSubtitle" class="text-xs text-slate-500">Demo scheduling and month 1 usage report</p>
           </div>
           <button onclick="copyDraft('schoolText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
             Copy Email
           </button>
         </div>
         <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
-          <div><strong>To:</strong> Ms. Kapoor, Academic Coordinator, Maple Heights School [Verified school contact email]</div>
-          <div><strong>CC:</strong> Principal [Verified Principal email]; Founders [EDXSO Founders email]</div>
-          <div><strong>Subject:</strong> Maple Heights School pilot: Class 8 maths demo and month 1 usage report</div>
+          <div><strong>To:</strong> <span id="schoolDraftTo">Ms. Kapoor, Academic Coordinator, Maple Heights School [Verified school contact email]</span></div>
+          <div><strong>CC:</strong> <span id="schoolDraftCC">Principal [Verified Principal email]; Founders [EDXSO Founders email]</span></div>
+          <div><strong>Subject:</strong> <span id="schoolDraftSubject">Maple Heights School pilot: Class 8 maths demo and month 1 usage report</span></div>
         </div>
         <div id="schoolText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
 Dear Ms. Kapoor,
@@ -196,17 +228,17 @@ Founder’s Office, EDXSO
       <div id="draft-vendor" class="hidden bg-white rounded-xl border border-slate-200 p-6 space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
-            <h3 class="text-sm font-bold text-slate-900">Email to PrintWorks</h3>
-            <p class="text-xs text-slate-500">Quotation request for 300 teacher guides</p>
+            <h3 id="vendorDraftTitle" class="text-sm font-bold text-slate-900">Email to PrintWorks</h3>
+            <p id="vendorDraftSubtitle" class="text-xs text-slate-500">Quotation request for 300 teacher guides</p>
           </div>
           <button onclick="copyDraft('vendorText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
             Copy Email
           </button>
         </div>
         <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
-          <div><strong>To:</strong> Sales Desk, PrintWorks [Verified PrintWorks sales/orders email]</div>
-          <div><strong>CC:</strong> Founder's Office [EDXSO operations contact]</div>
-          <div><strong>Subject:</strong> Quotation request: 300 copies of EDXSO Teacher Guides</div>
+          <div><strong>To:</strong> <span id="vendorDraftTo">Sales Desk, PrintWorks [Verified PrintWorks sales/orders email]</span></div>
+          <div><strong>CC:</strong> <span id="vendorDraftCC">Founder's Office [EDXSO operations contact]</span></div>
+          <div><strong>Subject:</strong> <span id="vendorDraftSubject">Quotation request: 300 copies of EDXSO Teacher Guides</span></div>
         </div>
         <div id="vendorText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
 Dear PrintWorks Team,
@@ -240,8 +272,8 @@ Founder’s Office, EDXSO
       <div id="draft-internal" class="hidden bg-white rounded-xl border border-slate-200 p-6 space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
-            <h3 class="text-sm font-bold text-slate-900">Internal Message to Founders (Slack / Chat)</h3>
-            <p class="text-xs text-slate-500">Immediate decisions needed to unblock tasks</p>
+            <h3 id="internalDraftTitle" class="text-sm font-bold text-slate-900">Internal Message to Founders (Slack / Chat)</h3>
+            <p id="internalDraftSubtitle" class="text-xs text-slate-500">Immediate decisions needed to unblock tasks</p>
           </div>
           <button onclick="copyDraft('internalText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
             Copy Message
@@ -278,7 +310,7 @@ Please share your thoughts when free so I can update the tracker and send out th
               <span class="w-2 h-2 rounded-full bg-red-500"></span>
               What is at Risk
             </h3>
-            <ul class="text-xs text-slate-700 space-y-2.5">
+            <ul id="briefRiskList" class="text-xs text-slate-700 space-y-2.5">
               <li><strong>Content invoice default (Due 30 Oct):</strong> Due in 7 days, but invoice copy, amount, and payer are missing.</li>
               <li><strong>Pilot expansion blocked:</strong> Cannot expand pilot to new classes until parent consent forms are checked for DPDP compliance.</li>
               <li><strong>Demo delay:</strong> Class 8 maths demo at Maple Heights must happen before Diwali break (~8 Nov) to maintain momentum.</li>
@@ -291,7 +323,7 @@ Please share your thoughts when free so I can update the tracker and send out th
               <span class="w-2 h-2 rounded-full bg-amber-500"></span>
               Decisions Needed
             </h3>
-            <ul class="text-xs text-slate-700 space-y-2.5">
+            <ul id="briefDecisionList" class="text-xs text-slate-700 space-y-2.5">
               <li><strong>Invoice owner & amount:</strong> Confirm who holds the invoice, state exact amount, and assign payer before 30 Oct.</li>
               <li><strong>Demo presenter:</strong> Name presenter (Founder 1 vs Academic Lead) and confirm available slots.</li>
               <li><strong>DPDP review owner:</strong> Assign qualified reviewer to audit parent consent forms.</li>
@@ -305,7 +337,7 @@ Please share your thoughts when free so I can update the tracker and send out th
               <span class="w-2 h-2 rounded-full bg-blue-500"></span>
               What Ops is Doing
             </h3>
-            <ul class="text-xs text-slate-700 space-y-2.5">
+            <ul id="briefOpsList" class="text-xs text-slate-700 space-y-2.5">
               <li>Maintaining central tracker across all open items.</li>
               <li>Sending quotation inquiry to PrintWorks for 300 teacher guides.</li>
               <li>Reaching out to Ms. Kapoor for demo slots and report requirements.</li>
@@ -318,17 +350,21 @@ Please share your thoughts when free so I can update the tracker and send out th
         <div class="border-t border-slate-100 pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">
           <div>
             <strong class="text-slate-800">Upcoming Deadlines:</strong>
-            <p>• 30 Oct: Content vendor invoice due</p>
-            <p>• 30 Oct: AI tutoring tools review due</p>
-            <p>• 05 Nov: Investor update to be sent (Founder 2)</p>
-            <p>• ~08 Nov: Expected Diwali break begins (demo must happen before)</p>
+            <div id="briefDeadlinesList" class="space-y-1 mt-1.5">
+              <p>• 30 Oct: Content vendor invoice due</p>
+              <p>• 30 Oct: AI tutoring tools review due</p>
+              <p>• 05 Nov: Investor update to be sent (Founder 2)</p>
+              <p>• ~08 Nov: Expected Diwali break begins (demo must happen before)</p>
+            </div>
           </div>
           <div>
             <strong class="text-slate-800">Items Awaiting Clarification:</strong>
-            <p>• Content invoice amount and payment authorizer</p>
-            <p>• Due date and metrics for Maple Heights usage report</p>
-            <p>• Confirmed date for teacher demo</p>
-            <p>• Assigned reviewer for DPDP consent forms</p>
+            <div id="briefClarificationsList" class="space-y-1 mt-1.5">
+              <p>• Content invoice amount and payment authorizer</p>
+              <p>• Due date and metrics for Maple Heights usage report</p>
+              <p>• Confirmed date for teacher demo</p>
+              <p>• Assigned reviewer for DPDP consent forms</p>
+            </div>
           </div>
         </div>
       </div>
@@ -348,43 +384,7 @@ Please share your thoughts when free so I can update the tracker and send out th
                 <th class="py-2.5 px-3">Suggested Owner</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 text-slate-700">
-              <tr>
-                <td class="py-2.5 px-3 font-semibold">Actions without named owners</td>
-                <td class="py-2.5 px-3">PrintWorks chase, demo, and DPDP review had no owner; shared ownership causes tasks to slip.</td>
-                <td class="py-2.5 px-3">DRI Rule: Every action must have exactly one named owner before ending the sync.</td>
-                <td class="py-2.5 px-3">Ops Intern</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-3 font-semibold">Deadlines missing or approximate</td>
-                <td class="py-2.5 px-3">Vague dates like "before Diwali" or "no date set" make weekly planning difficult.</td>
-                <td class="py-2.5 px-3">Explicit Dates: Require specific calendar dates or interim follow-up target dates.</td>
-                <td class="py-2.5 px-3">Founders & Ops</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-3 font-semibold">Invoice logged without amount or payer</td>
-                <td class="py-2.5 px-3">Invoice due in 7 days without cost or authorizer; risks late fees or vendor friction.</td>
-                <td class="py-2.5 px-3">Invoice SLA: Incoming bills must be forwarded to a central folder with amount and approver.</td>
-                <td class="py-2.5 px-3">Ops & Founders</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-3 font-semibold">School demo date unconfirmed</td>
-                <td class="py-2.5 px-3">Teachers go on leave around 8 Nov; delay risks losing school pilot engagement.</td>
-                <td class="py-2.5 px-3">48-Hour Scheduling SLA: Send 2-3 specific time windows within 48 hours of request.</td>
-                <td class="py-2.5 px-3">Demo Lead & Ops</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-3 font-semibold">Leads on paper for two weeks</td>
-                <td class="py-2.5 px-3">School fair leads go cold if not followed up quickly.</td>
-                <td class="py-2.5 px-3">48-Hour Event Ingestion SLA: Digitize lead slips into CRM within 48 hours of event.</td>
-                <td class="py-2.5 px-3">Ops Intern</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-3 font-semibold">Compliance blocker with no deadline</td>
-                <td class="py-2.5 px-3">DPDP consent review left unowned; risks delaying pilot expansion.</td>
-                <td class="py-2.5 px-3">Compliance Gating: Regulatory tasks must have a named reviewer and milestone deadline.</td>
-                <td class="py-2.5 px-3">Founders</td>
-              </tr>
+            <tbody id="gapsTableBody" class="divide-y divide-slate-100 text-slate-700">
             </tbody>
           </table>
         </div>
@@ -478,10 +478,15 @@ REQUIRED OUTPUTS:
     EDXSO Founder’s Office Operations Automation • Confidential
   </footer>
 
+  
   <script>
     const SCENARIOS = {
       scenario1: {
+        id: "scenario1",
+        name: "Oct 22 Founders Sync (Execution: 23 Oct 2026)",
         date: "2026-10-23",
+        meetingDate: "Thursday, 22 October 2026",
+        executionDate: "Friday, 23 October 2026",
         notes: `FOUNDERS SYNC — Thursday, 22 October 2026\nAttendees: Both founders and the Operations Intern.\n\n• Maple Heights School in Gurugram wants a demo for its Class 8 maths teachers before the Diwali break, which starts around 8 November.\n• Ms. Kapoor, the school coordinator, also asked for a usage report covering the first month.\n• A print quotation is needed from PrintWorks for 300 teacher guides. The budget cap is ₹40,000. Nobody has followed up yet.\n• A content vendor invoice is due on 30 October. The amount was not discussed, and the person responsible for payment is unclear.\n• Founder 1 wants a quick review of three AI tutoring tools for K–12 India by next Friday.\n• Parent consent forms must be checked for DPDP compliance before expanding the pilot to more classes. No date has been set.\n• Leads collected at the school fair two weeks ago are still on paper and have not been entered into the CRM.\n• The investor update will be sent on 5 November. Founder 2 will draft it.\n• The Operations Intern must maintain one tracker so that no action is missed.`,
         tracker: [
           { id: "ACT-001", task: "Schedule and deliver Class 8 maths teacher demo at Maple Heights School (Gurugram)", owner: "Unassigned (Suggested: Founder 1 or Academic Lead)", due: "Before 08-Nov-2026", priority: "High", cat: "School", status: "Not started", notes: "Demo date and presenter unconfirmed. Need dates before Diwali break (~8 Nov)." },
@@ -493,10 +498,126 @@ REQUIRED OUTPUTS:
           { id: "ACT-007", task: "Enter paper leads from school fair (collected two weeks ago) into central CRM", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "Medium", cat: "Internal", status: "Not started", notes: "Leads sitting on paper for ~14 days. Owner and data-entry deadline not confirmed." },
           { id: "ACT-008", task: "Draft and send investor update", owner: "Founder 2", due: "05-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Internal draft review date not specified." },
           { id: "ACT-009", task: "Maintain single central tracker across all workstreams so no action slips", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker active and maintained weekly." }
+        ],
+        brief: {
+          heading: "Founder Brief — 23 October 2026",
+          subheading: "Read time: ~2 minutes • Week 43 Executive Summary",
+          risks: [
+            "<strong>Content invoice default (Due 30 Oct):</strong> Due in 7 days, but invoice copy, amount, and payer are missing.",
+            "<strong>Pilot expansion blocked:</strong> Cannot expand pilot to new classes until parent consent forms are checked for DPDP compliance.",
+            "<strong>Demo delay:</strong> Class 8 maths demo at Maple Heights must happen before Diwali break (~8 Nov) to maintain momentum."
+          ],
+          decisions: [
+            "<strong>Invoice owner & amount:</strong> Confirm who holds the invoice, state exact amount, and assign payer before 30 Oct.",
+            "<strong>Demo presenter:</strong> Name presenter (Founder 1 vs Academic Lead) and confirm available slots.",
+            "<strong>DPDP review owner:</strong> Assign qualified reviewer to audit parent consent forms.",
+            "<strong>Print quote approver:</strong> Confirm who approves the PrintWorks quotation against the ₹40,000 cap."
+          ],
+          ops: [
+            "Maintaining central tracker across all open items.",
+            "Sending quotation inquiry to PrintWorks for 300 teacher guides.",
+            "Reaching out to Ms. Kapoor for demo slots and report requirements.",
+            "Entering school fair paper leads into CRM.",
+            "Scanning 3 Indian K-12 AI tutoring tools for Founder 1."
+          ],
+          deadlines: [
+            "• 30 Oct: Content vendor invoice due",
+            "• 30 Oct: AI tutoring tools review due",
+            "• 05 Nov: Investor update to be sent (Founder 2)",
+            "• ~08 Nov: Expected Diwali break begins (demo must happen before)"
+          ],
+          clarifications: [
+            "• Content invoice amount and payment authorizer",
+            "• Due date and metrics for Maple Heights usage report",
+            "• Confirmed date for teacher demo",
+            "• Assigned reviewer for DPDP consent forms"
+          ]
+        },
+        drafts: {
+          school: {
+            title: "Email to Ms. Kapoor (Maple Heights School, Gurugram)",
+            subtitle: "Demo scheduling and month 1 usage report",
+            to: "Ms. Kapoor, Academic Coordinator, Maple Heights School [Verified school contact email]",
+            cc: "Principal [Verified Principal email]; Founders [EDXSO Founders email]",
+            subject: "Maple Heights School pilot: Class 8 maths demo and month 1 usage report",
+            body: `Dear Ms. Kapoor,
+
+I hope you are having a good week.
+
+I am writing to follow up on our ongoing pilot at Maple Heights School.
+
+Regarding the demonstration for your Class 8 mathematics teachers, we would be glad to schedule this before the school closes for the Diwali break around 8 November. Could you please share a few dates and times that would be convenient for your teaching staff? Once you let us know their availability, we will confirm the session details.
+
+We are also preparing the usage report covering the first month of the pilot. If there are any specific data points, student engagement metrics, or questions you or the Principal would like highlighted in this report, please let us know so we can include them.
+
+Thank you for your guidance and support throughout the pilot.
+
+Warm regards,  
+
+Operations Intern  
+Founder’s Office, EDXSO  
+abhipandey4631@gmail.com`
+          },
+          vendor: {
+            title: "Email to PrintWorks",
+            subtitle: "Quotation request for 300 teacher guides",
+            to: "Sales Desk, PrintWorks [Verified PrintWorks sales/orders email]",
+            cc: "Founder's Office [EDXSO operations contact]",
+            subject: "Quotation request: 300 copies of EDXSO Teacher Guides",
+            body: `Dear PrintWorks Team,
+
+We would like to request a formal quotation for printing 300 copies of our EDXSO Teacher Guides.
+
+Please note that our total approved budget cap for this print run is strictly ₹40,000. 
+
+Could you please share a breakdown covering:
+1. Printing charges
+2. Applicable taxes (GST)
+3. Delivery charges to our office in Gurugram
+4. Estimated production and delivery turnaround time
+5. Payment terms
+
+Please also let us know what printing specifications you require from our side (such as preferred page count brackets, paper weight, cover stock, or file formats) so we can provide the print-ready files.
+
+Please note that this email is an inquiry for a quotation and not a confirmed purchase order. We will review your quotation against our budget cap before confirming.
+
+Looking forward to your response.
+
+Best regards,  
+
+Operations Intern  
+Founder’s Office, EDXSO  
+abhipandey4631@gmail.com`
+          },
+          internal: {
+            title: "Internal Message to Founders (Slack / Chat)",
+            subtitle: "Immediate decisions needed to unblock tasks",
+            body: `Hi team, quick update following yesterday’s sync. I have set up our central tracker, but need clarification on a few items to move work forward:
+
+1. Content vendor invoice (due 30 Oct): What is the billed amount, where is the invoice copy, and who will approve and initiate payment?
+2. Maple Heights demo & usage report: Who will lead the Class 8 maths demo session, and what dates work for you before 8 Nov? I can draft the usage report once metrics are confirmed.
+3. PrintWorks quotation: Who will give final sign-off on the print quote once received, keeping within our ₹40,000 cap?
+4. DPDP consent review: Who is responsible for checking parent consent forms against DPDP rules so pilot expansion isn't held up?
+5. AI tutoring tools review: Founder 1, should I take on the 3-tool review due next Friday (30 Oct)? Also, Founder 2, let me know if you need any pilot metrics for your 5 Nov investor update draft.
+
+Please share your thoughts when free so I can update the tracker and send out the school and vendor emails.`
+          }
+        },
+        gaps: [
+          { gap: "Actions without named owners", why: "PrintWorks chase, demo, and DPDP review had no owner; shared ownership causes tasks to slip.", fix: "DRI Rule: Every action must have exactly one named owner before ending the sync.", owner: "Ops Intern" },
+          { gap: "Deadlines missing or approximate", why: "Vague dates like 'before Diwali' or 'no date set' make weekly planning difficult.", fix: "Explicit Dates: Require specific calendar dates or interim follow-up target dates.", owner: "Founders & Ops" },
+          { gap: "Invoice logged without amount or payer", why: "Invoice due in 7 days without cost or authorizer; risks late fees or vendor friction.", fix: "Invoice SLA: Incoming bills must be forwarded to a central folder with amount and approver.", owner: "Ops & Founders" },
+          { gap: "School demo date unconfirmed", why: "Teachers go on leave around 8 Nov; delay risks losing school pilot engagement.", fix: "48-Hour Scheduling SLA: Send 2-3 specific time windows within 48 hours of request.", owner: "Demo Lead & Ops" },
+          { gap: "Leads on paper for two weeks", why: "School fair leads go cold if not followed up quickly.", fix: "48-Hour Event Ingestion SLA: Digitize lead slips into CRM within 48 hours of event.", owner: "Ops Intern" },
+          { gap: "Compliance blocker with no deadline", why: "DPDP consent review left unowned; risks delaying pilot expansion.", fix: "Compliance Gating: Regulatory tasks must have a named reviewer and milestone deadline.", owner: "Founders" }
         ]
       },
       scenario2: {
+        id: "scenario2",
+        name: "Nov 12 Founders Sync (Execution: 13 Nov 2026)",
         date: "2026-11-13",
+        meetingDate: "Thursday, 12 November 2026",
+        executionDate: "Friday, 13 November 2026",
         notes: `FOUNDERS SYNC — Thursday, 12 November 2026\nAttendees: Both founders, Operations Intern, Tech Lead\n\n• Maple Heights update: Class 8 maths demo was completed. Principal wants a proposal for 180 students across Classes 8 and 9. Coordinator Ms. Kapoor asked if our app works offline because Gurugram schools might close next week due to high AQI / air pollution.\n• PrintWorks delivered 300 teacher guides on Tuesday. Invoice received for ₹38,500. However, 25 copies in box 3 have defective binding. Nobody has spoken to PrintWorks yet.\n• Cloud server bill spiked by ₹35,000 this month. Tech Lead to investigate root cause by Monday.\n• Delhi World Public School (Noida) reached out asking for a pilot for Class 10 science. Exploratory call requested for next Tuesday afternoon.\n• Legal intern prepared draft parent consent form for DPDP compliance. Needs founder review before sending to Maple Heights Class 9 parents. No date set.\n• Matrix Edge (seed investor) asked for updated burn forecast by 20 Nov. Founder 2 will handle.\n• Operations Intern to keep tracker updated.`,
         tracker: [
           { id: "ACT-201", task: "Prepare formal commercial proposal for Maple Heights School (180 students, Classes 8 & 9)", owner: "Unassigned (Suggested: Founder 1 with Ops support)", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Pricing tier and delivery date unconfirmed. Need approved rates from founders." },
@@ -507,53 +628,292 @@ REQUIRED OUTPUTS:
           { id: "ACT-206", task: "Review legal intern draft parent consent form for DPDP compliance before Class 9 rollout", owner: "Unassigned (Suggested: Founders)", due: "TBD", priority: "High", cat: "Compliance", status: "Blocked", notes: "Draft ready, but founder review date not set. Blocks Class 9 rollout." },
           { id: "ACT-207", task: "Prepare and send updated burn forecast to Matrix Edge (investor)", owner: "Founder 2", due: "20-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Hard investor deadline 20 Nov." },
           { id: "ACT-208", task: "Maintain central operations tracker across all workstreams", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker updated weekly." }
+        ],
+        brief: {
+          heading: "Founder Brief — 13 November 2026",
+          subheading: "Read time: ~2 minutes • Post-Diwali Scaling Sprint",
+          risks: [
+            "<strong>Cloud Infrastructure Spend:</strong> Server bill spiked by ₹35,000 this month. Tech Lead investigating root cause by Monday.",
+            "<strong>Vendor Quality Defect:</strong> 25 of 300 printed teacher guides delivered have defective inverted binding. Invoice ₹38,500 pending resolution.",
+            "<strong>Class 9 Rollout Gated:</strong> Parent consent form prepared by legal intern requires founder review and sign-off before Class 9 rollout."
+          ],
+          decisions: [
+            "<strong>Maple Heights Commercial Pricing:</strong> Approve per-student rate for 180 students (Classes 8 & 9) before Wednesday's proposal.",
+            "<strong>DPDP Parent Consent Sign-off:</strong> Review legal intern's draft so consent forms can be dispatched.",
+            "<strong>Delhi World Public School Pitch:</strong> Assign caller (Founder 1 or 2) for Tuesday afternoon exploratory call.",
+            "<strong>PrintWorks Retention Policy:</strong> Decide whether to withhold partial payment on defective copies pending replacements."
+          ],
+          ops: [
+            "Logging formal quality defect report with PrintWorks for 25 replacement guides.",
+            "Coordinating with Tech Lead on offline sync capabilities for AQI school closure preparedness.",
+            "Preparing commercial proposal draft for Maple Heights School.",
+            "Maintaining centralized operational tracker across all workstreams."
+          ],
+          deadlines: [
+            "• 16 Nov: Tech Lead AWS root-cause investigation report",
+            "• 17 Nov: Exploratory pitch call with Delhi World Public School (Noida)",
+            "• 18 Nov: Formal commercial proposal to Maple Heights School",
+            "• 20 Nov: Matrix Edge updated burn forecast (Founder 2)"
+          ],
+          clarifications: [
+            "• Approved per-student pricing for 180 students",
+            "• Founder sign-off date for DPDP parent consent form",
+            "• Confirmation of app offline capability from Tech Lead",
+            "• Defective invoice retention approval from founders"
+          ]
+        },
+        drafts: {
+          school: {
+            title: "Email to Ms. Kapoor (Maple Heights School, Gurugram)",
+            subtitle: "Class 8 Demo Feedback, Air Quality Preparedness, & Pilot Proposal",
+            to: "Ms. Kapoor, Academic Coordinator, Maple Heights School [Verified school contact email]",
+            cc: "Principal [Verified Principal email]; Founders [EDXSO Founders email]",
+            subject: "EDXSO Follow-up: Class 8 Demo Feedback, Air Quality Preparedness, & Pilot Proposal",
+            body: `Dear Ms. Kapoor,
+
+Thank you for your time during our Class 8 Mathematics demonstration on Tuesday. We are delighted by the positive feedback from your teaching faculty.
+
+Regarding your question about potential Delhi-NCR school closures due to rising AQI levels:
+• Our technical team is currently reviewing our offline and low-bandwidth synchronization features to ensure seamless remote learning if schools shift online. We will confirm our exact technical readiness with you by Monday.
+
+Regarding the pilot expansion for your 180 students across Classes 8 & 9:
+1. We are finalizing our formal commercial proposal and will share the pricing structure with you and the Principal by Wednesday, 18 November 2026.
+2. We are also preparing an updated Parent Information and Consent Form for Class 9 parents and will share it as soon as internal legal review is complete.
+
+Please let us know if there are specific timetable or curriculum requirements we should factor into the proposal.
+
+Warm regards,  
+
+Operations Intern  
+Founder’s Office, EDXSO  
+abhipandey4631@gmail.com`
+          },
+          vendor: {
+            title: "Email to PrintWorks",
+            subtitle: "Quality defect report: 25 misbound copies",
+            to: "Accounts & Production Desk, PrintWorks [Verified PrintWorks sales/orders email]",
+            cc: "Founder's Office [EDXSO operations contact]",
+            subject: "Quality defect report: 25 misbound copies — EDXSO Teacher Guides",
+            body: `Dear PrintWorks Team,
+
+Thank you for delivering the 300 copies of our EDXSO Teacher Guides on Tuesday along with your invoice for ₹38,500.
+
+Upon our initial quality inspection, we found that 25 copies in Box #3 have inverted (upside-down) binding, which makes them unusable for teacher training.
+
+To resolve this promptly:
+1. Could you please confirm how quickly your team can collect the 25 defective copies and provide replacements?
+2. We would like to process your invoice promptly. Please let us know if we should process payment for the accepted 275 copies first while the replacement copies are in production, or if you prefer an amended invoice.
+
+Please confirm receipt and let us know your collection schedule.
+
+Best regards,  
+
+Operations Intern  
+Founder’s Office, EDXSO  
+abhipandey4631@gmail.com`
+          },
+          internal: {
+            title: "Internal Message to Founders (Slack / Chat)",
+            subtitle: "Immediate decisions needed from Thu 12 Nov sync",
+            body: `Hi Founders, quick update on open bottlenecks from yesterday's sync:
+
+1. Maple Heights Pricing (180 students, Classes 8 & 9): What per-student rate should we quote in Wednesday's proposal?
+2. DPDP Parent Consent Form: Legal intern's draft is ready in the shared folder. Please review and sign off so we can onboard Class 9 parents.
+3. PrintWorks Defective Copies (25 copies): Total invoice is ₹38,500. Should we hold payment on the 25 defective copies until replaced, or ask for an amended invoice?
+4. Cloud Server Spike (₹35,000): Tech Lead is auditing untagged instances due Monday.
+5. Delhi World Public School (Noida): Exploratory call requested for Tuesday afternoon. Who will take the lead on this pitch?
+
+Please share your guidance when free.`
+          }
+        },
+        gaps: [
+          { gap: "Untagged cloud infrastructure spike (₹35,000)", why: "Untagged staging servers left running over holidays cause unexpected burn rate spikes.", fix: "Cloud Governance: Enforce mandatory resource tagging and automated budget kill-switches.", owner: "Tech Lead" },
+          { gap: "Quality defect discovered after delivery", why: "25 defective guides found inside box 3 after vendor left; delays teacher onboarding.", fix: "Delivery QA Checklist: Inspect sample copies from every box before signing delivery challan.", owner: "Ops Intern" },
+          { gap: "Undefined pricing tiers for 180-student expansion", why: "School requested commercial proposal without pre-agreed multi-class discount tiers.", fix: "Standardized Rate Card: Pre-approve Class 8-10 pricing brackets for schools.", owner: "Founders" },
+          { gap: "Legal intern DPDP consent form unreviewed", why: "Consent form draft sits in folder without sign-off deadline; blocks Class 9 rollout.", fix: "48-Hour Legal Review SLA: Founders must review compliance drafts within 48 hours.", owner: "Founders" },
+          { gap: "Exploratory school pitch call unassigned", why: "Inbound opportunity from Noida school requested for Tuesday without a confirmed caller.", fix: "Inbound Routing SLA: Automatically assign school pitch leads to a designated founder.", owner: "Ops & Founders" }
         ]
       }
     };
 
-    let currentItems = SCENARIOS.scenario1.tracker;
+    let activeScenarioKey = "scenario1";
+    let currentItems = JSON.parse(JSON.stringify(SCENARIOS.scenario1.tracker));
+
+    function updateStatBadges(items) {
+      const total = items.length;
+      const highCount = items.filter(i => i.priority === "High" || i.priority === "Critical").length;
+      const blockedCount = items.filter(i => i.status === "Blocked" || i.status.toLowerCase().includes("block")).length;
+      const unassignedCount = items.filter(i => i.owner.toLowerCase().includes("unassigned")).length;
+
+      const statTot = document.getElementById("statTotal");
+      if (statTot) statTot.textContent = total;
+      const statH = document.getElementById("statHigh");
+      if (statH) statH.textContent = highCount;
+      const statB = document.getElementById("statBlocked");
+      if (statB) statB.textContent = blockedCount;
+      const statU = document.getElementById("statUnassigned");
+      if (statU) statU.textContent = unassignedCount;
+
+      const rowBadge = document.getElementById("rowCountBadge");
+      if (rowBadge) rowBadge.textContent = `${total} items`;
+    }
 
     function renderTable(items) {
       const tbody = document.getElementById("trackerTableBody");
       tbody.innerHTML = "";
-      document.getElementById("rowCountBadge").textContent = `${items.length} items`;
 
       items.forEach((item, index) => {
         const tr = document.createElement("tr");
         tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
 
         let prioClass = "bg-slate-100 text-slate-700";
-        if (item.priority === "High") prioClass = "bg-red-50 text-red-700 border border-red-200 font-semibold";
+        if (item.priority === "High" || item.priority === "Critical") prioClass = "bg-red-50 text-red-700 border border-red-200 font-semibold";
         if (item.priority === "Medium") prioClass = "bg-amber-50 text-amber-700 border border-amber-200";
 
         let statusClass = "text-slate-600";
-        if (item.status === "Blocked") statusClass = "text-red-700 font-medium";
+        if (item.status === "Blocked" || item.status.toLowerCase().includes("block")) statusClass = "text-red-700 font-medium";
         if (item.status === "In progress") statusClass = "text-blue-700 font-medium";
 
         tr.innerHTML = `
           <td class="py-2.5 px-3 text-center text-slate-400 font-mono text-[11px]">${item.id}</td>
-          <td class="py-2.5 px-3 font-medium text-slate-900" contenteditable="true" onblur="updateField(${index}, 'task', this.innerText)">${item.task}</td>
-          <td class="py-2.5 px-3 text-slate-700" contenteditable="true" onblur="updateField(${index}, 'owner', this.innerText)">${item.owner}</td>
-          <td class="py-2.5 px-3 text-slate-600" contenteditable="true" onblur="updateField(${index}, 'due', this.innerText)">${item.due}</td>
+          <td class="py-2.5 px-3 font-medium text-slate-900" contenteditable="true" onblur="updateField(${index}, 'task', this.innerText)" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur();}">${item.task}</td>
+          <td class="py-2.5 px-3 text-slate-700" contenteditable="true" onblur="updateField(${index}, 'owner', this.innerText)" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur();}">${item.owner}</td>
+          <td class="py-2.5 px-3 text-slate-600 font-medium" contenteditable="true" onblur="updateField(${index}, 'due', this.innerText)" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur();}">${item.due}</td>
           <td class="py-2.5 px-2 text-center">
             <span class="px-2 py-0.5 rounded text-[10px] ${prioClass}">${item.priority}</span>
           </td>
           <td class="py-2.5 px-2 text-center">
             <span class="px-2 py-0.5 rounded text-[10px] bg-slate-100 text-slate-600 border border-slate-200">${item.cat}</span>
           </td>
-          <td class="py-2.5 px-3 ${statusClass}" contenteditable="true" onblur="updateField(${index}, 'status', this.innerText)">${item.status}</td>
-          <td class="py-2.5 px-3 text-slate-500 leading-tight" contenteditable="true" onblur="updateField(${index}, 'notes', this.innerText)">${item.notes}</td>
+          <td class="py-2.5 px-3 ${statusClass}" contenteditable="true" onblur="updateField(${index}, 'status', this.innerText)" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur();}">${item.status}</td>
+          <td class="py-2.5 px-3 text-slate-500 leading-tight" contenteditable="true" onblur="updateField(${index}, 'notes', this.innerText)" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur();}">${item.notes}</td>
           <td class="py-2.5 px-2 text-center">
-            <button onclick="deleteRow(${index})" class="text-slate-300 hover:text-red-600 text-xs">✕</button>
+            <button onclick="deleteRow(${index})" class="text-slate-300 hover:text-red-600 text-xs font-bold" title="Delete row">✕</button>
           </td>
         `;
         tbody.appendChild(tr);
       });
+
+      updateStatBadges(items);
+    }
+
+    function renderBrief(brief) {
+      if (!brief) return;
+      if (document.getElementById("founderBriefHeading")) {
+        document.getElementById("founderBriefHeading").innerText = brief.heading;
+      }
+      if (document.getElementById("founderBriefSubheading")) {
+        document.getElementById("founderBriefSubheading").innerText = brief.subheading;
+      }
+
+      const rList = document.getElementById("briefRiskList");
+      if (rList) rList.innerHTML = brief.risks.map(r => `<li>${r}</li>`).join("");
+
+      const dList = document.getElementById("briefDecisionList");
+      if (dList) dList.innerHTML = brief.decisions.map(d => `<li>${d}</li>`).join("");
+
+      const oList = document.getElementById("briefOpsList");
+      if (oList) oList.innerHTML = brief.ops.map(o => `<li>${o}</li>`).join("");
+
+      const dlList = document.getElementById("briefDeadlinesList");
+      if (dlList) dlList.innerHTML = brief.deadlines.map(d => `<p>${d}</p>`).join("");
+
+      const clList = document.getElementById("briefClarificationsList");
+      if (clList) clList.innerHTML = brief.clarifications.map(c => `<p>${c}</p>`).join("");
+    }
+
+    function renderDrafts(drafts) {
+      if (!drafts) return;
+      // School
+      if (document.getElementById("schoolDraftTitle")) document.getElementById("schoolDraftTitle").innerText = drafts.school.title;
+      if (document.getElementById("schoolDraftSubtitle")) document.getElementById("schoolDraftSubtitle").innerText = drafts.school.subtitle;
+      if (document.getElementById("schoolDraftTo")) document.getElementById("schoolDraftTo").innerText = drafts.school.to;
+      if (document.getElementById("schoolDraftCC")) document.getElementById("schoolDraftCC").innerText = drafts.school.cc;
+      if (document.getElementById("schoolDraftSubject")) document.getElementById("schoolDraftSubject").innerText = drafts.school.subject;
+      if (document.getElementById("schoolText")) document.getElementById("schoolText").innerText = drafts.school.body;
+
+      // Vendor
+      if (document.getElementById("vendorDraftTitle")) document.getElementById("vendorDraftTitle").innerText = drafts.vendor.title;
+      if (document.getElementById("vendorDraftSubtitle")) document.getElementById("vendorDraftSubtitle").innerText = drafts.vendor.subtitle;
+      if (document.getElementById("vendorDraftTo")) document.getElementById("vendorDraftTo").innerText = drafts.vendor.to;
+      if (document.getElementById("vendorDraftCC")) document.getElementById("vendorDraftCC").innerText = drafts.vendor.cc;
+      if (document.getElementById("vendorDraftSubject")) document.getElementById("vendorDraftSubject").innerText = drafts.vendor.subject;
+      if (document.getElementById("vendorText")) document.getElementById("vendorText").innerText = drafts.vendor.body;
+
+      // Internal
+      if (document.getElementById("internalDraftTitle")) document.getElementById("internalDraftTitle").innerText = drafts.internal.title;
+      if (document.getElementById("internalDraftSubtitle")) document.getElementById("internalDraftSubtitle").innerText = drafts.internal.subtitle;
+      if (document.getElementById("internalText")) document.getElementById("internalText").innerText = drafts.internal.body;
+    }
+
+    function renderGaps(gaps) {
+      const tbody = document.getElementById("gapsTableBody");
+      if (!tbody || !gaps) return;
+      tbody.innerHTML = gaps.map(g => `
+        <tr>
+          <td class="py-2.5 px-3 font-semibold text-slate-900">${g.gap}</td>
+          <td class="py-2.5 px-3 text-slate-600 leading-snug">${g.why}</td>
+          <td class="py-2.5 px-3 text-slate-700 leading-snug font-medium">${g.fix}</td>
+          <td class="py-2.5 px-3 font-medium text-blue-700">${g.owner}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updatePromptDisplay() {
+      const promptEl = document.getElementById("promptTextDisplay");
+      if (!promptEl) return;
+
+      const dateVal = document.getElementById("refDateInput").value || "2026-10-23";
+      const [y, m, d] = dateVal.split("-").map(Number);
+      const refDate = new Date(y, m - 1, d);
+      const longMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const dayName = days[refDate.getDay()];
+      const executionDateStr = `${dayName}, ${d} ${longMonths[m - 1]} ${y}`;
+
+      // Meeting date is typically the day before execution
+      const meetingDateObj = new Date(refDate);
+      meetingDateObj.setDate(refDate.getDate() - 1);
+      const meetingDayName = days[meetingDateObj.getDay()];
+      const meetingDateStr = `${meetingDayName}, ${meetingDateObj.getDate()} ${longMonths[meetingDateObj.getMonth()]} ${meetingDateObj.getFullYear()}`;
+
+      const rawNotes = document.getElementById("rawNotesInput").value.trim() || "[Paste rough meeting notes here]";
+
+      promptEl.innerText = `You are the Operations Assistant in the Founder’s Office at EDXSO, an Indian K-12 EdTech startup.
+Your job is to convert messy, unstructured meeting notes into an accurate, operational execution pack.
+
+INPUT PARAMETERS:
+- Meeting Date: ${meetingDateStr}
+- Reference Execution Date (Today): ${executionDateStr}
+- Attendees: Both founders and the Operations Intern
+- Previous Tracker Open Items (if available): None (Baseline setup)
+- Raw Meeting Notes:
+"""
+${rawNotes}
+"""
+
+CORE OPERATING RULES:
+1. STRICT ACCURACY: Use only facts stated in the notes. Never invent owners, dates, budget figures, completed tasks, or business outcomes.
+2. MISSING INFORMATION: If an owner is missing or ambiguous, label it "Unassigned". If a date is missing, label it "TBD". If a budget or amount is unstated, label it "Amount unstated".
+3. SUGGESTIONS VS FACTS: You may suggest a practical owner or target date in parentheses, but clearly label it as a suggestion (e.g., "Unassigned (Suggested: Operations Intern)").
+4. RELATIVE DATES: Calculate relative dates strictly relative to the Meeting Date and Reference Date. Factor in Indian business/school contexts (e.g., Diwali break, term exams) when mentioned.
+5. NO FABRICATED COMPLETION: Never mark a task as "Done" based only on generated text.
+6. SENSITIVE MATTERS: Flag all payment approvals, legal compliance (including DPDP Act 2023 parent consent), and external commercial commitments for human founder review.
+7. PRIVACY: Never include real student, parent, or teacher personal data.
+
+REQUIRED OUTPUTS:
+1. Action Tracker Table (Task ID, Task, Owner, Due Date, Priority, Category, Status, Missing Information)
+2. Ready-to-Review Follow-up Drafts (School email, Vendor email, Internal Founders chat note)
+3. Founder Brief (One page, ~2-minute read: Current position, At risk, Decisions needed, Ops plan, Deadlines)
+4. Process-Gap Analysis (Gap, Why it matters, Practical fix, Owner)
+5. Validation Checklist
+6. Five Most Important Next Actions`;
     }
 
     function updateField(index, field, value) {
       if (currentItems[index]) {
         currentItems[index][field] = value.trim();
+        updateStatBadges(currentItems);
       }
     }
 
@@ -564,17 +924,19 @@ REQUIRED OUTPUTS:
         task: "New operational task (click to edit)",
         owner: "Unassigned",
         due: "TBD",
-        priority: "High",
+        priority: "Medium",
         cat: "Internal",
         status: "Not started",
-        notes: "Missing owner and deadline."
+        notes: "Added via operations dashboard."
       });
       filterTracker();
     }
 
     function deleteRow(index) {
-      currentItems.splice(index, 1);
-      filterTracker();
+      if (confirm("Delete this action item?")) {
+        currentItems.splice(index, 1);
+        filterTracker();
+      }
     }
 
     function filterTracker() {
@@ -582,33 +944,59 @@ REQUIRED OUTPUTS:
       const prio = document.getElementById("priorityFilter").value;
       const search = document.getElementById("searchFilter").value.toLowerCase();
 
-      const filtered = currentItems.filter(item => {
-        const matchCat = (cat === "ALL" || item.cat === cat);
-        const matchPrio = (prio === "ALL" || item.priority === prio);
-        const matchSearch = item.task.toLowerCase().includes(search) || item.owner.toLowerCase().includes(search);
+      let filtered = currentItems.filter(item => {
+        let matchCat = (cat === "ALL" || item.cat === cat);
+        let matchPrio = (prio === "ALL" || item.priority === prio);
+        let matchSearch = (
+          item.task.toLowerCase().includes(search) || 
+          item.owner.toLowerCase().includes(search) || 
+          item.notes.toLowerCase().includes(search) ||
+          item.id.toLowerCase().includes(search)
+        );
         return matchCat && matchPrio && matchSearch;
       });
+
       renderTable(filtered);
     }
 
     function toggleNotesPanel() {
       const panel = document.getElementById("notesPanel");
+      const btn = document.getElementById("notesToggleBtn");
       panel.classList.toggle("hidden");
+      if (panel.classList.contains("hidden")) {
+        btn.classList.remove("bg-blue-50", "text-blue-700", "border-blue-200");
+        btn.classList.add("bg-slate-100", "text-slate-700");
+      } else {
+        btn.classList.remove("bg-slate-100", "text-slate-700");
+        btn.classList.add("bg-blue-50", "text-blue-700", "border-blue-200");
+      }
     }
 
     function switchTab(tabName) {
-      ['tracker', 'drafts', 'brief', 'gaps', 'playbook', 'prompt'].forEach(t => {
-        document.getElementById(`tab-${t}`).classList.add('hidden');
-        document.getElementById(`tab-btn-${t}`).classList.remove('border-blue-600', 'text-blue-600', 'font-semibold');
-        document.getElementById(`tab-btn-${t}`).classList.add('border-transparent', 'text-slate-500');
+      const tabs = ['tracker', 'drafts', 'brief', 'gaps', 'playbook', 'prompt'];
+      tabs.forEach(t => {
+        const pane = document.getElementById(`tab-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (pane && btn) {
+          if (t === tabName) {
+            pane.classList.remove('hidden');
+            btn.classList.add('border-blue-600', 'text-blue-600', 'font-semibold');
+            btn.classList.remove('border-transparent', 'text-slate-500');
+          } else {
+            pane.classList.add('hidden');
+            btn.classList.remove('border-blue-600', 'text-blue-600', 'font-semibold');
+            btn.classList.add('border-transparent', 'text-slate-500');
+          }
+        }
       });
-      document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-      document.getElementById(`tab-btn-${tabName}`).classList.add('border-blue-600', 'text-blue-600', 'font-semibold');
-      document.getElementById(`tab-btn-${tabName}`).classList.remove('border-transparent', 'text-slate-500');
+      if (tabName === 'prompt') {
+        updatePromptDisplay();
+      }
     }
 
     function switchDraft(type) {
-      ['school', 'vendor', 'internal'].forEach(d => {
+      const drafts = ['school', 'vendor', 'internal'];
+      drafts.forEach(d => {
         document.getElementById(`draft-${d}`).classList.add('hidden');
         document.getElementById(`draft-btn-${d}`).classList.remove('bg-blue-600', 'text-white');
         document.getElementById(`draft-btn-${d}`).classList.add('bg-slate-100', 'text-slate-600');
@@ -618,7 +1006,7 @@ REQUIRED OUTPUTS:
       document.getElementById(`draft-btn-${type}`).classList.remove('bg-slate-100', 'text-slate-600');
     }
 
-        function onDateChanged() {
+    function onDateChanged() {
       const dateVal = document.getElementById("refDateInput").value;
       if (!dateVal) return;
 
@@ -641,17 +1029,30 @@ REQUIRED OUTPUTS:
       const briefSub = document.getElementById("founderBriefSubheading");
       if (briefSub) briefSub.innerText = `Reference Execution Date: ${dayName}, ${longStr} • Executive Summary`;
 
+      updatePromptDisplay();
       executeRealTimeParser(false);
     }
 
     function loadScenario(name) {
       const sc = SCENARIOS[name];
       if (!sc) return;
+      activeScenarioKey = name;
+
       document.getElementById("refDateInput").value = sc.date;
       document.getElementById("rawNotesInput").value = sc.notes.replace(/\\n/g, "\n");
       currentItems = JSON.parse(JSON.stringify(sc.tracker));
+      
       filterTracker();
-      onDateChanged();
+      renderBrief(sc.brief);
+      renderDrafts(sc.drafts);
+      renderGaps(sc.gaps);
+      updatePromptDisplay();
+
+      const [y, m, d] = sc.date.split("-").map(Number);
+      const shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const badge = document.getElementById("dateBadgeText");
+      if (badge) badge.innerText = `${String(d).padStart(2, "0")} ${shortMonths[m - 1]} ${y}`;
+
       toggleNotesPanel();
     }
 
@@ -745,11 +1146,11 @@ REQUIRED OUTPUTS:
       if (newItems.length > 0) {
         currentItems = newItems;
         filterTracker();
+        updatePromptDisplay();
         if (autoClose) {
           toggleNotesPanel();
         }
       }
-    }
     }
 
     function copyDraft(elemId) {
@@ -788,7 +1189,7 @@ REQUIRED OUTPUTS:
     }
 
     window.onload = function() {
-      filterTracker();
+      loadScenario("scenario1");
     };
   </script>
 </body>
