@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDXSO | Operations Tracker & Meeting Automation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    [contenteditable="true"]:focus { outline: 2px solid #2563EB; background-color: #EFF6FF; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Minimalist Clean Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAAA2CAYAAABazHL9AAAQAElEQVR4AeycCZxcVZXGv/u6sy9kZwuBJIIIyhYgJEDYFGQTEUeBQAQUCQKjCL8Zt2FmdH5ugDrjMGyBKGGI7ASQsChLgLDvIAFkC1nYSQhk737z/+6rV6muVHdXd6cbdKp+77y7n3vuud87d3uvkrQNv8bGNK1RTQfrGgNpG36JWvmlqWRqxG1olOzWqKaHdYWBHFPGmKkVOKpFwJoBONWK1dLri6VX3pFefbdGNR2sOwwYU8aWMWasGXMtgbZZwPoJMoMPV0h3Pi8ddkGqg89LdUgk4dbokPNqOuiIDr54vnToBRm2jDFjzZgz9poDbUXAukCgxJLl0q3PSj+6QXrsNenFN6XnXjeluDV67vWaDjqigzkLM/0ZW9+fkeoWsGbMGXvGIBBc61oLsM7oAu8D1hufSnXmbameWZCqAeg3pAEXkklqgF2NanpoHwbAUI4nsPXsQums26QbnpQWLxMIU1wvqezXBLA5WBdR4LonpPPvlp6YJ61CohTm8I3FUzKmLMBqJNV00F4dZGjy3dhaDZ6emJfqvLtTXfN4qveWqiJoi4AFgzGDM15HgYtnp3r41QysLup0RNPH7ufh4GMn1N+5QB3WeZCBmmkpLVjSEA3jo0w9f3efZIP5bgXQFgHrwtk0QJp6X4hgXYllFTAG/GKrDJ8roioL3A4KISiE9hOFLc4aUvYLoSM8Mx4KBdeO/e2h8rKlYftLqRr+zk++EIJCqI7IKAWt+dlvcozdtSgohLaRWSlwLyWC8SqNa8WfAtsAI2PLGBP+lexIPTJXssG8vjA9UMmvCNj3mQbMfEY6dxaWdW4at7IEg0aYil8IBbASB2RjbLMuCWkZyVOKsrjyPK2FeWp8NSGZJ61trWyL6bQvpts1mSduvAL3ZohsTWRpEqZY5ElkdB2uQES5CU35lJaxvy3tgxtFuDMe4olTFrtUhJPVk/MjzhFRPhLb5FK2SX6HqyYqI68illKFYAVLGdZCxJ5Bex5YvAlMGpsq/IqA9W7AT29O426AUS6FAgP7xM/PA05Uhd0WKCUtk0HOHgBrN8K9qa0j1I2GwSbyjHyppjtytodnH2TpCbOE8rDJLsIO2jF/IXdoDGqW3M6spFxO/uVxdgMRdk14Yx7HmRwHcFwHii62ydkiOR1PHdSbm+VtqZ1O7wXfOpeLfClYepHWJEi+QL46hHI5l2+Jf57mvKJspFKGud9pub9Vdw2mcvEy0CpODx5n/fTzW9K4U5WzSnLPd69KNYctK+8EiEbQFgk3QGbrpymJflX/C84a1KNe2myItMcnC7QFbjtoJDy610WmQhTVA+ARg6UJ5ttGfntSZqfNpA37SklDUPy50VAdQO0BkaT1SOhPJ/TP3YK/H243qFBSEXTkiUcxjiTNMsZwQgJxXPLDK9IC1J06euN2I4GLTFyEucfL6ZsODJneWmmf2zN+tLR+nyDUHcsX63eIdkUZXRHy1KG7HtCIAdK4T6iqOvZAhrGjpAGgNvAgm21FKmmD05sjZ0sQ0tgyxgJ+RFLqG/7GNERMGps5jyT3zF8kjw6R3DbPKxwwIw8rSbLG4uZlWnNDQASYDe4tHbGTdOU3pWtOkK6ejFslOe+1J0pXUPbosdLAnoqdntCg3kH6hx1Ig+dV8HPea3Bbo6vIfzU8L4fnP+8n9e8laXVQUgfDBC9z91FDpWMnSGd8Sfr+F6UfHCJ9D9f0Q/ynHyRttTHgoI1oWBGY4kd7IzDgE91COPBQhBVBYiFRtzKoX4+gHTaVvkybRg0N6l5PWS6zC7Stns4aNVS69BjpWtp0JdRc+xx/JW264RTptH2lUQMCjYCZL9efIUO5jAmVNKySttpA+tEB0gx0EXVCHc3pznVYx67nR5+XetbB3Lxx1rrCWjHNRtiiGlvGWI61xsY0qi4CGdmNzZxBUvQkgT1WQeRQqhACd1JRHF4YpATafyXU5E7p3k3qVl89uUw9ynEZRIwCJNzrC0opOIp5CvmctyXqYRnIO6wfpyxjpJ8dKg3oI6UrRZ8GicsL0E/SocfsKn1rT+lE6KQCTcb99j4Aery0+SCy03EhUEiVfwkM+/UAIJtIR0+QfjtRum6ydP3J0sl7KD4w3tYhm22EbLnHAOZzDpfGjFTUl0cp66K5drlNznP87tJJn5O23gB5VkFcRamQ0/5G1is7w/+f9pe+spPUu4fk8i3xd73OMxA9Hbeb9B88tMNsMeBZh+B1ZmyI5ORwlWTQRvWBNVgpiR2dRiw2wC8LZ8ySzFEEZMxPA0PglsFVKWOX4/N87XXzp8UnGdMfkCZNlb5xifTNVuh40k0nTpOueUxaxIGGRyM3xLLQHjvySxR/eEj6xz9IX/89fMlfkTfxx5H+4xulB1+R1mesP3hb6WdYz0EA2KchCdp/a7F0D0fSzy1kPsXK9d4XpH+ZIZ1xvfRrNrgXYSn3Yojcerjiw2ILYWVHihJxSyCuetwxI6RT9pJ+gEX76s7SLqOkodT3+vvSkg8FUANFg3pg5XfdnHoOJA9DvB/EKx6RTpnejL5oj/U4+TLa87JUl0hH7iyduLe07XAqx7LzFOLhIk2AeDz8T8dK7rc1cVx30c5TL5esl2/Cr1xv1r/pDNr/OCv4AYxIR49TtOYjBwW2pTKLGOsJMMw7BW+1lzEWsUZZ7/OHEMQF/hSxmfNxE6I/cM8ooDxKOewSuOvqMtfldP6jNPrmh6UZAPDaVug60iM9Lv1lgeIKUghqXoq3TLpGnvTHmKTPfAK+j0ouU4m346+H18Ucipx3h3TfSwCHyeohgPYMwGQQCcar4H0/gL7nRdEhWR23PC1Nv0e6iHJ3zJFsbXZj/jfaVpZ2IZYsm/yjvB2HmWFoDsC/9SnagDuoj9SzW0yNLxMtw+Il5E/IuEFvaXd47gaoXNZt+PXN0pUt6Ot6dHQNRuCnMzPQ9u4u7cUcfRcAH2WCdzAzwPqpDXmo95H2/pTig/YnjkPPvkX6A3uf1ov14zpLyXEz0Om02dIvbpWeni+5DUeOlb42jikIoBWIC1mTOnQPAS5cnpIGZA5wM+HEK4n3eHM0YMVP+5SR70Ssw8uW1qC1pX1/BRaTYfi9KmkZHZoWJKsk0grmZUvgtQi+75nwl/N+l/hFxL+GBb2ZLZPfA8Dn35CGYWm/sI20AW6dFVUnLWBefy/Wx4tRL+4+vbH0+hJpLvHX82C8i2XcEys7DmB4uBSd1kQu1Gf9+2H6gHoD2vY0ZDXteOeDLOfLb0vLkDtqn/y9APKQvlK/nopHlP/7oOTV8tuAurwtMQxfu27THbRnNiPB2/Ber5c0CPDTFF+yHKKebTaSPN1w+t3k/d290iza+BYjl3lYP+ZXieYxGtxGHWczwrz2rrQBK9IJPFgbs3BzvyJ+1qgO3N2/5pOTFDWj/IcKM2+WMbtnMZ13j8oDEAGSyVJUQWk0Q8jlNuCUXx4OE/i0ytd11qd6E8A9xDD6AoC1TF589QYwTraefHDyJFbbHWsQeeE4jM5J6iVPER7AOg/qq7jKHoGVTcusbBST+YsXKLtiNQ9nqPZOx71/ZTGFRTRoX3gTwFLO9UWiUXnn+wF86S3J0x+3yRSHXdrYxLXAyPQBD+Jd8L6KKcR1jCJPY809zMIyY80oZKB6mrGKOh/nVOlBTjOXAOSUdjfhWV4H/FPqWcwDchMjzTwAu7ohe7A8d5YMMde07ihDY3bPuVqs3N9lbmwaN/RHMxGIHvK8xcNAkVgpRr9dE3nInMkYkZB5m9zhycWUBvXhacKzwCPyNC8jlNYbDMvoaPPxwsfhrHeJIX0BVuV+pgW2tvn2Tzfi/Q7nLVibee9JO4yQxo+UukW5uHFRGiFC3GLy/PXoXciDJf4LIPotU4r/uVNy+RcB5ArLShmcWKz05rpIghcXckf53ZZSIn41gqeA6uG50nl3Sf91uzSbB6qUl/2e6pA9TnM80vmhjO0lMvK2W8rbfseZ6AA/AC6z3CBHYJKjvs27KyjpikqqqsO90hKZCQpCZ/ZVR+X8XKqMh3Fry+ykUuIxkrDo7tSnsEQ3ckzYE0AcxbzN8zcvzO7HOvvlIA+Je28lDWdP2FY28gnceSK3ZKfhWHYTvIf58jtY1vuZX2P9XsFCnQNw5zG9WE2jMMQRRJRqchkQxQjL7oB5l1Ieh7yepthqe9R4hxHESc2RF+NmQ/VgFl/OPy9AFAlZyGkFiuWcRkrBwdc118cDsG61qbTNedhuKZXmaYvfPCrkdx80AUVJHqcZtPOZt9oaLmTeuw+LFe+f9uouzQd0f2bR8hLz0O02kT7LQqcOkCbuZeapQ9gFmLyH5NW4h//LmAZczuLJfFeBElvAxZjX8vr9EEUxymV2uBI5cx7PVCcwvAfki1MIpzVHFsRUmp6HEyJznnibXHmeJpFdE7BYXVNTSS1+Qj1fqiOujt6phqw7snfsMhNTtVzcMeRfCQhfZp57Iwstr+49vA9j7oro8vx2NvPG4cxt9/20NACQNjI8i8OBI9nj3J84H3VPYXEzDcD6U5A4bzdvb7iWykKcO8T6oVr1wqJvwty4nvrBN3MCMtvfEsHDQ7s33+MoYUYUa9NlIfIC8It15+GP2C0VrUtEsTX5gBWpoJUMWatZ0TZUQQZAcEdZgXa7Qlo6Oy78GWrfRt4r2D7y3PWgbaWdmLP26yW9yRzXi6hnmZt6F+FA720CVj+QTy+QfADhaYX3bb0oSrGAjUZArnm7kJvlMouZT78BzwYstBd0PtQYt6XU03laa7eFZeuKjctMO5Fp5q36Tj1N8qIDDxhN4j7CQLl4nS5KX05VDviM9C32PE/dX/ouG9jftdsK7TxK6u1VjTvBSux0SanAdRVAEq0sALyEOSjrD+0LMDfCmtrveezdWFnPZb0TMARrW8fw4cXaPWwduc3er91yiOTj2WAEmG8JpVjltC7bufB+6AXsE3tuPXqo9PPDpHOPki6YGHRhM3T+EUHTviYdw3x5oz7UwFGzRwA/G2rH7+NapMsAG9CAyfuMe2MxTvmsdDIb2NXSLrZo3UVXB4UQ1GU/qrLh8ur4A7aCrmXBtICFkuelu7BVtR57nQvYKZjFQcITLM622kjah/aBPfmjulvZSZhPfgN2D8d3Y2Q3yuErU94Q+yHPbZ9nq+siVvrnspPgU7JtNpYOYo/4S9tLh25Xmb60A3mw/Kftq3jcujF7pKmtLTzzKv4e3C4DbK4sGy3P6byV5H1Gb49UQ/5Mx9OJnE+XuRYY4vL7MZoDKG/ixMoP3l5bSt5X9bzU21V3PCd5B8E7CYP7S7aQ97O15DmuT5/GA/BPYDHNKOQTVTck+Aa5EpxlAPpZQDsFwJ4/S/E0znumlcjW3fF+WHwAsfn60nG7A9odJc+r4/Qg5w/vv/WrywDrvjAtZY5mq3Mmx4g/50jwlxz1/dJuC3QmaffS8UvYRLSl63KlW3Aq9QjueahX+j6hGjuSPdhN9KgJlwAADs1JREFUpb69pDfYSfBc1vuqPhL1K48G6ZvE3w6QvaXls/0JgJbZgs0sHLlKweR6TMQtZyx/hoXef7OfehZHs2ejr7PK6Gzii3E3ST5u9kHDFoD2SPZ9veDr2x1m7Jl1WUfTpM68urwdtqY+XZnO2fWlHDtOK9AlrKArEumXQE8uSLWMIdnDaFz9dqZWynnT53m9PhF6lNMhg9OnRj7333wYp1VspD+zQJrBlMFA/cqY7LjXVtbvTjzInu16PRXP8DfFyqbkN1vzBZtZjTECL6D1NGQVi71nAa1Plmb+RfEzaH8KndPNxJkcvo3ttQuZRszE+r/FQ/IZphE+XfOLKoEFnA06nP/mry4HbKnGPBVtDKka6DG7zZHT3YGxc0sZtMcPGNpTrFgGEK1glJjJ8eRc9mH91pXnp31YTNqaerrwGgcEPmPfnhMwvxPgnQUD3Pu1jtuPQ4aktEEGquUy2V+sDA9zXsG7JQqk12Hl57If7JdyfPpmgPp1wR7RnMOnLZflaEv+Lsz7kQK22E53UnPkTOVpjmsPeUxvT7m8jOWwH615iPdJ0gj2SQ3CjQZInpt7SPbCrA/W9DAWQpuw+OGZ1MOvSH6Nzxbv81tLg/ozK1hdQIb5lpPrIc57qq1RI3Nes0qRKx4vF9pJdIXTMzNuhQpixVz2m2Lgo7/RxI9eCAwsvVdBjoLi48LBflN7leeyFapoNQrQxDx5eVwfHvid0602lPxZ/KtYVO+3BrRpd/pDkoflAzk02H6k1J+dBL/3aivrN8O2w/IeAGjrWMVnljbWkOkA/rG9jnJb87Bdh032lxJ5PVrhNL0su6lpbMWQ2TZJcITJkVXycNbOJlTc2VVUyd/KKe0E+100d+1vK5XybGvZSvnhlzQEnbQXK/HdsJIAcco92WLnTY5txaEA2596gZ2EaezXeu/W76VuivVNmUf6cMEfe/qd26+zku9LfPnDamscqEP+nAZAVxKjUpytaaX4FuMAoh8yT7XiusBoyPVNW5vIRt4ir1J/MbJrPBaxa2pqqRYrwJJUQ87bEq88zfma4+c87hB3DkByMKcmlso8IMcFerUvq20fy56ydwZWb+5fzmJxIYscMdc0aBrpZR90Xf0oOweAeF/mq2PZGejfhzAnWHeyOHqQHQ9bZ1vgXlRs3gmTzsC8dnj/EDf/pxwjnXGQNLBXEEmi+jVU3i6t+fld2+L2n9toWpMsF3XQbfJ7uj5RQ2TYB0XL7gzlRJKj6snlNq7KF4xm1MVkObq4Sil2QHtqtvJzKpPaHYA+y2IrB2NedhzW6y5ts6nkl1nynP7UJvdnHUkIoA6olw5mTvpDQDR8oPR7djkug15iOmCDGC1UIC/k1/zmzJP+yIrd4LGVNUC9l+yFl1+k6d9TOoatp4HMZQNtsjoSHqCBIHinzaRDt5cOY6dhBFY44QlIaBysqaCFy+Wx+t4jto596GC3tIQBTXXyO6z+ytZ1GYSxreWZSwq6TAON6Ucef1Lk7928qLO+YvmSvJ3pTTqTeXO841PNSruRJzX1sOdxtBoCOFZspDLmVpqV1wgQ/YpfCm9v0FeiFAAMBjA+Ij5+guSFk7+AuBRrOZ9TK7Z7YxURIKCxP9Zz9y2k73A656NSW89L7pW8ub+ciot7w+5V5HLYW3BXPya9wsrdb/ibvJPghdosjmv9uY/B4k9V/OD4PQk/SEuR+0N04y0zfzV7CtOP0etL9YwEaXO6Ij5dLu08WvoiQPcn9Z5LL8SiLybeizFOfqUeqbyl+AgLQKfvyINx7K7S5xgFPGUR9VbSl+Oss0Hs6R68neK3XP5C470PpVvZWvMClGZ3yZXktbhzcopxVr4pBtbBDV70bXyyd8SqHTFO8mfbk3bG3allcp6jyLPDcKlXPVIydK4lEdF+UfrLWKWjWuFpXv661CdCPvI1WP3qn49D36YTvI0GO4bIoH6AdVeAcMKe0tYbS3+ig875s/TUQvZesThRDtpWdPFzya/4+T3a2S9K3eok89h6Q2nFCul59msvY2/ZX6seBsC8w+DyBtZb1H8XBw3enrIVPIT0bzEFmbQLOqJd1sXR6KIJEW9d+pjbD0B36rudo+Kb2XrLAJvK1jF0C/LBxoXMu/9Mutvo1yVPpm0nMCefCF/zn4TbhD/hSWOlbzDvnkxev7BunfkBv5apz3ymPgwAik+5G9IRsvJM8LB8ORGMVxLvpTcyh1h7IZJwwddux5Uk3EzuJM/rTj1QOm0/iLPv03GbI+fJ0/wSdF8AFIfQgDiQN+bxyaCw8k/aR/IXoXmZiu7nJQPQ32K9t0zyB3fncqI0h036VX6qzJCHohcd74dr0nhp3CjFranf/El6AAu11GCl/qKqrCeH7bo8ZZcCztsAuKcBtmZ+3fCgz0jet/X203Ismvn6za/+TE9ctb9J84eRF3AIYLAPZu47EbB8x3pC7krtiTraXzoE6+f3dA3WqbMlf0C5ynIiTy6Wt798hOzFovNZZOvtdPifVuAf+ZX1idNOwNp739k7I9Mfli66m1HmdR5Cm28zop54lfpjRJW3XEiyByu2JExUvIBRdLmFSDEPmvPwRES8ggtHXxtv8HEJd46Hj79yPu4/RXaneP7jb4vq66WWyPn85pO/i7dbKhdTNhlwfrvevJcAEAO4O6BuiWc30j30eovJHxP6zf+nsHopoMmbijHStptIE8dJ/leVZ+mYcwGR/39sRYKWAi0rJ6JieZK9dxpo20OA+wGsbB94HwmvfztU+uEXpEn4rZ7BfaWDt5E2HyrVBYxUIr2zLI2fz/zmNh4OFmg+kPBq3vqyDsrbFnVEuQWLpNtZ1Pn9A4PRx8gi3mKZLJOtuPXmk7GLmNb4AMR/276KyMiHB62cv3Vvg+BTymcYWWY8If0K2fzn1jxzsmzmXyTaUfRX6QlRcVnmEHBRDmrE44AJL1exOY6K5Nx4Agyi17d22npXmGIOPXz4Reezb5Ui3YLLObg/L26VCvl8nn4nQ6U7wXxXYzlWoORZf5XOwTrmfM+Ct6klvub1K2T5Gefv/4nFfGo+mujOsgmeNFsJc2V/kOhFySeZP/pDRC+yLmf4k1/DsgAUiatq+4MDJeQ4BwHs4qXM856RDJC3PpB6AlxbQQ/bPpHyF7n+b4QNByn79xfapDrpfayWF2ffuwZwIGt8b4C2VWwXOsrb9JM/Kr5U7i+Mg2W1HDkhZ/zOjV53Uz0t8Hscv5hJf8C7Ob3FeOr4FXnOxP3XG7K5+WrkdP/mzY3VUEd023xLFUKAJO6+KYToU9CaH6JngT50WEIKV4xojCB1iI5MibIicdp0uRwsPmQV8whn6f6e33TxnZLni3ZbozzfVIafh+GxlDHNSrIcK5HxybkZr5gPC9gaP6dPnSVNQYYrHmBIYxoQ/2rFsha0Ya+3fPwZ+KlXMH24VPIQG5N9ixksAVTqJ4hIvkeyRfN2132vSu7kiVOkIy4sEP6jLsaC4357ejbdAKMUhyG6Rm2iqfLp2BRkvZi2TbVbgdx2t+nCO6THqOtDGFlHGKkoR7yZYfRgxUGrv0BeRW1PvpZqGrq9CL5TqeNi3ErkOizHZUw1fPTcyJ5zbF+BZ9FBdtgWg1V5KJPJStuBZ4Y94TOl6l3yZYbVL/++zfxkQK9UCRYxIauJppEUiKO1iRQtCk5bL6aDMigShr92E9s1IRcccZQUpCAuYZ6XkB7daupwfihQRrZC1lPOr1FyZ3uq4ZX8QwzJfjPLc9tG5yW9WHcuh8vaXxCp6DivUq1ghe/TsMcBkx+wnBw2PUL8awznywFaLAsvD90GVNJDqrpdtD2wE0D3RTbFW8BnWUx4i/LT7sD0qE19gt7clxELbrf5lZLjXF9pXEt+y0SZBGuqKHiKeCEjsOij7JP2UPFH1sx/+ueCTmPbxi/+0mUUpTVZUrwnxMCFqwppEorkxe2HDFqfeXeEzAMBYM5l/vDFx3l52i6KFsLNMTXCyVTgaQtk62jAuFOL9Trd+VyGIuDR94wc53ST89h1CnNe8zCv5ihgsWIdeZlC+zJ9Vd8+F3NXudoiWZY8YP4xExH4rdO21kFJRVlzviHGtPmWWNBEsApNyoao1FQbrSd9h0X09/Zbk072LK/3/Y4dH3Q82xujhmSQDWZIYTfIJjshnLc1UCwQxln7yjM5xY1a12S+pnXFN5c3gWnuxzWgs7YTIClaFdcZHChQqb8QhcoUVVMoJn45L/OrRDGrb+Zv12R/e4k642U+9rhtpjzsuPbyzsvlbXfY/PKw/c1QQDGhkGZREsLGlnWSoy4lbuRg6evsznxj16ABHgkLZZKCG/8MwV+CTmRP79hxQVuun1I+Bf2SrXVKLxAjIuUKA/dAqFkigUsuu87J9cK8U/iW8ra/lErrLI2v5Hdex+eu/S0RyiXrutNXXhdMo57ysF3H5a79HaGcj92qKSiQ11ii2RFZljGCEfRuMSyN/9nlvWX/dRRRMbdvMY89LmB3s8FBX91R8ua7jxOdOcA+Szd7QgTWADhQrIxIF2Vkt7NI1LmuebfEszSt3O9wKVkuh+1+XMjymCxP7trfESrn43ArZAQZOyHQfzFvKnuDmAikkjFnoB4+Rho5JItzugq/ImAdzhM8JfAfBXuj29s6Hs7MMMsMV2euUU0DHdZANoJnuJL8aY//v+wrO0ifGBYi9xyTMcAtz4u36TV6qC1tiMen/nDOoHWO4CeBbRHsOBYd8NoE16imizZhAHWBIWPJmDKNGpwyqoO5MaEIVseXU7OAdUZPfI8aG+SJ75ZsoDs8ekgqA7hGWIGhHaf/z3o0loypLbCmx7G48lTAo7uxb/xVomYBm5viTQZKkydw2vLloH8/KOgnB0NfqNFPajpQR3XwY7BkTJ11mOS9Vr81Z5Dm2LO/nJoFrDPmBf3upr9D8mchXpB9dYxUo5oOOoqBw3dU/Hv7Az4tGWOlmLO/ErUI2LyATbTfNa2RVNNB5+jAGMvx1pJbFWBtaZMg1aimg87CgDHWElDztKoA68xmWCOppoPO0YGq/FUN2Cr51bIVNVDzdIYG/g8AAP//rhWjdgAAAAZJREFUAwCAo7k0lLbfKAAAAABJRU5ErkJggg==" alt="EDXSO Logo" class="h-7 object-contain">
+        <div class="h-4 w-px bg-slate-200"></div>
+        <span class="text-sm font-semibold text-slate-700">Founder's Office Operations</span>
+      </div>
+      
+      <div class="flex items-center space-x-3">
+        <button onclick="toggleNotesPanel()" id="notesToggleBtn" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          Edit Notes
+        </button>
+        <button onclick="addNewRow()" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 transition">
+          + Add Task
+        </button>
+        <button onclick="downloadCSV()" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Clean Collapsible Meeting Notes Panel -->
+  <div id="notesPanel" class="hidden bg-white border-b border-slate-200 transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Meeting Notes Input</span>
+          <span class="text-xs text-slate-400">• Pasting new notes will automatically update all tabs</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="loadScenario('scenario1')" class="text-xs font-medium px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700">Oct 22 Sync</button>
+          <button onclick="loadScenario('scenario2')" class="text-xs font-medium px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700">Nov 12 Sync</button>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+        <textarea id="rawNotesInput" rows="4" class="md:col-span-4 w-full text-xs font-mono p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 focus:outline-none text-slate-700 placeholder-slate-400" placeholder="Paste rough meeting notes here..."></textarea>
+        <div class="flex flex-col justify-between space-y-2">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-500 uppercase">Meeting Date</label>
+            <input type="date" id="refDateInput" value="2026-10-23" class="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 font-medium">
+          </div>
+          <button onclick="executeRealTimeParser()" class="w-full py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition">
+            Reprocess
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full space-y-6">
+
+    <!-- Clean Navigation Tabs -->
+    <div class="border-b border-slate-200">
+      <nav class="flex space-x-8 text-sm font-medium overflow-x-auto" aria-label="Tabs">
+        <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="py-3 px-1 border-b-2 border-blue-600 text-blue-600 font-semibold whitespace-nowrap">
+          Action Tracker
+        </button>
+        <button onclick="switchTab('drafts')" id="tab-btn-drafts" class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">
+          Follow-up Drafts
+        </button>
+        <button onclick="switchTab('brief')" id="tab-btn-brief" class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">
+          Founder Brief
+        </button>
+        <button onclick="switchTab('gaps')" id="tab-btn-gaps" class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">
+          Process Gaps
+        </button>
+        <button onclick="switchTab('playbook')" id="tab-btn-playbook" class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">
+          Operating Note
+        </button>
+        <button onclick="switchTab('prompt')" id="tab-btn-prompt" class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">
+          Master Prompt
+        </button>
+      </nav>
+    </div>
+
+    <!-- TAB 1: ACTION TRACKER -->
+    <div id="tab-tracker" class="space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-white px-4 py-3 rounded-xl border border-slate-200">
+        <div class="flex items-center space-x-3">
+          <select id="categoryFilter" onchange="filterTracker()" class="text-xs bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700">
+            <option value="ALL">All Categories</option>
+            <option value="School">School</option>
+            <option value="Vendor">Vendor</option>
+            <option value="Compliance">Compliance</option>
+            <option value="Investor">Investor</option>
+            <option value="Internal">Internal</option>
+          </select>
+          <select id="priorityFilter" onchange="filterTracker()" class="text-xs bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700">
+            <option value="ALL">All Priorities</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <input type="text" id="searchFilter" oninput="filterTracker()" placeholder="Search tasks..." class="text-xs bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 w-44">
+        </div>
+        <div class="flex items-center space-x-3">
+          <button onclick="copyMarkdownTable()" class="text-xs text-slate-600 hover:text-slate-900 font-medium">Copy as Markdown</button>
+          <span class="text-xs text-slate-400" id="rowCountBadge">9 items</span>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto bg-white rounded-xl border border-slate-200">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase text-[11px] tracking-wider">
+              <th class="py-3 px-3 w-12 text-center">ID</th>
+              <th class="py-3 px-3 min-w-[240px]">Task Description</th>
+              <th class="py-3 px-3 min-w-[170px]">Owner</th>
+              <th class="py-3 px-3 min-w-[130px]">Due Date</th>
+              <th class="py-3 px-2 w-20 text-center">Priority</th>
+              <th class="py-3 px-2 w-24 text-center">Category</th>
+              <th class="py-3 px-3 min-w-[110px]">Status</th>
+              <th class="py-3 px-3 min-w-[220px]">Missing Information / Next Step</th>
+              <th class="py-3 px-2 w-10 text-center"></th>
+            </tr>
+          </thead>
+          <tbody id="trackerTableBody" class="divide-y divide-slate-100 text-slate-700">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: FOLLOW-UP DRAFTS -->
+    <div id="tab-drafts" class="hidden space-y-4">
+      <div class="flex space-x-2 border-b border-slate-200 pb-2">
+        <button onclick="switchDraft('school')" id="draft-btn-school" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 text-white">1. School Partner (Maple Heights)</button>
+        <button onclick="switchDraft('vendor')" id="draft-btn-vendor" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">2. Vendor (PrintWorks)</button>
+        <button onclick="switchDraft('internal')" id="draft-btn-internal" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">3. Internal Note to Founders</button>
+      </div>
+
+      <!-- School Draft -->
+      <div id="draft-school" class="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Email to Ms. Kapoor (Maple Heights School, Gurugram)</h3>
+            <p class="text-xs text-slate-500">Demo scheduling and month 1 usage report</p>
+          </div>
+          <button onclick="copyDraft('schoolText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+            Copy Email
+          </button>
+        </div>
+        <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
+          <div><strong>To:</strong> Ms. Kapoor, Academic Coordinator, Maple Heights School [Verified school contact email]</div>
+          <div><strong>CC:</strong> Principal [Verified Principal email]; Founders [EDXSO Founders email]</div>
+          <div><strong>Subject:</strong> Maple Heights School pilot: Class 8 maths demo and month 1 usage report</div>
+        </div>
+        <div id="schoolText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
+Dear Ms. Kapoor,
+
+I hope you are having a good week.
+
+I am writing to follow up on our ongoing pilot at Maple Heights School.
+
+Regarding the demonstration for your Class 8 mathematics teachers, we would be glad to schedule this before the school closes for the Diwali break around 8 November. Could you please share a few dates and times that would be convenient for your teaching staff? Once you let us know their availability, we will confirm the session details.
+
+We are also preparing the usage report covering the first month of the pilot. If there are any specific data points, student engagement metrics, or questions you or the Principal would like highlighted in this report, please let us know so we can include them.
+
+Thank you for your guidance and support throughout the pilot.
+
+Warm regards,  
+
+Operations Intern  
+Founder’s Office, EDXSO  
+[Contact Phone / Email]
+        </div>
+      </div>
+
+      <!-- Vendor Draft -->
+      <div id="draft-vendor" class="hidden bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Email to PrintWorks</h3>
+            <p class="text-xs text-slate-500">Quotation request for 300 teacher guides</p>
+          </div>
+          <button onclick="copyDraft('vendorText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+            Copy Email
+          </button>
+        </div>
+        <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
+          <div><strong>To:</strong> Sales Desk, PrintWorks [Verified PrintWorks sales/orders email]</div>
+          <div><strong>CC:</strong> Founder's Office [EDXSO operations contact]</div>
+          <div><strong>Subject:</strong> Quotation request: 300 copies of EDXSO Teacher Guides</div>
+        </div>
+        <div id="vendorText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
+Dear PrintWorks Team,
+
+We would like to request a formal quotation for printing 300 copies of our EDXSO Teacher Guides.
+
+Please note that our total approved budget cap for this print run is strictly ₹40,000. 
+
+Could you please share a breakdown covering:
+1. Printing charges
+2. Applicable taxes (GST)
+3. Delivery charges to our office in Gurugram
+4. Estimated production and delivery turnaround time
+5. Payment terms
+
+Please also let us know what printing specifications you require from our side (such as preferred page count brackets, paper weight, cover stock, or file formats) so we can provide the print-ready files.
+
+Please note that this email is an inquiry for a quotation and not a confirmed purchase order. We will review your quotation against our budget cap before confirming.
+
+Looking forward to your response.
+
+Best regards,  
+
+Operations Intern  
+Founder’s Office, EDXSO  
+[Contact Phone / Email]
+        </div>
+      </div>
+
+      <!-- Internal Draft -->
+      <div id="draft-internal" class="hidden bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Internal Message to Founders (Slack / Chat)</h3>
+            <p class="text-xs text-slate-500">Immediate decisions needed to unblock tasks</p>
+          </div>
+          <button onclick="copyDraft('internalText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+            Copy Message
+          </button>
+        </div>
+        <div id="internalText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
+Hi team, quick update following yesterday’s sync. I have set up our central tracker, but need clarification on a few items to move work forward:
+
+1. Content vendor invoice (due 30 Oct): What is the billed amount, where is the invoice copy, and who will approve and initiate payment?
+2. Maple Heights demo & usage report: Who will lead the Class 8 maths demo session, and what dates work for you before 8 Nov? I can draft the usage report once metrics are confirmed.
+3. PrintWorks quotation: Who will give final sign-off on the print quote once received, keeping within our ₹40,000 cap?
+4. DPDP consent review: Who is responsible for checking parent consent forms against DPDP rules so pilot expansion isn't held up?
+5. AI tutoring tools review: Founder 1, should I take on the 3-tool review due next Friday (30 Oct)? Also, Founder 2, let me know if you need any pilot metrics for your 5 Nov investor update draft.
+
+Please share your thoughts when free so I can update the tracker and send out the school and vendor emails.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: FOUNDER BRIEF -->
+    <div id="tab-brief" class="hidden space-y-4">
+      <div class="bg-white rounded-xl border border-slate-200 p-6 space-y-6">
+        <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Founder Brief — 23 October 2026</h2>
+            <p class="text-xs text-slate-500">Read time: ~2 minutes • Week 43 Executive Summary</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Col 1 -->
+          <div class="bg-red-50/50 border border-red-200 rounded-xl p-4 space-y-3">
+            <h3 class="text-xs font-bold text-red-800 uppercase tracking-wider flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-red-500"></span>
+              What is at Risk
+            </h3>
+            <ul class="text-xs text-slate-700 space-y-2.5">
+              <li><strong>Content invoice default (Due 30 Oct):</strong> Due in 7 days, but invoice copy, amount, and payer are missing.</li>
+              <li><strong>Pilot expansion blocked:</strong> Cannot expand pilot to new classes until parent consent forms are checked for DPDP compliance.</li>
+              <li><strong>Demo delay:</strong> Class 8 maths demo at Maple Heights must happen before Diwali break (~8 Nov) to maintain momentum.</li>
+            </ul>
+          </div>
+
+          <!-- Col 2 -->
+          <div class="bg-amber-50/50 border border-amber-200 rounded-xl p-4 space-y-3">
+            <h3 class="text-xs font-bold text-amber-800 uppercase tracking-wider flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              Decisions Needed
+            </h3>
+            <ul class="text-xs text-slate-700 space-y-2.5">
+              <li><strong>Invoice owner & amount:</strong> Confirm who holds the invoice, state exact amount, and assign payer before 30 Oct.</li>
+              <li><strong>Demo presenter:</strong> Name presenter (Founder 1 vs Academic Lead) and confirm available slots.</li>
+              <li><strong>DPDP review owner:</strong> Assign qualified reviewer to audit parent consent forms.</li>
+              <li><strong>Print quote approver:</strong> Confirm who approves the PrintWorks quotation against the ₹40,000 cap.</li>
+            </ul>
+          </div>
+
+          <!-- Col 3 -->
+          <div class="bg-blue-50/50 border border-blue-200 rounded-xl p-4 space-y-3">
+            <h3 class="text-xs font-bold text-blue-800 uppercase tracking-wider flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+              What Ops is Doing
+            </h3>
+            <ul class="text-xs text-slate-700 space-y-2.5">
+              <li>Maintaining central tracker across all open items.</li>
+              <li>Sending quotation inquiry to PrintWorks for 300 teacher guides.</li>
+              <li>Reaching out to Ms. Kapoor for demo slots and report requirements.</li>
+              <li>Entering school fair paper leads into CRM.</li>
+              <li>Scanning 3 Indian K-12 AI tutoring tools for Founder 1.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">
+          <div>
+            <strong class="text-slate-800">Upcoming Deadlines:</strong>
+            <p>• 30 Oct: Content vendor invoice due</p>
+            <p>• 30 Oct: AI tutoring tools review due</p>
+            <p>• 05 Nov: Investor update to be sent (Founder 2)</p>
+            <p>• ~08 Nov: Expected Diwali break begins (demo must happen before)</p>
+          </div>
+          <div>
+            <strong class="text-slate-800">Items Awaiting Clarification:</strong>
+            <p>• Content invoice amount and payment authorizer</p>
+            <p>• Due date and metrics for Maple Heights usage report</p>
+            <p>• Confirmed date for teacher demo</p>
+            <p>• Assigned reviewer for DPDP consent forms</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: PROCESS GAPS -->
+    <div id="tab-gaps" class="hidden space-y-4">
+      <div class="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+        <h3 class="text-sm font-bold text-slate-900">Process Gaps Identified in Founders Sync & Practical Fixes</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase text-[11px]">
+                <th class="py-2.5 px-3">Process Gap</th>
+                <th class="py-2.5 px-3">Why It Matters</th>
+                <th class="py-2.5 px-3">Practical Fix</th>
+                <th class="py-2.5 px-3">Suggested Owner</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr>
+                <td class="py-2.5 px-3 font-semibold">Actions without named owners</td>
+                <td class="py-2.5 px-3">PrintWorks chase, demo, and DPDP review had no owner; shared ownership causes tasks to slip.</td>
+                <td class="py-2.5 px-3">DRI Rule: Every action must have exactly one named owner before ending the sync.</td>
+                <td class="py-2.5 px-3">Ops Intern</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold">Deadlines missing or approximate</td>
+                <td class="py-2.5 px-3">Vague dates like "before Diwali" or "no date set" make weekly planning difficult.</td>
+                <td class="py-2.5 px-3">Explicit Dates: Require specific calendar dates or interim follow-up target dates.</td>
+                <td class="py-2.5 px-3">Founders & Ops</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold">Invoice logged without amount or payer</td>
+                <td class="py-2.5 px-3">Invoice due in 7 days without cost or authorizer; risks late fees or vendor friction.</td>
+                <td class="py-2.5 px-3">Invoice SLA: Incoming bills must be forwarded to a central folder with amount and approver.</td>
+                <td class="py-2.5 px-3">Ops & Founders</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold">School demo date unconfirmed</td>
+                <td class="py-2.5 px-3">Teachers go on leave around 8 Nov; delay risks losing school pilot engagement.</td>
+                <td class="py-2.5 px-3">48-Hour Scheduling SLA: Send 2-3 specific time windows within 48 hours of request.</td>
+                <td class="py-2.5 px-3">Demo Lead & Ops</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold">Leads on paper for two weeks</td>
+                <td class="py-2.5 px-3">School fair leads go cold if not followed up quickly.</td>
+                <td class="py-2.5 px-3">48-Hour Event Ingestion SLA: Digitize lead slips into CRM within 48 hours of event.</td>
+                <td class="py-2.5 px-3">Ops Intern</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold">Compliance blocker with no deadline</td>
+                <td class="py-2.5 px-3">DPDP consent review left unowned; risks delaying pilot expansion.</td>
+                <td class="py-2.5 px-3">Compliance Gating: Regulatory tasks must have a named reviewer and milestone deadline.</td>
+                <td class="py-2.5 px-3">Founders</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: OPERATING NOTE -->
+    <div id="tab-playbook" class="hidden space-y-4">
+      <div class="bg-white rounded-xl border border-slate-200 p-6 space-y-4 text-xs leading-relaxed text-slate-700">
+        <h3 class="text-sm font-bold text-slate-900">EDXSO Founder’s Office — Weekly Operations Cadence</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <h4 class="font-bold text-slate-900">1. Weekly Operating Cadence</h4>
+            <p>• <strong>Thu 5:00 PM (Sync):</strong> Raw notes captured in real time.</p>
+            <p>• <strong>Thu 5:30 PM (AI Extraction):</strong> Raw notes run through master prompt in Claude.</p>
+            <p>• <strong>Thu 6:00 PM (Manual Audit):</strong> Ops Intern verifies unassigned owners, dates, and amounts.</p>
+            <p>• <strong>Fri 9:00 AM (Dispatch):</strong> Founders review 2-min brief; approved drafts are sent.</p>
+
+            <h4 class="font-bold text-slate-900 pt-2">2. What Could Go Wrong (AI Failure Modes)</h4>
+            <p>• <strong>Invented facts:</strong> AI guessing missing names or dates. <em>Fix: Strict Unassigned/TBD tags.</em></p>
+            <p>• <strong>Date calculation errors:</strong> Misjudging Indian holidays. <em>Fix: Manual calendar check.</em></p>
+            <p>• <strong>Tone mismatch:</strong> Emails too direct for principals. <em>Fix: Mandatory human review.</em></p>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-bold text-slate-900">3. What Must Never Be Left to AI Alone</h4>
+            <p>• <strong>Payment approvals:</strong> No funds released without dual human sign-off.</p>
+            <p>• <strong>External dispatches:</strong> No email sent directly by AI without human eyes.</p>
+            <p>• <strong>DPDP legal compliance:</strong> Parental consent under DPDP Act requires legal check.</p>
+            <p>• <strong>Student privacy:</strong> Never paste student/parent PII into cloud AI models.</p>
+
+            <h4 class="font-bold text-slate-900 pt-2">4. Tools and Manual Checks</h4>
+            <p>• <strong>Tools:</strong> Claude for drafting; Excel / Google Sheets for central tracking.</p>
+            <p>• <strong>Checks:</strong> Verify invoice figures by hand, check school term calendars, confirm open items.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: MASTER PROMPT -->
+    <div id="tab-prompt" class="hidden space-y-4">
+      <div class="bg-white rounded-xl border border-slate-200 p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Reusable Claude Master Prompt</h3>
+            <p class="text-xs text-slate-500">Copy this prompt into Claude with future meeting notes</p>
+          </div>
+          <button onclick="copyPromptText()" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-semibold border border-blue-200 transition">
+            Copy Master Prompt
+          </button>
+        </div>
+        <pre id="promptTextDisplay" class="text-xs bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto leading-relaxed max-h-[480px]">
+You are the Operations Assistant in the Founder’s Office at EDXSO, an Indian K-12 EdTech startup.
+Your job is to convert messy, unstructured meeting notes into an accurate, operational execution pack.
+
+INPUT PARAMETERS:
+- Meeting Date: [Insert Date, e.g., Thursday, 22 October 2026]
+- Reference Execution Date (Today): [Insert Date, e.g., Friday, 23 October 2026]
+- Attendees: [Insert Names and Roles]
+- Previous Tracker Open Items (if available): [Paste previous open tasks or state 'None']
+- Raw Meeting Notes:
+"""
+[Paste rough meeting notes here]
+"""
+
+CORE OPERATING RULES:
+1. STRICT ACCURACY: Use only facts stated in the notes. Never invent owners, dates, budget figures, completed tasks, or business outcomes.
+2. MISSING INFORMATION: If an owner is missing or ambiguous, label it "Unassigned". If a date is missing, label it "TBD". If a budget or amount is unstated, label it "Amount unstated".
+3. SUGGESTIONS VS FACTS: You may suggest a practical owner or target date in parentheses, but clearly label it as a suggestion (e.g., "Unassigned (Suggested: Operations Intern)").
+4. RELATIVE DATES: Calculate relative dates strictly relative to the Meeting Date and Reference Date. Factor in Indian business/school contexts (e.g., Diwali break, term exams) when mentioned.
+5. NO FABRICATED COMPLETION: Never mark a task as "Done" based only on generated text.
+6. SENSITIVE MATTERS: Flag all payment approvals, legal compliance (including DPDP Act 2023 parent consent), and external commercial commitments for human founder review.
+7. PRIVACY: Never include real student, parent, or teacher personal data.
+
+REQUIRED OUTPUTS:
+1. Action Tracker Table (Task ID, Task, Owner, Due Date, Priority, Category, Status, Missing Information)
+2. Ready-to-Review Follow-up Drafts (School email, Vendor email, Internal Founders chat note)
+3. Founder Brief (One page, ~2-minute read: Current position, At risk, Decisions needed, Ops plan, Deadlines)
+4. Process-Gap Analysis (Gap, Why it matters, Practical fix, Owner)
+5. Validation Checklist
+6. Five Most Important Next Actions
+        </pre>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-400">
+    EDXSO Founder’s Office Operations Automation • Confidential
+  </footer>
+
+  <script>
+    const SCENARIOS = {
+      scenario1: {
+        date: "2026-10-23",
+        notes: `FOUNDERS SYNC — Thursday, 22 October 2026\nAttendees: Both founders and the Operations Intern.\n\n• Maple Heights School in Gurugram wants a demo for its Class 8 maths teachers before the Diwali break, which starts around 8 November.\n• Ms. Kapoor, the school coordinator, also asked for a usage report covering the first month.\n• A print quotation is needed from PrintWorks for 300 teacher guides. The budget cap is ₹40,000. Nobody has followed up yet.\n• A content vendor invoice is due on 30 October. The amount was not discussed, and the person responsible for payment is unclear.\n• Founder 1 wants a quick review of three AI tutoring tools for K–12 India by next Friday.\n• Parent consent forms must be checked for DPDP compliance before expanding the pilot to more classes. No date has been set.\n• Leads collected at the school fair two weeks ago are still on paper and have not been entered into the CRM.\n• The investor update will be sent on 5 November. Founder 2 will draft it.\n• The Operations Intern must maintain one tracker so that no action is missed.`,
+        tracker: [
+          { id: "ACT-001", task: "Schedule and deliver Class 8 maths teacher demo at Maple Heights School (Gurugram)", owner: "Unassigned (Suggested: Founder 1 or Academic Lead)", due: "Before 08-Nov-2026", priority: "High", cat: "School", status: "Not started", notes: "Demo date and presenter unconfirmed. Need dates before Diwali break (~8 Nov)." },
+          { id: "ACT-002", task: "Prepare first-month usage report for Maple Heights School (requested by Ms. Kapoor)", owner: "Unassigned (Suggested: Operations Intern to draft, Founders to review)", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Due date not set. Metrics to include not defined. Need to check if Ms. Kapoor wants specific data." },
+          { id: "ACT-003", task: "Request print quotation from PrintWorks for 300 teacher guides (budget cap ₹40,000)", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "Nobody has followed up yet. Need print specifications, page count, and quotation approver." },
+          { id: "ACT-004", task: "Clarify invoice amount, verify deliverables, and process payment for content vendor", owner: "Unassigned", due: "30-Oct-2026", priority: "High", cat: "Vendor", status: "Blocked", notes: "Invoice amount not discussed in meeting. Invoice copy missing. Payment authorizer unconfirmed." },
+          { id: "ACT-005", task: "Conduct quick review of 3 AI tutoring tools for K-12 India (requested by Founder 1)", owner: "Unassigned (Suggested: Operations Intern)", due: "30-Oct-2026", priority: "Medium", cat: "Internal", status: "Not started", notes: "Founder 1 requested this by next Friday (30 Oct 2026). Assignee not confirmed in notes." },
+          { id: "ACT-006", task: "Review parent consent forms for DPDP compliance before expanding pilot to more classes", owner: "Unassigned", due: "TBD (Precedes expansion)", priority: "High", cat: "Compliance", status: "Blocked", notes: "No date set. Reviewer unassigned. Strictly blocks expanding the school pilot." },
+          { id: "ACT-007", task: "Enter paper leads from school fair (collected two weeks ago) into central CRM", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "Medium", cat: "Internal", status: "Not started", notes: "Leads sitting on paper for ~14 days. Owner and data-entry deadline not confirmed." },
+          { id: "ACT-008", task: "Draft and send investor update", owner: "Founder 2", due: "05-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Internal draft review date not specified." },
+          { id: "ACT-009", task: "Maintain single central tracker across all workstreams so no action slips", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker active and maintained weekly." }
+        ]
+      },
+      scenario2: {
+        date: "2026-11-13",
+        notes: `FOUNDERS SYNC — Thursday, 12 November 2026\nAttendees: Both founders, Operations Intern, Tech Lead\n\n• Maple Heights update: Class 8 maths demo was completed. Principal wants a proposal for 180 students across Classes 8 and 9. Coordinator Ms. Kapoor asked if our app works offline because Gurugram schools might close next week due to high AQI / air pollution.\n• PrintWorks delivered 300 teacher guides on Tuesday. Invoice received for ₹38,500. However, 25 copies in box 3 have defective binding. Nobody has spoken to PrintWorks yet.\n• Cloud server bill spiked by ₹35,000 this month. Tech Lead to investigate root cause by Monday.\n• Delhi World Public School (Noida) reached out asking for a pilot for Class 10 science. Exploratory call requested for next Tuesday afternoon.\n• Legal intern prepared draft parent consent form for DPDP compliance. Needs founder review before sending to Maple Heights Class 9 parents. No date set.\n• Matrix Edge (seed investor) asked for updated burn forecast by 20 Nov. Founder 2 will handle.\n• Operations Intern to keep tracker updated.`,
+        tracker: [
+          { id: "ACT-201", task: "Prepare formal commercial proposal for Maple Heights School (180 students, Classes 8 & 9)", owner: "Unassigned (Suggested: Founder 1 with Ops support)", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Pricing tier and delivery date unconfirmed. Need approved rates from founders." },
+          { id: "ACT-202", task: "Confirm offline capability and respond to Ms. Kapoor regarding AQI school closures", owner: "Unassigned (Suggested: Tech Lead for tech check, Ops for email)", due: "TBD", priority: "High", cat: "School", status: "In progress", notes: "Tech Lead must confirm offline capability before any promise is made to the school." },
+          { id: "ACT-203", task: "Notify PrintWorks of 25 defective copies and resolve invoice payment (billed ₹38,500)", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "25 copies damaged. Holding partial payment requires founder approval before communicating." },
+          { id: "ACT-204", task: "Investigate ₹35,000 cloud server bill spike and implement cost controls", owner: "Tech Lead", due: "16-Nov-2026", priority: "High", cat: "Internal", status: "In progress", notes: "Tech Lead named as owner. Root cause analysis due Monday." },
+          { id: "ACT-205", task: "Schedule exploratory pitch call with Delhi World Public School (Noida) for Class 10 science", owner: "Unassigned (Suggested: Founder 1 or 2 lead; Ops coordinate)", due: "17-Nov-2026", priority: "High", cat: "School", status: "Not started", notes: "Call requested for Tuesday afternoon. Caller unconfirmed." },
+          { id: "ACT-206", task: "Review legal intern draft parent consent form for DPDP compliance before Class 9 rollout", owner: "Unassigned (Suggested: Founders)", due: "TBD", priority: "High", cat: "Compliance", status: "Blocked", notes: "Draft ready, but founder review date not set. Blocks Class 9 rollout." },
+          { id: "ACT-207", task: "Prepare and send updated burn forecast to Matrix Edge (investor)", owner: "Founder 2", due: "20-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Hard investor deadline 20 Nov." },
+          { id: "ACT-208", task: "Maintain central operations tracker across all workstreams", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker updated weekly." }
+        ]
+      }
+    };
+
+    let currentItems = SCENARIOS.scenario1.tracker;
+
+    function renderTable(items) {
+      const tbody = document.getElementById("trackerTableBody");
+      tbody.innerHTML = "";
+      document.getElementById("rowCountBadge").textContent = `${items.length} items`;
+
+      items.forEach((item, index) => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
+
+        let prioClass = "bg-slate-100 text-slate-700";
+        if (item.priority === "High") prioClass = "bg-red-50 text-red-700 border border-red-200 font-semibold";
+        if (item.priority === "Medium") prioClass = "bg-amber-50 text-amber-700 border border-amber-200";
+
+        let statusClass = "text-slate-600";
+        if (item.status === "Blocked") statusClass = "text-red-700 font-medium";
+        if (item.status === "In progress") statusClass = "text-blue-700 font-medium";
+
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 text-center text-slate-400 font-mono text-[11px]">${item.id}</td>
+          <td class="py-2.5 px-3 font-medium text-slate-900" contenteditable="true" onblur="updateField(${index}, 'task', this.innerText)">${item.task}</td>
+          <td class="py-2.5 px-3 text-slate-700" contenteditable="true" onblur="updateField(${index}, 'owner', this.innerText)">${item.owner}</td>
+          <td class="py-2.5 px-3 text-slate-600" contenteditable="true" onblur="updateField(${index}, 'due', this.innerText)">${item.due}</td>
+          <td class="py-2.5 px-2 text-center">
+            <span class="px-2 py-0.5 rounded text-[10px] ${prioClass}">${item.priority}</span>
+          </td>
+          <td class="py-2.5 px-2 text-center">
+            <span class="px-2 py-0.5 rounded text-[10px] bg-slate-100 text-slate-600 border border-slate-200">${item.cat}</span>
+          </td>
+          <td class="py-2.5 px-3 ${statusClass}" contenteditable="true" onblur="updateField(${index}, 'status', this.innerText)">${item.status}</td>
+          <td class="py-2.5 px-3 text-slate-500 leading-tight" contenteditable="true" onblur="updateField(${index}, 'notes', this.innerText)">${item.notes}</td>
+          <td class="py-2.5 px-2 text-center">
+            <button onclick="deleteRow(${index})" class="text-slate-300 hover:text-red-600 text-xs">✕</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateField(index, field, value) {
+      if (currentItems[index]) {
+        currentItems[index][field] = value.trim();
+      }
+    }
+
+    function addNewRow() {
+      const newId = `ACT-00${currentItems.length + 1}`;
+      currentItems.push({
+        id: newId,
+        task: "New operational task (click to edit)",
+        owner: "Unassigned",
+        due: "TBD",
+        priority: "High",
+        cat: "Internal",
+        status: "Not started",
+        notes: "Missing owner and deadline."
+      });
+      filterTracker();
+    }
+
+    function deleteRow(index) {
+      currentItems.splice(index, 1);
+      filterTracker();
+    }
+
+    function filterTracker() {
+      const cat = document.getElementById("categoryFilter").value;
+      const prio = document.getElementById("priorityFilter").value;
+      const search = document.getElementById("searchFilter").value.toLowerCase();
+
+      const filtered = currentItems.filter(item => {
+        const matchCat = (cat === "ALL" || item.cat === cat);
+        const matchPrio = (prio === "ALL" || item.priority === prio);
+        const matchSearch = item.task.toLowerCase().includes(search) || item.owner.toLowerCase().includes(search);
+        return matchCat && matchPrio && matchSearch;
+      });
+      renderTable(filtered);
+    }
+
+    function toggleNotesPanel() {
+      const panel = document.getElementById("notesPanel");
+      panel.classList.toggle("hidden");
+    }
+
+    function switchTab(tabName) {
+      ['tracker', 'drafts', 'brief', 'gaps', 'playbook', 'prompt'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`tab-btn-${t}`).classList.remove('border-blue-600', 'text-blue-600', 'font-semibold');
+        document.getElementById(`tab-btn-${t}`).classList.add('border-transparent', 'text-slate-500');
+      });
+      document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+      document.getElementById(`tab-btn-${tabName}`).classList.add('border-blue-600', 'text-blue-600', 'font-semibold');
+      document.getElementById(`tab-btn-${tabName}`).classList.remove('border-transparent', 'text-slate-500');
+    }
+
+    function switchDraft(type) {
+      ['school', 'vendor', 'internal'].forEach(d => {
+        document.getElementById(`draft-${d}`).classList.add('hidden');
+        document.getElementById(`draft-btn-${d}`).classList.remove('bg-blue-600', 'text-white');
+        document.getElementById(`draft-btn-${d}`).classList.add('bg-slate-100', 'text-slate-600');
+      });
+      document.getElementById(`draft-${type}`).classList.remove('hidden');
+      document.getElementById(`draft-btn-${type}`).classList.add('bg-blue-600', 'text-white');
+      document.getElementById(`draft-btn-${type}`).classList.remove('bg-slate-100', 'text-slate-600');
+    }
+
+    function loadScenario(name) {
+      const sc = SCENARIOS[name];
+      document.getElementById("refDateInput").value = sc.date;
+      document.getElementById("rawNotesInput").value = sc.notes.replace(/\\n/g, '\n');
+      currentItems = sc.tracker;
+      filterTracker();
+      toggleNotesPanel();
+    }
+
+    function executeRealTimeParser() {
+      const rawText = document.getElementById("rawNotesInput").value;
+      if (!rawText.trim()) return;
+
+      const lines = rawText.split('\n');
+      const newItems = [];
+      let counter = 1;
+
+      lines.forEach(line => {
+        let clean = line.replace(/^[\s•\-\d\.\)\*]+/, '').trim();
+        if (clean.length < 5 || clean.startsWith("FOUNDERS") || clean.toLowerCase().startsWith("attendees:")) return;
+
+        let cat = "Internal";
+        if (/school|principal|teacher|maths|class|coordinator|student/i.test(clean)) cat = "School";
+        else if (/vendor|printworks|quote|invoice|print|copies|bill/i.test(clean)) cat = "Vendor";
+        else if (/investor|seed|matrix|update|burn/i.test(clean)) cat = "Investor";
+        else if (/dpdp|consent|compliance|legal/i.test(clean)) cat = "Compliance";
+
+        let owner = "Unassigned";
+        if (/founder 2 will draft|founder 2/i.test(clean)) owner = "Founder 2";
+        else if (/ops intern to|ops intern/i.test(clean)) owner = "Operations Intern";
+        else if (/founder 1 wants/i.test(clean)) owner = "Unassigned (Suggested: Operations Intern)";
+        else if (/tech lead/i.test(clean)) owner = "Tech Lead";
+
+        let due = "TBD";
+        if (/30 oct/i.test(clean)) due = "30-Oct-2026";
+        else if (/5 nov/i.test(clean)) due = "05-Nov-2026";
+        else if (/next friday/i.test(clean)) due = "30-Oct-2026";
+        else if (/diwali|8 nov/i.test(clean)) due = "Before 08-Nov-2026";
+        else if (/20 nov/i.test(clean)) due = "20-Nov-2026";
+
+        let priority = (/critical|dpdp|due 30 oct|invoice/i.test(clean)) ? "High" : "Medium";
+        let status = (/unclear|no date set|nobody has/i.test(clean)) ? "Blocked" : "Not started";
+
+        newItems.push({
+          id: `ACT-00${counter++}`,
+          task: clean,
+          owner: owner,
+          due: due,
+          priority: priority,
+          cat: cat,
+          status: status,
+          notes: "Extracted from meeting notes."
+        });
+      });
+
+      if (newItems.length > 0) {
+        currentItems = newItems;
+        filterTracker();
+        toggleNotesPanel();
+      }
+    }
+
+    function copyDraft(elemId) {
+      const text = document.getElementById(elemId).innerText;
+      navigator.clipboard.writeText(text).then(() => alert("Draft copied to clipboard!"));
+    }
+
+    function copyMarkdownTable() {
+      let md = "| Task ID | Task | Owner | Due Date | Priority | Stakeholder Category | Status | Missing Information |\n";
+      md += "|---|---|---|---|---|---|---|---|\n";
+      currentItems.forEach(i => {
+        md += `| ${i.id} | ${i.task} | ${i.owner} | ${i.due} | ${i.priority} | ${i.cat} | ${i.status} | ${i.notes} |\n`;
+      });
+      navigator.clipboard.writeText(md).then(() => alert("Markdown table copied!"));
+    }
+
+    function copyPromptText() {
+      const text = document.getElementById("promptTextDisplay").innerText;
+      navigator.clipboard.writeText(text).then(() => alert("Master prompt copied!"));
+    }
+
+    function downloadCSV() {
+      let csv = "Task ID,Task,Owner,Due Date,Priority,Stakeholder Category,Status,Missing Information\n";
+      currentItems.forEach(i => {
+        const clean = str => `"${String(str).replace(/"/g, '""')}"`;
+        csv += `${i.id},${clean(i.task)},${clean(i.owner)},${clean(i.due)},${clean(i.priority)},${clean(i.cat)},${clean(i.status)},${clean(i.notes)}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `EDXSO_Action_Tracker_${document.getElementById("refDateInput").value}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    window.onload = function() {
+      filterTracker();
+    };
+  </script>
+</body>
+</html>
