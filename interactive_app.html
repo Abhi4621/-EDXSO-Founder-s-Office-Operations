@@ -32,7 +32,7 @@
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
           Edit Notes
         </button>
-        <button onclick="addNewRow()" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 transition">
+        <button onclick="openAddTaskModal()" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 transition flex items-center gap-1.5 cursor-pointer">
           + Add Task
         </button>
         <button onclick="downloadCSV()" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition flex items-center gap-1.5">
@@ -490,12 +490,12 @@ REQUIRED OUTPUTS:
         notes: `FOUNDERS SYNC — Thursday, 22 October 2026\nAttendees: Both founders and the Operations Intern.\n\n• Maple Heights School in Gurugram wants a demo for its Class 8 maths teachers before the Diwali break, which starts around 8 November.\n• Ms. Kapoor, the school coordinator, also asked for a usage report covering the first month.\n• A print quotation is needed from PrintWorks for 300 teacher guides. The budget cap is ₹40,000. Nobody has followed up yet.\n• A content vendor invoice is due on 30 October. The amount was not discussed, and the person responsible for payment is unclear.\n• Founder 1 wants a quick review of three AI tutoring tools for K–12 India by next Friday.\n• Parent consent forms must be checked for DPDP compliance before expanding the pilot to more classes. No date has been set.\n• Leads collected at the school fair two weeks ago are still on paper and have not been entered into the CRM.\n• The investor update will be sent on 5 November. Founder 2 will draft it.\n• The Operations Intern must maintain one tracker so that no action is missed.`,
         tracker: [
           { id: "ACT-001", task: "Schedule and deliver Class 8 maths teacher demo at Maple Heights School (Gurugram)", owner: "Unassigned (Suggested: Founder 1 or Academic Lead)", due: "Before 08-Nov-2026", priority: "High", cat: "School", status: "Not started", notes: "Demo date and presenter unconfirmed. Need dates before Diwali break (~8 Nov)." },
-          { id: "ACT-002", task: "Prepare first-month usage report for Maple Heights School (requested by Ms. Kapoor)", owner: "Unassigned (Suggested: Operations Intern to draft, Founders to review)", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Due date not set. Metrics to include not defined. Need to check if Ms. Kapoor wants specific data." },
+          { id: "ACT-002", task: "Prepare first-month usage report for Maple Heights School (requested by Ms. Kapoor)", owner: "Unassigned", due: "TBD", priority: "High", cat: "School", status: "Not started", notes: "Due date not set. Metrics to include not defined. Need to check if Ms. Kapoor wants specific data." },
           { id: "ACT-003", task: "Request print quotation from PrintWorks for 300 teacher guides (budget cap ₹40,000)", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "High", cat: "Vendor", status: "Not started", notes: "Nobody has followed up yet. Need print specifications, page count, and quotation approver." },
           { id: "ACT-004", task: "Clarify invoice amount, verify deliverables, and process payment for content vendor", owner: "Unassigned", due: "30-Oct-2026", priority: "High", cat: "Vendor", status: "Blocked", notes: "Invoice amount not discussed in meeting. Invoice copy missing. Payment authorizer unconfirmed." },
-          { id: "ACT-005", task: "Conduct quick review of 3 AI tutoring tools for K-12 India (requested by Founder 1)", owner: "Unassigned (Suggested: Operations Intern)", due: "30-Oct-2026", priority: "Medium", cat: "Internal", status: "Not started", notes: "Founder 1 requested this by next Friday (30 Oct 2026). Assignee not confirmed in notes." },
+          { id: "ACT-005", task: "Conduct quick review of 3 AI tutoring tools for K-12 India (requested by Founder 1)", owner: "Unassigned (Requested by Founder 1)", due: "30-Oct-2026", priority: "Medium", cat: "Internal", status: "Not started", notes: "Founder 1 requested this by next Friday (30 Oct 2026). Assignee not confirmed in notes." },
           { id: "ACT-006", task: "Review parent consent forms for DPDP compliance before expanding pilot to more classes", owner: "Unassigned", due: "TBD (Precedes expansion)", priority: "High", cat: "Compliance", status: "Blocked", notes: "No date set. Reviewer unassigned. Strictly blocks expanding the school pilot." },
-          { id: "ACT-007", task: "Enter paper leads from school fair (collected two weeks ago) into central CRM", owner: "Unassigned (Suggested: Operations Intern)", due: "TBD", priority: "Medium", cat: "Internal", status: "Not started", notes: "Leads sitting on paper for ~14 days. Owner and data-entry deadline not confirmed." },
+          { id: "ACT-007", task: "Enter paper leads from school fair (collected two weeks ago) into central CRM", owner: "Unassigned", due: "TBD", priority: "Medium", cat: "Internal", status: "Not started", notes: "Leads sitting on paper for ~14 days. Owner and data-entry deadline not confirmed." },
           { id: "ACT-008", task: "Draft and send investor update", owner: "Founder 2", due: "05-Nov-2026", priority: "Medium", cat: "Investor", status: "Not started", notes: "Founder 2 confirmed as owner. Internal draft review date not specified." },
           { id: "ACT-009", task: "Maintain single central tracker across all workstreams so no action slips", owner: "Operations Intern", due: "Ongoing", priority: "High", cat: "Internal", status: "In progress", notes: "Confirmed owner is Operations Intern. Central tracker active and maintained weekly." }
         ],
@@ -1086,7 +1086,8 @@ REQUIRED OUTPUTS:
         let owner = "Unassigned";
         if (/founder 2 will draft|founder 2 will handle|founder 2/i.test(clean)) owner = "Founder 2";
         else if (/ops intern to|ops intern/i.test(clean)) owner = "Operations Intern";
-        else if (/founder 1 wants/i.test(clean)) owner = "Unassigned (Suggested: Operations Intern)";
+        else if (/founder 1 wants/i.test(clean)) owner = "Unassigned (Requested by Founder 1)";
+        else if (/printworks|print quotation|teacher guides/i.test(clean)) owner = "Unassigned (Suggested: Operations Intern)";
         else if (/tech lead/i.test(clean)) owner = "Tech Lead";
 
         let due = "TBD";
@@ -1188,9 +1189,151 @@ REQUIRED OUTPUTS:
       document.body.removeChild(link);
     }
 
+    
+    function openAddTaskModal() {
+      document.getElementById("addTaskModal").classList.remove("hidden");
+      document.getElementById("modalTaskDesc").focus();
+    }
+
+    function closeAddTaskModal() {
+      document.getElementById("addTaskModal").classList.add("hidden");
+    }
+
+    function toggleCustomOwner(val) {
+      const customInp = document.getElementById("modalCustomOwner");
+      if (val === "CUSTOM") {
+        customInp.classList.remove("hidden");
+        customInp.focus();
+      } else {
+        customInp.classList.add("hidden");
+      }
+    }
+
+    function submitNewTask(e) {
+      e.preventDefault();
+      const desc = document.getElementById("modalTaskDesc").value.trim();
+      if (!desc) return;
+
+      let ownerVal = document.getElementById("modalTaskOwner").value;
+      if (ownerVal === "CUSTOM") {
+        ownerVal = document.getElementById("modalCustomOwner").value.trim() || "Unassigned";
+      }
+
+      const due = document.getElementById("modalTaskDue").value.trim() || "TBD";
+      const prio = document.getElementById("modalTaskPriority").value;
+      const cat = document.getElementById("modalTaskCat").value;
+      const status = document.getElementById("modalTaskStatus").value;
+      const notes = document.getElementById("modalTaskNotes").value.trim() || "Added via operations dashboard.";
+
+      const prefix = activeScenarioKey === "scenario2" ? "ACT-2" : "ACT-0";
+      const nextNum = currentItems.length + 1;
+      const newId = `${prefix}${String(nextNum).padStart(2, "0")}`;
+
+      currentItems.push({
+        id: newId,
+        task: desc,
+        owner: ownerVal,
+        due: due,
+        priority: prio,
+        cat: cat,
+        status: status,
+        notes: notes
+      });
+
+      filterTracker();
+      closeAddTaskModal();
+
+      // Reset form
+      document.getElementById("modalTaskDesc").value = "";
+      document.getElementById("modalTaskDue").value = "TBD";
+      document.getElementById("modalTaskNotes").value = "";
+      document.getElementById("modalTaskOwner").value = "Unassigned";
+      document.getElementById("modalCustomOwner").classList.add("hidden");
+    }
+
     window.onload = function() {
       loadScenario("scenario1");
     };
   </script>
+
+  <!-- Add Task Modal -->
+  <div id="addTaskModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-lg w-full overflow-hidden transform transition-all">
+      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center space-x-2">
+          <span class="w-6 h-6 rounded-md bg-blue-600 text-white flex items-center justify-center font-bold text-xs">+</span>
+          <h3 class="text-sm font-bold text-slate-800">Create New Action Item</h3>
+        </div>
+        <button onclick="closeAddTaskModal()" class="text-slate-400 hover:text-slate-600 text-sm font-bold cursor-pointer">✕</button>
+      </div>
+      <form onsubmit="submitNewTask(event)" class="p-6 space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Task Description <span class="text-red-500">*</span></label>
+          <input type="text" id="modalTaskDesc" required placeholder="e.g. Follow up with PrintWorks for revised quotation" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 focus:ring-1 focus:ring-blue-500 focus:outline-none">
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Assignee / Owner <span class="text-red-500">*</span></label>
+            <select id="modalTaskOwner" onchange="toggleCustomOwner(this.value)" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+              <option value="Unassigned">Unassigned (Missing Owner)</option>
+              <option value="Operations Intern">Operations Intern (Abhi Pandey)</option>
+              <option value="Founder 1">Founder 1</option>
+              <option value="Founder 2">Founder 2</option>
+              <option value="Tech Lead">Tech Lead</option>
+              <option value="Legal Reviewer">Legal Reviewer</option>
+              <option value="Unassigned (Suggested: Operations Intern)">Unassigned (Suggested: Operations Intern)</option>
+              <option value="CUSTOM">Custom Assignee...</option>
+            </select>
+            <input type="text" id="modalCustomOwner" placeholder="Enter custom assignee" class="hidden mt-1.5 w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Due Date</label>
+            <input type="text" id="modalTaskDue" value="TBD" placeholder="e.g. 30-Oct-2026, TBD" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Priority</label>
+            <select id="modalTaskPriority" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+              <option value="High">High</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Category</label>
+            <select id="modalTaskCat" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+              <option value="Internal" selected>Internal</option>
+              <option value="School">School</option>
+              <option value="Vendor">Vendor</option>
+              <option value="Compliance">Compliance</option>
+              <option value="Investor">Investor</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Status</label>
+            <select id="modalTaskStatus" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+              <option value="Not started" selected>Not started</option>
+              <option value="In progress">In progress</option>
+              <option value="Blocked">Blocked</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Missing Information / Operational Note</label>
+          <input type="text" id="modalTaskNotes" placeholder="e.g. Pending final approval from Founder 1" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-end space-x-2">
+          <button type="button" onclick="closeAddTaskModal()" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-medium">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs">Assign & Add Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>
