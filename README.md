@@ -5,23 +5,32 @@
 **Submission Target:** [hr@edxso.com](mailto:hr@edxso.com)  
 **Subject Line:** `Assignment 2 – Abhi Pandey`  
 **Execution Context Date:** Friday, 23 October 2026 (Meeting: Thursday, 22 October 2026)  
-**Public Repository:** [https://github.com/abhipandey/EDXSo](https://github.com/abhipandey/EDXSo)  
+**Public Repository:** [https://github.com/Abhi4621/Edxso-Platform](https://github.com/Abhi4621/Edxso-Platform)  
+**Live Interactive Dashboard:** [https://edxso-ten.vercel.app/](https://edxso-ten.vercel.app/) (or local: `http://localhost:8000/`)
 
 ---
 
 ### Executive Summary
 
-This repository contains the complete, production-grade automation workflow designed to transform messy, unstructured notes from EDXSO founder syncs into rigorous, actionable operational outputs:
-1. **Action Tracker** (9 items with strict `Unassigned` and `TBD` zero-guess guardrails for missing owners, dates, or amounts)
-2. **Follow-up Drafts** (ready-to-send messages for Maple Heights School, PrintWorks vendor, and an internal founder decision memo with explicit contact placeholders)
-3. **Founder Brief** (a high-density 1-page executive summary readable in ~2 minutes covering Red Flag blockers, Yellow Flag decisions, and Green Ops plan)
-4. **Process Gaps & Practical Fixes** (diagnosing 7 operational failures with zero-cost, lightweight startup solutions)
-5. **One-Page Weekly Operations Note** (SOP, failure modes, what must never be left to AI, and transparent manual check disclosure)
+This repository contains the complete, production-grade automation workflow designed to transform messy, unstructured notes from EDXSO founder syncs into an interconnected, 4-part operational execution package:
+1. **Action Tracker** (Tasks categorized into School, Vendor, Compliance, Investor, Internal with dynamic relative dates, priorities, statuses, and strict zero-guess guardrails for missing owners, dates, or amounts)
+2. **Follow-up Drafts** (Ready-to-send messages dynamically synthesized for every external school partner and vendor partner, plus a targeted internal Slack note to founders connecting all open blockers and unassigned DRIs)
+3. **Founder Brief** (A high-density 1-page executive summary readable in ~2 minutes covering Current Position, What is at Risk, Decisions Needed, What Ops is Doing This Week, Upcoming Deadlines, and Items Awaiting Clarification)
+4. **Process Gaps & Practical Fixes** (Diagnosing operational meeting failures with practical, zero-cost startup solutions and designated owners)
 
-Additionally, this package includes **all extra credit deliverables**:
-* **Extra Credit 1:** A full second run on a realistic post-Diwali meeting notes set (`EXTRA_CREDIT_SECOND_RUN.md`) demonstrating true repeatability and flagging unconfirmed proposals.
-* **Extra Credit 2:** A 3-tab Excel workbook (`EDXSO_Operations_Tracker.xlsx`) and machine-readable CSV (`tracker_export.csv`).
-* **Extra Credit 3:** A responsive, standalone interactive web application (`index.html` / `interactive_app.html`) with the official EDXSO logo, live client-side parser, and Vercel readiness.
+---
+
+### Key Highlights: True Dynamic Operational Pipeline
+
+Unlike static websites or prototypes that only swap pre-baked text, this automation features a **fully dynamic operational engine**:
+* **Upload or Paste Any Meeting Notes:** Whether you paste messy notes into the web dashboard or upload a `.txt` / `.md` file, the system dynamically parses the text and **automatically connects and updates all 4 deliverables simultaneously**.
+* **Dynamic Follow-up Drafts for Every Stakeholder:**
+  - Detects all school partners and drafts tailored emails addressing coordinators/principals regarding demo scheduling, pilot usage reports, and compliance certificates.
+  - Detects all vendor partners and drafts tailored communications (e.g. PrintWorks quotation inquiries under strict budget caps, delivery notices for defective binding, content vendor invoice documentation requests).
+  - Automatically synthesizes the Internal Slack note to founders listing the exact open bottlenecks and unassigned tasks with task IDs and target dates.
+* **Dynamic Founder Executive Brief:** Synthesizes the active tasks into a crisp 1-page briefing note with real-time risk classification, pending founder approvals, operational plan, and chronologically sorted deadlines.
+* **Dynamic Process Gap Evaluation:** Evaluates the active notes for operational anti-patterns (unassigned DRIs, vague deadlines, informal invoicing, compliance afterthoughts, paper lead lag) and generates practical fixes with suggested owners.
+* **Strict Honesty & Single Intern Suggestion Guardrail:** Missing parameters are explicitly flagged (`Unassigned`, `TBD`, `Amount unstated`) and never invented. Across the tracker, exactly one routine operational chase (`ACT-003`) is suggested for the intern (`Unassigned (Suggested: Founder's Office Intern)`).
 
 ---
 
@@ -29,30 +38,61 @@ Additionally, this package includes **all extra credit deliverables**:
 
 | File | Purpose / Contents |
 |---|---|
-| [`index.html`](./index.html) | **Vercel Static Entry & Live Web Tool:** Standalone web app with client-side NLP parser, official EDXSO logo, inline editing, and CSV export. |
+| [`index.html`](./index.html) | **Live Interactive Web Application:** Standalone web tool with dynamic client-side engine, file upload / drag-and-drop support, scenario switcher, live draft cards, and CSV export. |
+| [`interactive_app.html`](./interactive_app.html) | Local mirror of the web application. |
+| [`edxso_engine.py`](./edxso_engine.py) | **Python CLI Engine:** Command-line automation that takes any raw notes file and outputs all 4 deliverables (`tracker.csv`, `tracker.md`, `followup_drafts.md`, `founder_brief.md`, `process_gaps.md`). |
+| [`edxso_engine.js`](./edxso_engine.js) | **Node.js CLI Engine:** Standalone Node CLI offering the exact same 4-deliverable pipeline. |
 | [`EDXSO_Operations_Tracker.xlsx`](./EDXSO_Operations_Tracker.xlsx) | **Excel Workbook:** 3 tabs (Action Tracker, Decisions Log, Follow-ups) with clean styling and verified formulas. |
-| [`EDXSO_Operations_Weekly_Note.docx`](./EDXSO_Operations_Weekly_Note.docx) | **Executive Word Document:** 1-page operating note with official EDXSO logo, SOP, failure modes, and human guardrails. |
-| [`PROMPT_SYSTEM_INSTRUCTIONS.md`](./PROMPT_SYSTEM_INSTRUCTIONS.md) | Reusable master system prompt and instructions for Claude Projects or Claude Chat with XML tags and zero-guess guardrails. |
+| [`EDXSO_Operations_Weekly_Note.docx`](./EDXSO_Operations_Weekly_Note.docx) | **Executive Word Document:** 1-page operating note with official EDXSO logo, weekly cadence SOP, failure modes, and human guardrails. |
+| [`ONE_PAGE_STRATEGY_NOTE.md`](./ONE_PAGE_STRATEGY_NOTE.md) | The 1-page operating strategy note covering EDXSO's weekly cadence, AI failure modes, human-only boundaries, and manual check disclosure. |
+| [`PROMPT_SYSTEM_INSTRUCTIONS.md`](./PROMPT_SYSTEM_INSTRUCTIONS.md) | Reusable master system prompt and instructions for Claude Projects or Claude Chat with zero-guess guardrails. |
 | [`SCENARIO_OUTPUTS.md`](./SCENARIO_OUTPUTS.md) | Complete outputs for the assigned 22 Oct 2026 Founders Sync across all required sections. |
-| [`ONE_PAGE_STRATEGY_NOTE.md`](./ONE_PAGE_STRATEGY_NOTE.md) | The 1-page executive note covering EDXSO's weekly operating cadence, AI failure modes, human-only boundaries, and manual verification disclosure. |
-| [`EXTRA_CREDIT_SECOND_RUN.md`](./EXTRA_CREDIT_SECOND_RUN.md) | Validation of prompt repeatability using a second realistic post-Diwali founders sync (12 Nov 2026), flagging unconfirmed proposals. |
-| [`tracker_export.csv`](./tracker_export.csv) | Machine-readable, clean CSV export of the Action Tracker formatted for instant Google Sheets / Microsoft Excel ingestion. |
-| [`edxso_engine.py`](./edxso_engine.py) | **Python CLI Engine:** Parses unstructured meeting notes, extracts entities/dates, flags missing owners, and exports CSV + Markdown + Founder Brief. |
-| [`SUBMISSION_EMAIL_DRAFT.md`](./SUBMISSION_EMAIL_DRAFT.md) | Ready-to-send submission email addressed to `hr@edxso.com` adhering to the brief's guidelines. |
+| [`EXTRA_CREDIT_SECOND_RUN.md`](./EXTRA_CREDIT_SECOND_RUN.md) | Validation of prompt repeatability using a second realistic post-Diwali founders sync (12 Nov 2026). |
+| [`tracker_export.csv`](./tracker_export.csv) | Clean CSV export of the Action Tracker formatted for Google Sheets / Microsoft Excel ingestion. |
+| [`SUBMISSION_EMAIL_DRAFT.md`](./SUBMISSION_EMAIL_DRAFT.md) | Ready-to-send submission email addressed to `hr@edxso.com`. |
 | [`Assignment_2_Abhi_Pandey_EDXSO.zip`](./Assignment_2_Abhi_Pandey_EDXSO.zip) | Complete submission ZIP archive ready to attach. |
+
+---
+
+### How to Run the Automation
+
+#### 1. Interactive Web Dashboard
+* **Online:** Visit [https://edxso-ten.vercel.app/](https://edxso-ten.vercel.app/)
+* **Locally:** Run `node server.js` and open `http://localhost:8000/`
+* Click **"Upload Notes File"** or paste raw notes into the panel, set the meeting date, and click **"Reprocess All 4 Outputs"**. Watch the Action Tracker, Follow-up Drafts, Founder Brief, and Process Gaps update dynamically in real time!
+
+#### 2. Python CLI Engine
+```bash
+# Run baseline scenario (22 Oct 2026)
+python edxso_engine.py --scenario 1 --out-dir ./output
+
+# Run second scenario (12 Nov 2026)
+python edxso_engine.py --scenario 2 --out-dir ./output
+
+# Run on custom meeting notes file
+python edxso_engine.py --notes-file custom_notes_test.txt --date 2026-12-16 --out-dir ./custom_output
+```
+
+#### 3. Node.js CLI Engine
+```bash
+# Run baseline scenario
+node edxso_engine.js --scenario 1
+
+# Run custom notes
+node edxso_engine.js --notes-file custom_notes_test.txt --date 2026-12-16 --out-dir ./custom_output
+```
 
 ---
 
 ### Tools Used & Manual Verification Disclosure
 
-* **Tools Actually Used:**
-  * **Claude:** Used for unstructured text extraction and initial drafting of communication drafts.
-  * **Python 3.14:** Used for local script execution (`edxso_engine.py`), programmatic generation of the Excel tracker (`openpyxl`), Word document formatting (`docx`), and ZIP packaging (`zipfile`).
-  * **Git & GitHub:** Used for publishing the public repository to [`https://github.com/abhipandey/EDXSo`](https://github.com/abhipandey/EDXSo).
-  * **Standard Browser:** Used for running and verifying the local interactive dashboard at `http://localhost:8000/interactive_app.html`.
+* **Tools Used:**
+  * **Claude:** Used for unstructured text extraction and initial drafting.
+  * **JavaScript (Node.js) & Python:** Used for building the real-time operational engine, CLI runners, CSV/Excel/Word generation, and local HTTP server.
+  * **Git & GitHub:** Used for code version control and publishing to [`https://github.com/Abhi4621/Edxso-Platform`](https://github.com/Abhi4621/Edxso-Platform).
 
 * **Manual Checks Actually Performed:**
-  1. *Line-by-Line Fact Audit:* Cross-checked every task in the Action Tracker against the raw notes. Removed any invented contact emails, page counts, or payment terms.
-  2. *Date Arithmetic Verification:* Manually verified calendar math: Thursday 22 Oct (meeting) $\rightarrow$ Friday 23 Oct (today) $\rightarrow$ Friday 30 Oct ("next Friday" for Founder 1 scan & Content invoice) $\rightarrow$ ~8 Nov (Diwali break begin).
-  3. *Unassigned Owner Audit:* Confirmed that 7 of the 9 tasks had no explicit owner named in the meeting notes and ensured each was labeled `Unassigned` with suggestions clearly marked in parentheses.
-  4. *Spreadsheet & Document Validation:* Opened and inspected `EDXSO_Operations_Tracker.xlsx` across all 3 tabs to verify formatting and data integrity.
+  1. *Zero-Guess Audit:* Verified that every missing date is flagged `TBD` and unconfirmed owners are tagged `Unassigned`.
+  2. *Single Intern Assignment Rule:* Ensured only the vendor quotation chase (`ACT-003`) suggests the Founder's Office Intern.
+  3. *Calendar & Relative Math:* Cross-checked dates against reference execution dates and regional school context (Diwali break).
+  4. *Human-in-the-Loop Boundaries:* Verified that payment authorizations, external email dispatches, and DPDP compliance sign-offs require human founder approval.

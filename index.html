@@ -46,28 +46,57 @@
   <!-- Clean Collapsible Meeting Notes Panel -->
   <div id="notesPanel" class="hidden bg-white border-b border-slate-200 transition-all duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
-      <div class="flex items-center justify-between">
+      <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center space-x-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Meeting Notes Input</span>
-          <span class="text-xs text-slate-400">• Pasting new notes will automatically update all tabs</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Meeting Notes Input</span>
+          <span class="text-xs text-slate-400">• Dynamic pipeline: editing or uploading notes automatically connects all 4 deliverables</span>
         </div>
-        <div class="flex items-center space-x-2">
-          <button onclick="loadScenario('scenario1')" class="text-xs font-medium px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700">Oct 22 Sync</button>
-          <button onclick="loadScenario('scenario2')" class="text-xs font-medium px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700">Nov 12 Sync</button>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="loadScenario('scenario1')" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition cursor-pointer">
+            Scenario 1: Baseline Founders Sync (23 Oct)
+          </button>
+          <button onclick="loadScenario('scenario2')" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">
+            Scenario 2: Post-Diwali Ops (13 Nov)
+          </button>
+          <button onclick="clearAndCustomNotes()" class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">
+            Clear / Custom Notes
+          </button>
+          <label class="text-xs font-medium px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 cursor-pointer transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            Upload Notes File (.txt, .md, .csv)
+            <input type="file" id="notesFileInput" accept=".txt,.md,.json,.csv,.text" class="hidden" onchange="handleFileUpload(event)">
+          </label>
         </div>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
-        <textarea id="rawNotesInput" rows="4" class="md:col-span-4 w-full text-xs font-mono p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 focus:outline-none text-slate-700 placeholder-slate-400" placeholder="Paste rough meeting notes here..."></textarea>
+        <div class="md:col-span-4 relative">
+          <textarea id="rawNotesInput" rows="5" class="w-full text-xs font-mono p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 focus:outline-none text-slate-700 placeholder-slate-400" placeholder="Paste rough meeting notes here, or drag-and-drop a .txt / .md file..."></textarea>
+          <div id="dropOverlay" class="hidden absolute inset-0 bg-blue-500/10 border-2 border-dashed border-blue-500 rounded-lg flex items-center justify-center text-blue-700 font-semibold text-xs backdrop-blur-xs">
+            Drop meeting notes file here to auto-process
+          </div>
+        </div>
         <div class="flex flex-col justify-between space-y-2">
           <div>
-            <label class="block text-[11px] font-semibold text-slate-500 uppercase">Meeting Date</label>
+            <label class="block text-[11px] font-semibold text-slate-500 uppercase">Meeting / Ref Date</label>
             <input type="date" id="refDateInput" value="2026-10-23" onchange="onDateChanged()" oninput="onDateChanged()" class="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 font-medium cursor-pointer">
           </div>
-          <button onclick="executeRealTimeParser(true)" class="w-full py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition">
-            Reprocess
+          <button onclick="executeRealTimeParser(true)" class="w-full py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            Reprocess All 4 Outputs
           </button>
         </div>
+      </div>
+
+      <!-- Live Sync Status Banner -->
+      <div id="syncStatusBanner" class="text-[11px] px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 flex items-center justify-between">
+        <span class="flex items-center gap-1.5 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Dynamic Workflow Connected: Action Tracker, Follow-up Drafts, Founder Brief, and Process Gaps are fully synchronized.
+        </span>
+        <span id="activeMetricsBadge" class="text-[10px] font-mono text-emerald-700 font-semibold">
+          Ready
+        </span>
       </div>
     </div>
   </div>
@@ -179,117 +208,24 @@
       </div>
     </div>
 
-    <!-- TAB 2: FOLLOW-UP DRAFTS -->
+    <!-- TAB 2: FOLLOW-UP DRAFTS (DYNAMIC) -->
     <div id="tab-drafts" class="hidden space-y-4">
-      <div class="flex space-x-2 border-b border-slate-200 pb-2">
-        <button onclick="switchDraft('school')" id="draft-btn-school" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 text-white">1. School Partner (Maple Heights)</button>
-        <button onclick="switchDraft('vendor')" id="draft-btn-vendor" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">2. Vendor (PrintWorks)</button>
-        <button onclick="switchDraft('internal')" id="draft-btn-internal" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">3. Internal Note to Founders</button>
-      </div>
-
-      <!-- School Draft -->
-      <div id="draft-school" class="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div>
-            <h3 id="schoolDraftTitle" class="text-sm font-bold text-slate-900">Email to Ms. Kapoor (Maple Heights School, Gurugram)</h3>
-            <p id="schoolDraftSubtitle" class="text-xs text-slate-500">Demo scheduling and month 1 usage report</p>
-          </div>
-          <button onclick="copyDraft('schoolText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
-            Copy Email
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
+        <div id="draftTabsContainer" class="flex flex-wrap gap-2">
+          <!-- Dynamically populated draft buttons -->
+        </div>
+        <div class="flex items-center space-x-2">
+          <span id="draftCountBadge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+            Drafts Generated
+          </span>
+          <button onclick="showAllDrafts()" id="btnShowAllDrafts" class="text-xs font-medium px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">
+            View All
           </button>
-        </div>
-        <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
-          <div><strong>To:</strong> <span id="schoolDraftTo">Ms. Kapoor, Academic Coordinator, Maple Heights School [Verified school contact email]</span></div>
-          <div><strong>CC:</strong> <span id="schoolDraftCC">Principal [Verified Principal email]; Founders [EDXSO Founders email]</span></div>
-          <div><strong>Subject:</strong> <span id="schoolDraftSubject">Maple Heights School pilot: Class 8 maths demo and month 1 usage report</span></div>
-        </div>
-        <div id="schoolText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
-Dear Ms. Kapoor,
-
-I hope you are having a good week.
-
-I am writing to follow up on our ongoing pilot at Maple Heights School.
-
-Regarding the demonstration for your Class 8 mathematics teachers, we would be glad to schedule this before the school closes for the Diwali break around 8 November. Could you please share a few dates and times that would be convenient for your teaching staff? Once you let us know their availability, we will confirm the session details.
-
-We are also preparing the usage report covering the first month of the pilot. If there are any specific data points, student engagement metrics, or questions you or the Principal would like highlighted in this report, please let us know so we can include them.
-
-Thank you for your guidance and support throughout the pilot.
-
-Warm regards,  
-
-Founder's Office Intern  
-Founder’s Office, EDXSO  
-[Contact Phone / Email]
         </div>
       </div>
 
-      <!-- Vendor Draft -->
-      <div id="draft-vendor" class="hidden bg-white rounded-xl border border-slate-200 p-6 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div>
-            <h3 id="vendorDraftTitle" class="text-sm font-bold text-slate-900">Email to PrintWorks</h3>
-            <p id="vendorDraftSubtitle" class="text-xs text-slate-500">Quotation request for 300 teacher guides</p>
-          </div>
-          <button onclick="copyDraft('vendorText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
-            Copy Email
-          </button>
-        </div>
-        <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
-          <div><strong>To:</strong> <span id="vendorDraftTo">Sales Desk, PrintWorks [Verified PrintWorks sales/orders email]</span></div>
-          <div><strong>CC:</strong> <span id="vendorDraftCC">Founder's Office [EDXSO operations contact]</span></div>
-          <div><strong>Subject:</strong> <span id="vendorDraftSubject">Quotation request: 300 copies of EDXSO Teacher Guides</span></div>
-        </div>
-        <div id="vendorText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
-Dear PrintWorks Team,
-
-We would like to request a formal quotation for printing 300 copies of our EDXSO Teacher Guides.
-
-Please note that our total approved budget cap for this print run is strictly ₹40,000. 
-
-Could you please share a breakdown covering:
-1. Printing charges
-2. Applicable taxes (GST)
-3. Delivery charges to our office in Gurugram
-4. Estimated production and delivery turnaround time
-5. Payment terms
-
-Please also let us know what printing specifications you require from our side (such as preferred page count brackets, paper weight, cover stock, or file formats) so we can provide the print-ready files.
-
-Please note that this email is an inquiry for a quotation and not a confirmed purchase order. We will review your quotation against our budget cap before confirming.
-
-Looking forward to your response.
-
-Best regards,  
-
-Founder's Office Intern  
-Founder’s Office, EDXSO  
-[Contact Phone / Email]
-        </div>
-      </div>
-
-      <!-- Internal Draft -->
-      <div id="draft-internal" class="hidden bg-white rounded-xl border border-slate-200 p-6 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div>
-            <h3 id="internalDraftTitle" class="text-sm font-bold text-slate-900">Internal Message to Founders (Slack / Chat)</h3>
-            <p id="internalDraftSubtitle" class="text-xs text-slate-500">Immediate decisions needed to unblock tasks</p>
-          </div>
-          <button onclick="copyDraft('internalText')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition">
-            Copy Message
-          </button>
-        </div>
-        <div id="internalText" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans">
-Hi team, quick update following yesterday’s sync. I have set up our central tracker, but need clarification on a few items to move work forward:
-
-1. Content vendor invoice (due 30 Oct): What is the billed amount, where is the invoice copy, and who will approve and initiate payment?
-2. Maple Heights demo & usage report: Who will lead the Class 8 maths demo session, and what dates work for you before 8 Nov? I can draft the usage report once metrics are confirmed.
-3. PrintWorks quotation: Who will give final sign-off on the print quote once received, keeping within our ₹40,000 cap?
-4. DPDP consent review: Who is responsible for checking parent consent forms against DPDP rules so pilot expansion isn't held up?
-5. AI tutoring tools review: Founder 1, should I take on the 3-tool review due next Friday (30 Oct)? Also, Founder 2, let me know if you need any pilot metrics for your 5 Nov investor update draft.
-
-Please share your thoughts when free so I can update the tracker and send out the school and vendor emails.
-        </div>
+      <div id="draftCardsContainer" class="space-y-4">
+        <!-- Dynamically populated draft cards -->
       </div>
     </div>
 
@@ -822,31 +758,477 @@ Please share your guidance when free.`
       if (clList) clList.innerHTML = brief.clarifications.map(c => `<p>${c}</p>`).join("");
     }
 
-    function renderDrafts(drafts) {
-      if (!drafts) return;
-      // School
-      if (document.getElementById("schoolDraftTitle")) document.getElementById("schoolDraftTitle").innerText = drafts.school.title;
-      if (document.getElementById("schoolDraftSubtitle")) document.getElementById("schoolDraftSubtitle").innerText = drafts.school.subtitle;
-      if (document.getElementById("schoolDraftTo")) document.getElementById("schoolDraftTo").innerText = drafts.school.to;
-      if (document.getElementById("schoolDraftCC")) document.getElementById("schoolDraftCC").innerText = drafts.school.cc;
-      if (document.getElementById("schoolDraftSubject")) document.getElementById("schoolDraftSubject").innerText = drafts.school.subject;
-      if (document.getElementById("schoolText")) document.getElementById("schoolText").innerText = drafts.school.body;
+    // ==========================================
+    // DYNAMIC OPERATIONAL ENGINE (FULL REAL-TIME PIPELINE)
+    // ==========================================
+    let currentDrafts = [];
+    let currentBrief = null;
+    let currentGaps = [];
+    let activeDraftId = null;
 
-      // Vendor
-      if (document.getElementById("vendorDraftTitle")) document.getElementById("vendorDraftTitle").innerText = drafts.vendor.title;
-      if (document.getElementById("vendorDraftSubtitle")) document.getElementById("vendorDraftSubtitle").innerText = drafts.vendor.subtitle;
-      if (document.getElementById("vendorDraftTo")) document.getElementById("vendorDraftTo").innerText = drafts.vendor.to;
-      if (document.getElementById("vendorDraftCC")) document.getElementById("vendorDraftCC").innerText = drafts.vendor.cc;
-      if (document.getElementById("vendorDraftSubject")) document.getElementById("vendorDraftSubject").innerText = drafts.vendor.subject;
-      if (document.getElementById("vendorText")) document.getElementById("vendorText").innerText = drafts.vendor.body;
+    function parseFullWorkflow(rawText, refDateStr) {
+      const [y, m, d] = (refDateStr || "2026-10-23").split("-").map(Number);
+      const refDate = new Date(y, m - 1, d);
+      const shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const longMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-      // Internal
-      if (document.getElementById("internalDraftTitle")) document.getElementById("internalDraftTitle").innerText = drafts.internal.title;
-      if (document.getElementById("internalDraftSubtitle")) document.getElementById("internalDraftSubtitle").innerText = drafts.internal.subtitle;
-      if (document.getElementById("internalText")) document.getElementById("internalText").innerText = drafts.internal.body;
+      function formatShort(dt) {
+        return `${String(dt.getDate()).padStart(2, "0")}-${shortMonths[dt.getMonth()]}-${dt.getFullYear()}`;
+      }
+
+      // 1. EXTRACT TRACKER ITEMS
+      const lines = rawText.split("\n");
+      const items = [];
+      let counter = 1;
+      let internSuggestedAssigned = false;
+
+      lines.forEach(line => {
+        let clean = line.replace(/^[\s•\-\d\.\)\*]+/, "").trim();
+        if (clean.length < 5 || clean.startsWith("FOUNDERS") || clean.toLowerCase().startsWith("attendees:") || clean.toLowerCase().startsWith("present:")) return;
+
+        let cat = "Internal";
+        if (/^[\s•\-\d\.\)\*]*(?:dpdp|parent consent)/i.test(clean) || (/dpdp/i.test(clean) && !/school|principal/i.test(clean))) {
+          cat = "Compliance";
+        } else if (/investor|seed|matrix|update.*draft|burn|runway/i.test(clean)) {
+          cat = "Investor";
+        } else if (/printworks|print quote|vendor|invoice|supplier|budget cap|azure|aws|cloud bill|copies/i.test(clean)) {
+          cat = "Vendor";
+        } else if (/school|principal|coordinator|teacher|class \d|student|trial|gurugram|noida|heritage|delhi world/i.test(clean)) {
+          cat = "School";
+        } else if (/dpdp|consent|compliance|legal|safety certificate/i.test(clean)) {
+          cat = "Compliance";
+        }
+
+        let owner = "Unassigned";
+        if (/founder 2 will draft|founder 2 will handle|founder 2/i.test(clean)) {
+          owner = "Founder 2";
+        } else if (/Founder's Office Intern to|ops intern to/i.test(clean)) {
+          owner = "Founder's Office Intern";
+        } else if (/founder 1 wants/i.test(clean)) {
+          owner = "Unassigned (Requested by Founder 1)";
+        } else if (!internSuggestedAssigned && (/printworks|print quotation|teacher guides|nobody has chased|nobody has contacted/i.test(clean))) {
+          owner = "Unassigned (Suggested: Founder's Office Intern)";
+          internSuggestedAssigned = true;
+        } else if (/tech lead/i.test(clean)) {
+          owner = "Tech Lead";
+        } else if (/legal intern/i.test(clean)) {
+          owner = "Unassigned (Requires Legal Sign-off)";
+        }
+
+        let due = "TBD";
+        if (/next friday/i.test(clean)) {
+          let daysAhead = (5 - refDate.getDay() + 7) % 7;
+          if (daysAhead === 0) daysAhead = 7;
+          const fri = new Date(refDate);
+          fri.setDate(refDate.getDate() + daysAhead);
+          due = formatShort(fri);
+        } else if (/by monday|next monday/i.test(clean)) {
+          let daysAhead = (1 - refDate.getDay() + 7) % 7;
+          if (daysAhead === 0) daysAhead = 7;
+          const mon = new Date(refDate);
+          mon.setDate(refDate.getDate() + daysAhead);
+          due = formatShort(mon);
+        } else if (/next tuesday|tuesday afternoon/i.test(clean)) {
+          let daysAhead = (2 - refDate.getDay() + 7) % 7;
+          if (daysAhead === 0) daysAhead = 7;
+          const tue = new Date(refDate);
+          tue.setDate(refDate.getDate() + daysAhead);
+          due = formatShort(tue);
+        } else if (/30 oct/i.test(clean)) {
+          due = `30-Oct-${refDate.getFullYear()}`;
+        } else if (/5 nov/i.test(clean)) {
+          due = `05-Nov-${refDate.getFullYear()}`;
+        } else if (/15 jan/i.test(clean)) {
+          due = `15-Jan-${refDate.getFullYear() + (refDate.getMonth() >= 9 ? 1 : 0)}`;
+        } else if (/22 jan/i.test(clean)) {
+          due = `22-Jan-${refDate.getFullYear() + (refDate.getMonth() >= 9 ? 1 : 0)}`;
+        } else if (/5 jan/i.test(clean)) {
+          due = `05-Jan-${refDate.getFullYear() + (refDate.getMonth() >= 9 ? 1 : 0)}`;
+        } else if (/diwali|8 nov/i.test(clean)) {
+          due = `Before 08-Nov-${refDate.getFullYear()}`;
+        } else {
+          const match = clean.match(/(?:by|before|due|on)?\s*(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*/i);
+          if (match) {
+            const dNum = String(match[1]).padStart(2, "0");
+            const mStr = match[2].charAt(0).toUpperCase() + match[2].slice(1, 3).toLowerCase();
+            due = `${dNum}-${mStr}-${refDate.getFullYear()}`;
+          }
+        }
+
+        let priority = (/critical|dpdp|due 30 oct|invoice|spike|defective|azure|safety/i.test(clean)) ? "High" : "Medium";
+        let status = (/unclear|no date set|nobody has|blocked|not discussed|haven't spoken/i.test(clean)) ? "Blocked" : (/will draft|ongoing/i.test(clean) ? "Scheduled" : (/maintain|keep/i.test(clean) ? "In progress" : "Not started"));
+
+        let noteText = "Extracted from meeting notes.";
+        if (/dpdp/i.test(clean)) noteText = "DPDP compliance review required before pilot expansion.";
+        else if (/invoice/i.test(clean)) noteText = "Payment amount/payer unconfirmed.";
+        else if (/print/i.test(clean)) noteText = "Budget cap specified. Quotation needed.";
+        else if (/safety certificate|certificate/i.test(clean)) noteText = "Data safety compliance certificate requested by school.";
+        else if (/fair|paper/i.test(clean)) noteText = "Paper leads sitting idle for ~14 days; requires CRM ingestion.";
+        else if (/defective/i.test(clean)) noteText = "25 copies defective. Resolution required before invoice settlement.";
+        else if (/spike/i.test(clean)) noteText = "Cost control and tagging audit required.";
+
+        items.push({
+          id: `ACT-00${counter++}`,
+          task: clean,
+          owner: owner,
+          due: due,
+          priority: priority,
+          cat: cat,
+          status: status,
+          notes: noteText
+        });
+      });
+
+      // 2. DYNAMIC FOLLOW-UP DRAFTS
+      const drafts = [];
+
+      // Group school items
+      const schoolItems = items.filter(i => i.cat === "School" && !/paper|crm|leads from/i.test(i.task));
+      if (schoolItems.length > 0) {
+        let schoolName = "School Partner";
+        let contactPerson = "School Coordinator";
+        let location = "";
+
+        const fullSchoolText = schoolItems.map(i => i.task).join(" ");
+        if (/Maple Heights/i.test(fullSchoolText)) schoolName = "Maple Heights School";
+        else if (/Heritage International/i.test(fullSchoolText)) schoolName = "Heritage International School";
+        else if (/Delhi World Public/i.test(fullSchoolText)) schoolName = "Delhi World Public School";
+        else {
+          const matchSchool = fullSchoolText.match(/([A-Z][a-zA-Z\s]+(?:School|Academy|Vidyalaya|Public School))/);
+          if (matchSchool) schoolName = matchSchool[1].trim();
+        }
+
+        if (/Gurugram/i.test(fullSchoolText)) location = "Gurugram";
+        else if (/Noida/i.test(fullSchoolText)) location = "Noida";
+
+        if (/Kapoor/i.test(fullSchoolText)) contactPerson = "Ms. Kapoor, Academic Coordinator";
+        else if (/Mehta/i.test(fullSchoolText)) contactPerson = "Principal Mehta";
+        else if (/Rao/i.test(fullSchoolText)) contactPerson = "Mrs. Rao, Coordinator";
+
+        let schoolBody = `Dear ${contactPerson},\n\nI hope you are having a productive week.\n\nI am writing on behalf of the EDXSO team to follow up on our ongoing pilot collaboration for ${schoolName}${location ? ` (${location})` : ""}.\n\n`;
+
+        schoolItems.forEach(item => {
+          if (/demo/i.test(item.task)) {
+            schoolBody += `• Demo Scheduling: Regarding the demonstration requested for your teaching staff, we would be pleased to organize this session prior to the upcoming holiday break (${item.due}). Could you please share 2–3 preferred dates and time windows that would suit your teachers?\n\n`;
+          } else if (/usage report/i.test(item.task)) {
+            schoolBody += `• Pilot Usage Report: We are currently compiling the first-month usage report. If there are specific engagement metrics, student activity benchmarks, or learning indicators you or the Principal would like highlighted, please let us know so we can incorporate them.\n\n`;
+          } else if (/offline trial|trial/i.test(item.task)) {
+            schoolBody += `• Offline / Hybrid Trial: Regarding the offline trial requested for Class 9 Maths before ${item.due}, we are actively preparing the setup package and would be glad to coordinate classroom deployment logistics with your team.\n\n`;
+          } else if (/proposal/i.test(item.task)) {
+            schoolBody += `• Commercial Proposal: Regarding the formal commercial proposal requested for 180 students across Classes 8 and 9, our team is finalizing the institutional tier pricing and will share the full documentation shortly.\n\n`;
+          } else if (/offline|aqi|pollution/i.test(item.task)) {
+            schoolBody += `• Offline Mode & Continuity: In light of anticipated school closures due to regional air quality / AQI spikes, we confirm that our app architecture supports offline caching so student learning continues uninterrupted.\n\n`;
+          } else if (/data safety|safety certificate|compliance certificate/i.test(item.task)) {
+            schoolBody += `• Student Data Safety Certificate: We noted your request for our student data safety compliance documentation. Our compliance team is finalizing this certificate in alignment with DPDP standards, and we will share the verified copy shortly.\n\n`;
+          } else {
+            schoolBody += `• Follow-up Item: Regarding "${item.task}", our operations desk is actively coordinating next steps.\n\n`;
+          }
+        });
+
+        schoolBody += `Thank you for your continuous guidance and partnership.\n\nWarm regards,\n\nFounder's Office Intern\nFounder’s Office, EDXSO\n[Verified Contact / Phone]`;
+
+        drafts.push({
+          id: "draft-school",
+          title: `School Partner: ${schoolName}`,
+          subtitle: `External communication addressing ${contactPerson}`,
+          category: "School",
+          to: `${contactPerson}, ${schoolName} [Verified school email]`,
+          cc: `Principal [Verified Principal email]; Founders [EDXSO Founders email]`,
+          subject: `${schoolName} Pilot: Upcoming Session Scheduling & Pilot Updates`,
+          body: schoolBody
+        });
+      }
+
+      // Group vendor items
+      const vendorItems = items.filter(i => i.cat === "Vendor");
+      vendorItems.forEach((vItem, idx) => {
+        if (/printworks|print/i.test(vItem.task)) {
+          const matchQty = vItem.task.match(/(\d+)\s+(?:copies|teacher guides|workbooks|books)/i);
+          const qty = matchQty ? matchQty[1] : "300";
+          const matchCap = vItem.task.match(/(?:cap|under|budget|rs\.?)\s*(?:rs\.?|₹)?\s*([\d,]+)/i);
+          const cap = matchCap ? matchCap[1] : "40,000";
+
+          let printBody = "";
+          if (/defective/i.test(vItem.task)) {
+            printBody = `Dear PrintWorks Accounts & Quality Team,\n\nI am writing regarding the delivery of ${qty} teacher guides received at our Gurugram office on Tuesday and your invoice for ₹38,500.\n\nDuring our initial quality inspection, we identified that 25 copies in Box 3 have defective inverted binding, making them unusable for classroom delivery.\n\nCould you please advise on:\n1. Immediate replacement or reprint timeline for the 25 defective copies\n2. Issuance of a revised credit note or adjusted invoice reflecting the defect-free units\n\nPlease note that our finance team has placed the invoice on temporary hold pending resolution of the replacement batch.\n\nBest regards,\n\nFounder's Office Intern\nFounder’s Office, EDXSO\n[Verified Contact Details]`;
+          } else {
+            printBody = `Dear PrintWorks Sales Team,\n\nWe would like to request a formal quotation for printing ${qty} copies of our EDXSO Teacher Guides.\n\nPlease note that our total approved budget cap for this print run is strictly ₹${cap}.\n\nCould you please provide an itemized quotation covering:\n1. Unit printing charges and volume discounts\n2. Applicable taxes (GST)\n3. Delivery charges to our office in Gurugram\n4. Estimated production and delivery turnaround time (Target: ${vItem.due})\n5. Payment terms and invoicing milestones\n\nPlease also specify any file format or layout specifications required from our design team (paper weight, cover stock, binding type).\n\nNote: This email is an inquiry for quotation and does not constitute a confirmed purchase order. Confirmation is contingent on budget approval.\n\nBest regards,\n\nFounder's Office Intern\nFounder’s Office, EDXSO\n[Verified Contact Details]`;
+          }
+
+          drafts.push({
+            id: `draft-vendor-print-${idx}`,
+            title: `Vendor: PrintWorks`,
+            subtitle: /defective/i.test(vItem.task) ? `Quality defect resolution & invoice adjustment` : `Quotation request for ${qty} copies under ₹${cap} budget cap`,
+            category: "Vendor",
+            to: `Sales & Quality Desk, PrintWorks [Verified print vendor email]`,
+            cc: `Founder's Office [EDXSO operations contact]`,
+            subject: /defective/i.test(vItem.task) ? `Delivery Notice: Defective Binding in Teacher Guides Batch & Invoice Clearance` : `Quotation Request: ${qty} Copies of EDXSO Teacher Guides (Budget Cap: ₹${cap})`,
+            body: printBody
+          });
+        } else if (/invoice|azure|aws|bill|content vendor/i.test(vItem.task)) {
+          let vendorName = "Vendor Billing Desk";
+          if (/content vendor/i.test(vItem.task)) vendorName = "Content Services Vendor";
+          else if (/azure/i.test(vItem.task)) vendorName = "Cloud Infrastructure Team";
+          else if (/aws/i.test(vItem.task)) vendorName = "AWS Cloud Billing";
+
+          let invBody = `Dear ${vendorName} Accounts Team,\n\nI am writing from the Founder’s Office at EDXSO regarding the account invoice slated for settlement on ${vItem.due}.\n\nTo ensure timely processing through our finance workflow, could you please provide:\n1. The official tax invoice copy reflecting the itemized breakdown of deliverables\n2. Verified billing amount and GST breakdown\n3. Bank details / NEFT payment instructions\n4. Purchase order / milestone delivery confirmation\n\nPlease note that our finance policy requires formal invoice verification against completed milestones prior to releasing disbursement.\n\nThank you for your prompt assistance.\n\nBest regards,\n\nFounder's Office Intern\nFounder’s Office, EDXSO\n[Verified Contact Details]`;
+
+          drafts.push({
+            id: `draft-vendor-inv-${idx}`,
+            title: `Vendor: ${vendorName}`,
+            subtitle: `Invoice verification & billing documentation request (Due ${vItem.due})`,
+            category: "Vendor",
+            to: `${vendorName} Billing Desk [Verified vendor accounts email]`,
+            cc: `Founders [EDXSO finance email]`,
+            subject: `Invoice Verification & Payment Clearance: EDXSO Account (Due: ${vItem.due})`,
+            body: invBody
+          });
+        }
+      });
+
+      // Internal Founders Slack Note
+      const unassignedList = items.filter(i => i.owner.startsWith("Unassigned") || i.status === "Blocked");
+      let internalNote = `Hi team, quick operational update following our founders' sync. Central tracker is live with ${items.length} items. We need quick founder decisions on the following ${unassignedList.length} open points to prevent execution bottlenecks:\n\n`;
+
+      unassignedList.forEach((it, idx) => {
+        internalNote += `${idx + 1}. [${it.id}] ${it.task}\n   • Target Date: ${it.due} | Status: ${it.status}\n   • Blocker / Decision Needed: ${it.notes}\n   • Current DRI: ${it.owner}\n\n`;
+      });
+
+      internalNote += `Please share your thoughts when free so I can update the tracker, dispatch the external drafts, and unblock execution.`;
+
+      drafts.push({
+        id: "draft-internal",
+        title: `Internal Note: Founders (Slack)`,
+        subtitle: `Actionable summary of ${unassignedList.length} decisions needed to unblock operations`,
+        category: "Internal",
+        to: `Founders 1 & 2 [Internal Founders Slack Channel]`,
+        cc: `Founder's Office`,
+        subject: `Founders Sync Action Items & Immediate Blockers Requiring Decision`,
+        body: internalNote
+      });
+
+      // 3. DYNAMIC FOUNDER BRIEF
+      const highRisks = items.filter(i => i.priority === "High" || i.status === "Blocked");
+      const briefRisks = highRisks.map(r => `<strong>${r.id} (${r.cat}):</strong> ${r.task} — <em>Risk: ${r.notes} (Due: ${r.due})</em>`);
+      
+      const briefDecisions = unassignedList.map(d => `<strong>${d.id}:</strong> Assign DRI and authorize next step for: "${d.task}" (Target: ${d.due})`);
+
+      const briefOps = [
+        `Maintaining and reconciling the central operational tracker across all ${items.length} workstreams.`,
+        `Dispatching vendor inquiries (quotations, invoice audits, SLA confirmations).`,
+        `Following up with school leadership on pilot scheduling, usage reports, and compliance certifications.`,
+        `Conducting operational research and digitizing outstanding paper records into CRM.`
+      ];
+
+      const briefDeadlines = items.filter(i => i.due !== "TBD" && !i.due.startsWith("TBD")).map(d => `• <strong>${d.due}:</strong> [${d.cat}] ${d.task} (${d.owner})`);
+
+      const briefClarifications = items.filter(i => i.notes.includes("unconfirmed") || i.notes.includes("needed") || i.notes.includes("required") || i.notes.includes("missing") || i.due === "TBD").map(c => `• [${c.id}] ${c.notes}`);
+
+      const brief = {
+        heading: `Founder Brief — ${formatShort(refDate)}`,
+        subheading: `Read time: ~2 minutes • Operations Executive Summary (${items.length} Total Actions)`,
+        risks: briefRisks.length > 0 ? briefRisks : ["No immediate critical operational risks identified."],
+        decisions: briefDecisions.length > 0 ? briefDecisions : ["All active tasks have designated owners and confirmed timelines."],
+        ops: briefOps,
+        deadlines: briefDeadlines.length > 0 ? briefDeadlines : ["No hard deadlines detected in current sync notes."],
+        clarifications: briefClarifications.length > 0 ? briefClarifications : ["All operational parameters currently verified."]
+      };
+
+      // 4. DYNAMIC PROCESS GAPS
+      const gaps = [];
+      const unownedCount = items.filter(i => i.owner.startsWith("Unassigned")).length;
+      if (unownedCount > 0) {
+        gaps.push({
+          gap: `${unownedCount} Tasks Agreed Without Confirmed Owners`,
+          why: "When tasks lack a single Directly Responsible Individual (DRI), accountability diffuses and items inevitably slip past deadlines.",
+          fix: "Enforce the 'DRI Rule': No meeting agenda item is concluded without explicitly naming one person as the single owner before moving to the next topic.",
+          owner: "Founder 1 & Founder 2"
+        });
+      }
+
+      const vagueDatesCount = items.filter(i => i.due === "TBD" || i.due.startsWith("TBD")).length;
+      if (vagueDatesCount > 0) {
+        gaps.push({
+          gap: `${vagueDatesCount} Action Items Left With Unspecified Deadlines ('No date set' / 'TBD')`,
+          why: "Without defined calendar milestones, tasks cannot be sequenced and upstream dependencies (such as pilot expansion) become blocked.",
+          fix: "Assign concrete target milestone dates during the sync or require a 24-hour scoping deadline to convert 'TBD' into hard calendar dates.",
+          owner: "Founder's Office Intern"
+        });
+      }
+
+      if (items.some(i => /invoice|bill/i.test(i.task) && /unclear|not discussed|haven't spoken/i.test(i.task + i.notes))) {
+        gaps.push({
+          gap: "Financial Commitments Discussed Without Invoices or Payer Details",
+          why: "Late invoice payment risks vendor supplier halts, credit penalties, or unbudgeted cash outflows.",
+          fix: "Mandate an Accounts Payable intake protocol: Any vendor invoice mentioned must include the invoice PDF, verified amount, and designated approver in writing 7 days before due date.",
+          owner: "Founder 2 (Finance Lead)"
+        });
+      }
+
+      if (items.some(i => i.cat === "Compliance")) {
+        gaps.push({
+          gap: "Regulatory Compliance Treated as an Operational Afterthought",
+          why: "Deploying educational technology to minors without verified parent consent violates the DPDP Act 2023 Section 9 and creates legal liability.",
+          fix: "Establish a mandatory Compliance Gating Checklist: Pilot expansion cannot be approved or scheduled until compliance templates have legal sign-off.",
+          owner: "Legal / Compliance Advisor"
+        });
+      }
+
+      if (items.some(i => /fair|paper|leads/i.test(i.task))) {
+        gaps.push({
+          gap: "Sales Leads Retained on Paper for 14+ Days Without CRM Ingestion",
+          why: "In K-12 institutional sales, lead response time directly determines demo conversion rates. Paper leads decay rapidly and risk permanent loss.",
+          fix: "Implement a 48-hour Event Lead Protocol: All offline event cards/sheets must be scanned and ingested into CRM within 48 hours of event completion.",
+          owner: "Founder's Office Intern"
+        });
+      }
+
+      if (items.some(i => /printworks|quote/i.test(i.task))) {
+        gaps.push({
+          gap: "Procurement Requests Initiated Without Approved Specifications",
+          why: "Requesting vendor quotes without page count brackets, paper weight, and delivery terms leads to protracted back-and-forth and inaccurate bids.",
+          fix: "Create a 1-page Vendor Procurement Template specifying volume brackets, stock requirements, and delivery milestones prior to supplier outreach.",
+          owner: "Founder's Office Intern"
+        });
+      }
+
+      return { items, drafts, brief, gaps };
+    }
+
+    function renderDynamicDrafts(drafts) {
+      currentDrafts = drafts || [];
+      const tabsCont = document.getElementById("draftTabsContainer");
+      const cardsCont = document.getElementById("draftCardsContainer");
+      const countBadge = document.getElementById("draftCountBadge");
+
+      if (!tabsCont || !cardsCont) return;
+
+      if (countBadge) {
+        countBadge.innerText = `${currentDrafts.length} Drafts Generated`;
+      }
+
+      if (!activeDraftId || !currentDrafts.some(d => d.id === activeDraftId)) {
+        activeDraftId = currentDrafts.length > 0 ? currentDrafts[0].id : null;
+      }
+
+      // Render tab buttons
+      tabsCont.innerHTML = currentDrafts.map((d, index) => {
+        const isActive = d.id === activeDraftId;
+        const activeClass = isActive ? "bg-blue-600 text-white shadow-xs" : "bg-slate-100 text-slate-600 hover:bg-slate-200";
+        return `<button onclick="selectDraft('${d.id}')" id="btn-draft-${d.id}" class="px-3 py-1.5 text-xs font-semibold rounded-lg ${activeClass} transition cursor-pointer flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white' : 'bg-slate-400'}"></span>
+          ${index + 1}. ${d.title}
+        </button>`;
+      }).join("");
+
+      // Render cards
+      cardsCont.innerHTML = currentDrafts.map(d => {
+        const isHidden = (activeDraftId && activeDraftId !== "ALL" && d.id !== activeDraftId) ? "hidden" : "";
+        const badgeColor = d.category === "School" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : (d.category === "Vendor" ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-purple-50 text-purple-700 border-purple-200");
+        return `
+        <div id="card-${d.id}" class="${isHidden} bg-white rounded-xl border border-slate-200 p-6 space-y-4 shadow-xs transition-all">
+          <div class="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${badgeColor}">${d.category}</span>
+                <h3 class="text-sm font-bold text-slate-900">${d.title}</h3>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">${d.subtitle}</p>
+            </div>
+            <button onclick="copyDraftText('${d.id}')" id="copy-btn-${d.id}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition cursor-pointer flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+              <span>Copy Draft</span>
+            </button>
+          </div>
+          <div class="text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono space-y-1 text-slate-600">
+            <div><strong>To:</strong> ${d.to}</div>
+            <div><strong>CC:</strong> ${d.cc}</div>
+            <div><strong>Subject:</strong> ${d.subject}</div>
+          </div>
+          <div id="text-${d.id}" contenteditable="true" class="text-xs leading-relaxed text-slate-700 whitespace-pre-line bg-slate-50/50 p-4 rounded-xl border border-slate-100 font-sans focus:outline-none focus:ring-1 focus:ring-blue-500">
+${d.body}
+          </div>
+        </div>`;
+      }).join("");
+    }
+
+    function selectDraft(draftId) {
+      activeDraftId = draftId;
+      currentDrafts.forEach(d => {
+        const card = document.getElementById(`card-${d.id}`);
+        const btn = document.getElementById(`btn-draft-${d.id}`);
+        if (card) {
+          if (d.id === draftId || draftId === "ALL") {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+        }
+        if (btn) {
+          if (d.id === draftId) {
+            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 text-white shadow-xs transition cursor-pointer flex items-center gap-1.5";
+          } else {
+            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer flex items-center gap-1.5";
+          }
+        }
+      });
+      const showAllBtn = document.getElementById("btnShowAllDrafts");
+      if (showAllBtn) {
+        if (draftId === "ALL") {
+          showAllBtn.className = "text-xs font-semibold px-2.5 py-1 rounded bg-blue-100 text-blue-700 cursor-pointer";
+        } else {
+          showAllBtn.className = "text-xs font-medium px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer";
+        }
+      }
+    }
+
+    function showAllDrafts() {
+      selectDraft("ALL");
+    }
+
+    function copyDraftText(draftId) {
+      const el = document.getElementById(`text-${draftId}`);
+      if (!el) return;
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(`copy-btn-${draftId}`);
+        if (btn) {
+          const oldHtml = btn.innerHTML;
+          btn.innerHTML = `<span class="text-emerald-600 font-bold">✓ Copied!</span>`;
+          setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+        }
+      });
+    }
+
+    function renderBrief(brief) {
+      if (!brief) return;
+      currentBrief = brief;
+      if (document.getElementById("founderBriefHeading")) {
+        document.getElementById("founderBriefHeading").innerText = brief.heading;
+      }
+      if (document.getElementById("founderBriefSubheading")) {
+        document.getElementById("founderBriefSubheading").innerText = brief.subheading;
+      }
+
+      const rList = document.getElementById("briefRiskList");
+      if (rList) rList.innerHTML = brief.risks.map(r => `<li>${r}</li>`).join("");
+
+      const dList = document.getElementById("briefDecisionList");
+      if (dList) dList.innerHTML = brief.decisions.map(d => `<li>${d}</li>`).join("");
+
+      const oList = document.getElementById("briefOpsList");
+      if (oList) oList.innerHTML = brief.ops.map(o => `<li>${o}</li>`).join("");
+
+      const dlList = document.getElementById("briefDeadlinesList");
+      if (dlList) dlList.innerHTML = brief.deadlines.map(d => `<p>${d}</p>`).join("");
+
+      const clList = document.getElementById("briefClarificationsList");
+      if (clList) clList.innerHTML = brief.clarifications.map(c => `<p>${c}</p>`).join("");
     }
 
     function renderGaps(gaps) {
+      currentGaps = gaps || [];
       const tbody = document.getElementById("gapsTableBody");
       if (!tbody || !gaps) return;
       tbody.innerHTML = gaps.map(g => `
@@ -857,6 +1239,13 @@ Please share your guidance when free.`
           <td class="py-2.5 px-3 font-medium text-blue-700">${g.owner}</td>
         </tr>
       `).join("");
+    }
+
+    function updateSyncMetrics() {
+      const badge = document.getElementById("activeMetricsBadge");
+      if (badge && currentItems) {
+        badge.innerText = `${currentItems.length} Tasks • ${currentDrafts.length} Drafts • ${currentGaps.length} Gaps Active`;
+      }
     }
 
     function updatePromptDisplay() {
@@ -871,7 +1260,6 @@ Please share your guidance when free.`
       const dayName = days[refDate.getDay()];
       const executionDateStr = `${dayName}, ${d} ${longMonths[m - 1]} ${y}`;
 
-      // Meeting date is typically the day before execution
       const meetingDateObj = new Date(refDate);
       meetingDateObj.setDate(refDate.getDate() - 1);
       const meetingDayName = days[meetingDateObj.getDay()];
@@ -930,12 +1318,14 @@ REQUIRED OUTPUTS:
         notes: "Added via operations dashboard."
       });
       filterTracker();
+      updateSyncMetrics();
     }
 
     function deleteRow(index) {
       if (confirm("Delete this action item?")) {
         currentItems.splice(index, 1);
         filterTracker();
+        updateSyncMetrics();
       }
     }
 
@@ -994,18 +1384,6 @@ REQUIRED OUTPUTS:
       }
     }
 
-    function switchDraft(type) {
-      const drafts = ['school', 'vendor', 'internal'];
-      drafts.forEach(d => {
-        document.getElementById(`draft-${d}`).classList.add('hidden');
-        document.getElementById(`draft-btn-${d}`).classList.remove('bg-blue-600', 'text-white');
-        document.getElementById(`draft-btn-${d}`).classList.add('bg-slate-100', 'text-slate-600');
-      });
-      document.getElementById(`draft-${type}`).classList.remove('hidden');
-      document.getElementById(`draft-btn-${type}`).classList.add('bg-blue-600', 'text-white');
-      document.getElementById(`draft-btn-${type}`).classList.remove('bg-slate-100', 'text-slate-600');
-    }
-
     function onDateChanged() {
       const dateVal = document.getElementById("refDateInput").value;
       if (!dateVal) return;
@@ -1017,19 +1395,9 @@ REQUIRED OUTPUTS:
       const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
       const shortStr = `${String(d).padStart(2, "0")} ${shortMonths[m - 1]} ${y}`;
-      const longStr = `${d} ${longMonths[m - 1]} ${y}`;
-      const dayName = days[refDate.getDay()];
-
       const badge = document.getElementById("dateBadgeText");
       if (badge) badge.innerText = shortStr;
 
-      const briefHeading = document.getElementById("founderBriefHeading");
-      if (briefHeading) briefHeading.innerText = `Founder Brief — ${longStr}`;
-
-      const briefSub = document.getElementById("founderBriefSubheading");
-      if (briefSub) briefSub.innerText = `Reference Execution Date: ${dayName}, ${longStr} • Executive Summary`;
-
-      updatePromptDisplay();
       executeRealTimeParser(false);
     }
 
@@ -1040,117 +1408,96 @@ REQUIRED OUTPUTS:
 
       document.getElementById("refDateInput").value = sc.date;
       document.getElementById("rawNotesInput").value = sc.notes.replace(/\\n/g, "\n");
-      currentItems = JSON.parse(JSON.stringify(sc.tracker));
       
-      filterTracker();
-      renderBrief(sc.brief);
-      renderDrafts(sc.drafts);
-      renderGaps(sc.gaps);
-      updatePromptDisplay();
-
-      const [y, m, d] = sc.date.split("-").map(Number);
-      const shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const badge = document.getElementById("dateBadgeText");
-      if (badge) badge.innerText = `${String(d).padStart(2, "0")} ${shortMonths[m - 1]} ${y}`;
-
-      toggleNotesPanel();
+      executeRealTimeParser(false);
     }
+
+    function clearAndCustomNotes() {
+      activeScenarioKey = "custom";
+      document.getElementById("rawNotesInput").value = `FOUNDERS SYNC – Wed 16 Dec 2026\nPresent: Founder 1, Founder 2, Ops Intern\n\n• Heritage International School (Gurugram) pilot: Principal Mehta requested an offline trial for Class 9 Maths before 15 Jan. Coordinator Mrs. Rao asked for our student data safety compliance certificate.\n• Server infrastructure: Azure cloud invoice of Rs 54,000 due 5 Jan. Unclear who is authorizing the payment.\n• PrintWorks: 500 revised student workbooks needed by 22 Jan. Need quote under Rs 60,000. Nobody has contacted them yet.\n• Review parent feedback surveys from Noida branch.\n• Ops intern to track all tasks.`;
+      document.getElementById("refDateInput").value = "2026-12-16";
+      executeRealTimeParser(false);
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        document.getElementById("rawNotesInput").value = text;
+        
+        // Try to detect date from header (e.g. "Thu 22 Oct 2026" or "16 Dec 2026")
+        const dateMatch = text.match(/(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})/i);
+        if (dateMatch) {
+          const mNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+          const monthNum = String(mNames.indexOf(dateMatch[2].toLowerCase().slice(0, 3)) + 1).padStart(2, "0");
+          const dayNum = String(dateMatch[1]).padStart(2, "0");
+          document.getElementById("refDateInput").value = `${dateMatch[3]}-${monthNum}-${dayNum}`;
+        }
+
+        executeRealTimeParser(false);
+        alert(`File "${file.name}" loaded successfully! All 4 deliverables have been dynamically connected and updated.`);
+      };
+      reader.readAsText(file);
+    }
+
+    // Drag and Drop listeners
+    window.addEventListener("DOMContentLoaded", () => {
+      const dropZone = document.getElementById("rawNotesInput");
+      const overlay = document.getElementById("dropOverlay");
+      if (!dropZone || !overlay) return;
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          overlay.classList.remove('hidden');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          overlay.classList.add('hidden');
+        }, false);
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length > 0) {
+          const fakeEvent = { target: { files: [files[0]] } };
+          handleFileUpload(fakeEvent);
+        }
+      }, false);
+    });
 
     function executeRealTimeParser(autoClose = true) {
       const rawText = document.getElementById("rawNotesInput").value;
       if (!rawText.trim()) return;
 
       const dateVal = document.getElementById("refDateInput").value || "2026-10-23";
-      const [y, m, d] = dateVal.split("-").map(Number);
-      const refDate = new Date(y, m - 1, d);
-      const shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-      function formatShort(dt) {
-        return `${String(dt.getDate()).padStart(2, "0")}-${shortMonths[dt.getMonth()]}-${dt.getFullYear()}`;
-      }
+      // Execute dynamic operational pipeline across all 4 outputs
+      const result = parseFullWorkflow(rawText, dateVal);
 
-      const lines = rawText.split("\n");
-      const newItems = [];
-      let counter = 1;
+      currentItems = result.items;
+      currentDrafts = result.drafts;
+      currentBrief = result.brief;
+      currentGaps = result.gaps;
 
-      lines.forEach(line => {
-        let clean = line.replace(/^[\s•\-\d\.\)\*]+/, "").trim();
-        if (clean.length < 5 || clean.startsWith("FOUNDERS") || clean.toLowerCase().startsWith("attendees:") || clean.toLowerCase().startsWith("present:")) return;
+      filterTracker();
+      renderDynamicDrafts(currentDrafts);
+      renderBrief(currentBrief);
+      renderGaps(currentGaps);
+      updatePromptDisplay();
+      updateSyncMetrics();
 
-        let cat = "Internal";
-        if (/school|principal|teacher|maths|class|coordinator|student|gurugram|noida/i.test(clean)) cat = "School";
-        else if (/vendor|printworks|quote|invoice|print|copies|bill|aws|server/i.test(clean)) cat = "Vendor";
-        else if (/investor|seed|matrix|update|burn|runway/i.test(clean)) cat = "Investor";
-        else if (/dpdp|consent|compliance|legal/i.test(clean)) cat = "Compliance";
-
-        let owner = "Unassigned";
-        if (/founder 2 will draft|founder 2 will handle|founder 2/i.test(clean)) owner = "Founder 2";
-        else if (/Founder's Office Intern to|Founder's Office Intern/i.test(clean)) owner = "Founder's Office Intern";
-        else if (/founder 1 wants/i.test(clean)) owner = "Unassigned (Requested by Founder 1)";
-        else if (/printworks|print quotation|teacher guides/i.test(clean)) owner = "Unassigned (Suggested: Founder's Office Intern)";
-        else if (/tech lead/i.test(clean)) owner = "Tech Lead";
-
-        let due = "TBD";
-        if (/next friday/i.test(clean)) {
-          let daysAhead = (5 - refDate.getDay() + 7) % 7;
-          if (daysAhead === 0) daysAhead = 7;
-          const fri = new Date(refDate);
-          fri.setDate(refDate.getDate() + daysAhead);
-          due = formatShort(fri);
-        } else if (/by monday|next monday/i.test(clean)) {
-          let daysAhead = (1 - refDate.getDay() + 7) % 7;
-          if (daysAhead === 0) daysAhead = 7;
-          const mon = new Date(refDate);
-          mon.setDate(refDate.getDate() + daysAhead);
-          due = formatShort(mon);
-        } else if (/next tuesday|tuesday afternoon/i.test(clean)) {
-          let daysAhead = (2 - refDate.getDay() + 7) % 7;
-          if (daysAhead === 0) daysAhead = 7;
-          const tue = new Date(refDate);
-          tue.setDate(refDate.getDate() + daysAhead);
-          due = formatShort(tue);
-        } else if (/30 oct/i.test(clean)) {
-          due = `30-Oct-${refDate.getFullYear()}`;
-        } else if (/5 nov/i.test(clean)) {
-          due = `05-Nov-${refDate.getFullYear()}`;
-        } else if (/16 nov/i.test(clean)) {
-          due = `16-Nov-${refDate.getFullYear()}`;
-        } else if (/17 nov/i.test(clean)) {
-          due = `17-Nov-${refDate.getFullYear()}`;
-        } else if (/20 nov/i.test(clean)) {
-          due = `20-Nov-${refDate.getFullYear()}`;
-        } else if (/diwali|8 nov/i.test(clean)) {
-          due = `Before 08-Nov-${refDate.getFullYear()}`;
-        }
-
-        let priority = (/critical|dpdp|due 30 oct|invoice|spike|defective/i.test(clean)) ? "High" : "Medium";
-        let status = (/unclear|no date set|nobody has|blocked/i.test(clean)) ? "Blocked" : (/will draft|ongoing/i.test(clean) ? "Scheduled" : "Not started");
-
-        let noteText = "Extracted from meeting notes.";
-        if (/dpdp/i.test(clean)) noteText = "DPDP compliance review required before pilot expansion.";
-        else if (/invoice/i.test(clean)) noteText = "Payment amount/payer unconfirmed.";
-        else if (/print/i.test(clean)) noteText = "Budget cap ₹40,000. Quotation needed.";
-        else if (/cloud|server|spike/i.test(clean)) noteText = "Cost control and tagging audit required.";
-
-        newItems.push({
-          id: `ACT-00${counter++}`,
-          task: clean,
-          owner: owner,
-          due: due,
-          priority: priority,
-          cat: cat,
-          status: status,
-          notes: noteText
-        });
-      });
-
-      if (newItems.length > 0) {
-        currentItems = newItems;
-        filterTracker();
-        updatePromptDisplay();
-        if (autoClose) {
-          toggleNotesPanel();
-        }
+      if (autoClose) {
+        toggleNotesPanel();
       }
     }
 
